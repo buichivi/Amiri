@@ -1318,7 +1318,7 @@
     list-style: none;
 }
 
-.product-infomation__size-list li {
+.product-infomation__size-list span {
     width: 50px;
     padding: 8px 0;
     font-size: 1.5rem;

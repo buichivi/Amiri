@@ -18,9 +18,6 @@
 
     <!-- Content -->
     <div class="product-detail">
-        <?php 
-            print_r($_POST);
-        ?>
         <form action="" method="post" name="add-to-cart-form">
         <div class="container dp-flex">
             <?php 
@@ -86,19 +83,19 @@
                     <p>Màu sắc: <span class="product-infomation__color">Màu lam sáng</span></p>
                     <ul class="product-infomation__size-list dp-flex">
                         <li>
-                            S
+                            <span>S</span>
                         </li>
                         <li>
-                            M
+                            <span>M</span>
                         </li>
                         <li>
-                            L
+                            <span>L</span>
                         </li>
                         <li>
-                            XL
+                            <span>XL</span>
                         </li>
                         <li>
-                            XXL
+                            <span>XXL</span>
                         </li>
                     </ul>
                     <div class="product-infomation__quantity dp-flex">
