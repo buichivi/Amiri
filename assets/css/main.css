@@ -1266,6 +1266,7 @@
     margin: 0;
     text-transform: uppercase;
     padding: 12px 0;
+    line-height: 1.1;
 }
 .product-infomation > h3 {
     font-size: 1.6rem;
@@ -1946,4 +1947,11 @@ td > .item-quantity-wrap {
 
 .register-wrap {
     padding: 0 40px;
+}
+
+.add-to-cart-success {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
 }

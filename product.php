@@ -7,6 +7,8 @@
     }
     else {
         $id = $_GET['prodId'];
+        include 'inc/add-to-cart-success.php';
+
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
         $quantity = $_POST['quantity'];
@@ -16,7 +18,10 @@
 
     <!-- Content -->
     <div class="product-detail">
-        <form action="" method="post">
+        <?php 
+            print_r($_POST);
+        ?>
+        <form action="" method="post" name="add-to-cart-form">
         <div class="container dp-flex">
             <?php 
                 $prodDetail = $prod->getProductById($id);
@@ -80,11 +85,21 @@
                     </div>
                     <p>Màu sắc: <span class="product-infomation__color">Màu lam sáng</span></p>
                     <ul class="product-infomation__size-list dp-flex">
-                        <li>S</li>
-                        <li>M</li>
-                        <li>L</li>
-                        <li>XL</li>
-                        <li>XXL</li>
+                        <li>
+                            S
+                        </li>
+                        <li>
+                            M
+                        </li>
+                        <li>
+                            L
+                        </li>
+                        <li>
+                            XL
+                        </li>
+                        <li>
+                            XXL
+                        </li>
                     </ul>
                     <div class="product-infomation__quantity dp-flex">
                         <h3>Số lượng</h3>
@@ -489,7 +504,7 @@
     <div class="advertise container">
         <img class="advertise-img" src="./assets/slider/slider-0.jpg" alt="">
     </div>
-
+    
 <?php
     include 'inc/footer.php';
 ?>

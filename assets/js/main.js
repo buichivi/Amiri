@@ -126,8 +126,6 @@ closeCartInfoBtn.addEventListener("click", closeCartInfo);
 
 // Product quantity
 const productQuantities = document.querySelectorAll('.item-quantity-wrap');
-
-console.log(productQuantities)
 productQuantities.forEach(function(productQuantity) {
     var numberOfProduct = productQuantity.querySelector('.item-quantity');
     var upBtn = productQuantity.querySelector('.item-increase-btn');

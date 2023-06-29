@@ -23,19 +23,16 @@ class Cart
         $query = "SELECT * FROM tb_product WHERE id = $id";
         $prodDetail = $this->db->select($query)->fetch_assoc();
 
-        $prodName = $prodDetail['productName'];
-        $prodPrice = $prodDetail['price'];
-        $prodImg = $prodDetail['productImg'];
-
-
-
-        $query_cart = "INSERT INTO tb_cart VALUES (NULL,'$sessionId','$id','$prodName','$quantity','$prodPrice','$prodImg')";
+        $query_cart = "INSERT INTO tb_cart VALUES (NULL,'$sessionId','$id','$quantity')";
         $insert_cart = $this->db->insert($query_cart);
         if ($insert_cart) {
-            header("Location: cart.php");
+            $_SESSION['add-to-cart-success'] = "Thêm vào giỏ hàng thành công!";
+            header("Location: product.php?prodId=$id");
+            return;
         }
         else {
             header("Location: 404.php");
+            return;
         }
     }
     
