@@ -8,6 +8,7 @@
     else {
         $id = $_GET['prodId'];
         include 'inc/add-to-cart-success.php';
+        echo "  ";
 
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
