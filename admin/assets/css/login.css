@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #636564;
+    --border-color: #e7e8e9;
+}
+
+* {
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    /* Tips: 100% == 16px ; 62.5% == 10px dùng rem dễ nhân hơn */
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: "Roboto", serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: calc(100vw - 80px);
+    margin: 0 auto;
+}
+
+.dp-flex {
+    display: flex;
+}
+
+::selection {
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
+
+/* Admin - login page */
+.login-wrap {
+    width: 30%;
+    min-height: 300px;
+    margin: 100px auto;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    /* backdrop-filter: blur(60px); */
+    background-color: rgba(255, 255, 255, 0.1);
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+/* .login-wrap p {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--white-color);
+    margin-bottom: 24px;
+} */
+
+.login-wrap form {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.login-wrap input {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--black-color);
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    /* border-radius: 5px; */
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.login-wrap input:focus {
+    outline: 3px solid #65aef5;
+}
+
+.login-wrap button {
+    margin-top: 12px;
+    width: 60%;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--white-color);
+    border: none;
+    cursor: pointer;
+}
