@@ -34,6 +34,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="https://pubcdn.ivymoda.com/ivy2/images/logo-icon.ico" type="image/x-icon">
     <title>Trang chủ | IVY moda</title>
+    <script>
+      if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
 </head>
 
 <body>
@@ -241,7 +246,7 @@
                                                             <i class="fa-solid fa-minus"></i>
                                                         </span>
                                                         <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1">
+                                                            name="" id="" value="1" min="0">
                                                         <span class="item-increase-btn">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </span>
@@ -267,7 +272,7 @@
                                                             <i class="fa-solid fa-minus"></i>
                                                         </span>
                                                         <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1">
+                                                            name="" id="" value="1" min="0">
                                                         <span class="item-increase-btn">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </span>
@@ -293,7 +298,7 @@
                                                             <i class="fa-solid fa-minus"></i>
                                                         </span>
                                                         <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1">
+                                                            name="" id="" value="1" min="0">
                                                         <span class="item-increase-btn">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </span>

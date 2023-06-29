@@ -35,7 +35,15 @@
                         </a>
                         <div class="product__desc dp-flex">
                             <a href="product.php" class="product__link">
-                                <p class="product__name"><?=$row['productName']?></p>
+                                <p class="product__name">
+                                <?php
+                                    if (strlen($row['productName']) > 34) {
+                                        echo $fm->textShorten($row['productName'], 30);
+                                    }
+                                    else 
+                                        echo $row['productName'];
+                                ?>
+                                </p>
                             </a>
                             <span class="product__like">
                                 <i class="product__like-icon fa-regular fa-heart"></i>

@@ -62,8 +62,8 @@
             <tr>
               <td><label for="productDiscount">Giảm giá (%) </label></td>
               <td><input type="text" name="productDiscount" id="productDiscount" placeholder="Nhập % giảm giá"></td>
-              <td></td>
-              <td></td>
+              <td><label for="">Màu sắc </label></td>
+              <td><input type="text" name="productColor" placeholder="Nhập màu sắc sản phẩm"></td>
             </tr>
           </table>
           <label for="product-desc">Mô tả sản phẩm</label>

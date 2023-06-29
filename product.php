@@ -8,10 +8,15 @@
     else {
         $id = $_GET['prodId'];
     }
-?>
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
+        $quantity = $_POST['quantity'];
+        $addToCart = $ct->addToCart($id, $quantity);
+    }
+    ?>
 
     <!-- Content -->
     <div class="product-detail">
+        <form action="" method="post">
         <div class="container dp-flex">
             <?php 
                 $prodDetail = $prod->getProductById($id);
@@ -66,12 +71,12 @@
                                 echo $prod->getNewPriceAfterSale($result['price'], $result['productDiscount']);
                             ?>
                         </span>
-                        <span class="product-infomation__price-old">
-                            <?php 
-                                echo $prod->convertPrice($result['price'])."đ";
-                            ?>
-                        </span>
-                        <span class="product-infomation__price-sale">-<?=$result['productDiscount']?>%</span>
+                        <?php 
+                        if ($result['productDiscount'] > 0) {
+                            echo "<span class='product-infomation__price-old'>".$prod->convertPrice($result['price'])."đ</span>";
+                            echo "<span class='product-infomation__price-sale'>".$result['productDiscount']."%</span>";
+                        }
+                        ?>
                     </div>
                     <p>Màu sắc: <span class="product-infomation__color">Màu lam sáng</span></p>
                     <ul class="product-infomation__size-list dp-flex">
@@ -88,15 +93,15 @@
                                 <i class="fa-solid fa-minus"></i>
                             </span>
                             <input class="item-quantity item-quantity-s-size" type="number"
-                                name="" id="" value="1">
+                                name="quantity" id="" value="1" min="1">
                             <span class="item-increase-btn">
                                 <i class="fa-solid fa-plus"></i>
                             </span>
                         </div>
                     </div>
                     <div class="product-infomation__btn dp-flex">
-                        <a class="btn btn__extra-btn">Thêm vào giỏ</a>
-                        <a href="cart.php" class="btn">Mua hàng</a>
+                        <button type='submit' name='add-to-cart' class="btn btn__extra-btn">Thêm vào giỏ</button>
+                        <button  class="btn">Mua hàng</button>
                     </div>
                 </div>
                 <div class="product-desc-wrap dp-flex">
@@ -107,6 +112,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <script>
         // Zoom img effect

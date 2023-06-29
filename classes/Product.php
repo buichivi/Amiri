@@ -22,7 +22,7 @@ class Product
         $productPrice = mysqli_real_escape_string($this->db->link, $data['productPrice']);
         $productDiscount = mysqli_real_escape_string($this->db->link, $data['productDiscount']);
         $productDesc = mysqli_real_escape_string($this->db->link, $data['product-desc']);
-        
+        $productColor = mysqli_real_escape_string($this->db->link, $data['productColor']);
 
         //Kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
         $permited = array('jpg', 'jpeg', 'png', 'gif');
@@ -36,13 +36,13 @@ class Product
         $uploaded_img = 'uploads/'.$unique_img;
 
 
-        if ($productName == '' || $cateId == '' || $productPrice == '' || $productDesc == '' || $productDiscount == '' || $file_name == '') {
+        if ($productName == '' || $cateId == '' || $productPrice == '' || $productDesc == '' || $productDiscount == '' || $file_name == '' || $productColor == '') {
             $_SESSION['error'] = $this->db->error;
             return;
         }
         else {
             move_uploaded_file($file_temp, $uploaded_img);
-            $query = "INSERT INTO `tb_product` VALUES (NULL, '$productName','$cateId','$productDesc','$productPrice','$unique_img','1','$productDiscount')";
+            $query = "INSERT INTO `tb_product` VALUES (NULL, '$productName','$cateId','$productDesc','$productPrice','$unique_img','1','$productDiscount', '$productColor')";
             $result = $this->db->insert($query);
             if ($result) {
                 $_SESSION['success'] = 'Thêm sản phẩm thành công!';
@@ -87,7 +87,7 @@ class Product
         $productPrice = mysqli_real_escape_string($this->db->link, $data['productPrice']);
         $productDiscount = mysqli_real_escape_string($this->db->link, $data['productDiscount']);
         $productDesc = mysqli_real_escape_string($this->db->link, $data["product-desc-edit-$id"]);
-        
+        $productColor = mysqli_real_escape_string($this->db->link, $data["productColor"]);
 
         //Kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
         $permited = array('jpg', 'jpeg', 'png', 'gif');
@@ -101,7 +101,7 @@ class Product
         $uploaded_img = 'uploads/'.$unique_img;
 
 
-        if ($productName == '' || $cateId == '' || $productPrice == '' || $productDesc == '' || $productDiscount == '') {
+        if ($productName == '' || $cateId == '' || $productPrice == '' || $productDesc == '' || $productDiscount == '' || $productColor == '') {
             $_SESSION['error'] = 'Các trường không được để trống!';
             header("Location:product.php");
             return;
@@ -121,11 +121,11 @@ class Product
                     return;
                 }
                 move_uploaded_file($file_temp, $uploaded_img);
-                $query = "UPDATE `tb_product` SET `productName`='$productName',`categoryId`='$cateId',`productDesc`='$productDesc',`price`='$productPrice',`productImg`='$unique_img',`productDiscount`='$productDiscount' WHERE `id` = '$id'";
+                $query = "UPDATE `tb_product` SET `productName`='$productName',`categoryId`='$cateId',`productDesc`='$productDesc',`price`='$productPrice',`productImg`='$unique_img',`productDiscount`='$productDiscount', `productColor`='$productColor' WHERE `id` = '$id'";
             }
             else {
                 // Nếu người dùng không chọn ảnh
-                $query = "UPDATE `tb_product` SET `productName`='$productName',`categoryId`='$cateId',`productDesc`='$productDesc',`price`='$productPrice',`productDiscount`='$productDiscount' WHERE `id` =  '$id'";
+                $query = "UPDATE `tb_product` SET `productName`='$productName',`categoryId`='$cateId',`productDesc`='$productDesc',`price`='$productPrice',`productDiscount`='$productDiscount', `productColor`='$productColor' WHERE `id` =  '$id'";
             }
             $result = $this->db->update($query);
             

@@ -138,7 +138,7 @@ productQuantities.forEach(function(productQuantity) {
 
     downBtn.onclick = function() {
         numberOfProduct.value--;
-        if (numberOfProduct.value < 0) 
-            numberOfProduct.value = 0;
+        if (numberOfProduct.value < numberOfProduct.min) 
+            numberOfProduct.value = numberOfProduct.min;
     }
 });

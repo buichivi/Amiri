@@ -54,8 +54,16 @@
               <td><input onchange="changeImgWhenUpload();" type="file" name="productImg" id="productImg" placeholder="asc"></td>
             </tr>
             <tr>
-              <td><label for="productDiscount">Giảm giá (%) </label></td>
-              <td><input type="text" name="productDiscount" id="productDiscount" placeholder="Nhập % giảm giá" value="<?=$result['productDiscount']?>"></td>
+              <td>
+                <label for="productDiscount">Giảm giá (%) </label>
+                <span style="padding: 10px 0; display: block;"></span>
+                <label for="productColor">Màu sắc </label>
+              </td>
+              <td>
+                <input type="text" name="productDiscount" id="productDiscount" placeholder="Nhập % giảm giá" value="<?=$result['productDiscount']?>">
+                <span style="padding: 7.5px 0; display: block;"></span>
+                <input type="text" name="productColor" id="productColor" placeholder="Nhập màu sắc sản phẩm" value="<?=$result['productColor']?>">
+              </td>
               <td></td>
               <td><img src="./uploads/<?=$result['productImg']?>" alt="" width="80"></td>
             </tr>
