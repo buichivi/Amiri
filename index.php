@@ -2,6 +2,16 @@
     include 'inc/header.php';
     include 'inc/slider.php';
 ?>
+<?php
+    include 'inc/add-to-cart-success.php';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
+        $id = $_POST['prodIdSelected'];
+        $quantity = 1;
+        $size = $_POST['add-to-cart'];
+        $addToCart = $ct->addToCart($id, $quantity, $size, "index.php");
+    }
+
+?>
 
 
     <div class="new-product">
@@ -20,8 +30,11 @@
                         $getListProd = $prod->getProductList_New();
                         if ($getListProd) {
                             while($row = $getListProd->fetch_assoc()) {
+
                     ?>
+                    <form action="" method="post">
                     <li class="product product--man">
+                        <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                         <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                             <div class="product__img-wrap">
                                 <div class="ticket-new">New</div>
@@ -68,15 +81,26 @@
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 <!-- Thêm class open-product__size-item để m -->
                                 <ul class="product__size-list">
-                                    <li class="product__size-item">S</li>
-                                    <li class="product__size-item">M</li>
-                                    <li class="product__size-item">L</li>
-                                    <li class="product__size-item">XL</li>
-                                    <li class="product__size-item">XXL</li>
-                                </ul>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
+                            </ul>
                             </div>
                         </div>
                     </li>
+                    </form>
                     <?php 
                             }
                         }

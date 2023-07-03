@@ -15,7 +15,7 @@
             </div>
             <!-- Nếu giỏ hàng không có sản phẩm thì thêm class no-cart -->
             <div class="cart__list">
-                <h1>Giỏ hàng của bạn có <span class="cart__number-item">3 sản phẩm</span></h1>
+                <h1>Giỏ hàng của bạn có <span class="cart__number-item"><?=$numberOfProd?> sản phẩm</span></h1>
                 <table class="cart-table">
                     <thead align="left">
                         <tr>
@@ -26,123 +26,69 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                            $getProdCart = $ct->getProductCart();
+                            if ($getProdCart) {
+                                // $numberOfProd = 0;
+                                $totalPrice = 0;
+                                // $finalPrice = 0;
+                                while($row = $getProdCart->fetch_assoc()) {
+                                    // $numberOfProd += $row['quantity'];
+                                    $totalPrice += $row['price'];
+                                    // $finalPrice += $row['finalPrice'];
+                        ?>
                         <tr>
                             <td>
                                 <div class="cart__product-item dp-flex">
-                                    <a href="">
-                                        <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/1b751da0513d24200158440a2f9513b4.JPG"
+                                    <a href="product.php?prodId=<?=$row['productId']?>">
+                                        <img src="admin/uploads/<?=$row['productImg']?>"
                                             alt="">
                                     </a>
                                     <div>
-                                        <a href="">Áo thun in hình</a>
-                                        <p>Màu sắc: <span class="cart__product-item-name">Xanh Ngọc</span> Size: <span
-                                                class="cart__product-item-size">XL</span></p>
+                                        <a href="product.php?prodId=<?=$row['productId']?>"><?=$row['productName']?></a>
+                                        <p>Màu sắc: <span class="cart__product-item-name"><?=$row['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row['size']?></span></p>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="cart__product-sale-price">
-                                    <p>-455.000đ</p>
-                                    <span>( -70% )</span>
+                                    <p>-
+                                    <?php
+                                        echo $prod->convertPrice($row['discountAmount']).'đ';
+                                    ?>
+                                    </p>
+                                    <span>( -<?=$row['productDiscount']?>% )</span>
                                 </div>
                             </td>
                             <td>
+                                <form action="" method="post">
                                 <div class="item-quantity-wrap">
                                     <span class="item-decrease-btn">
                                         <i class="fa-solid fa-minus"></i>
                                     </span>
                                     <input class="item-quantity item-quantity-s-size" type="number" name="" id=""
-                                        value="1">
+                                        value="<?=$row['quantity']?>" min='0'>
                                     <span class="item-increase-btn">
                                         <i class="fa-solid fa-plus"></i>
                                     </span>
                                 </div>
+                                </form>
                             </td>
                             <td>
                                 <div class="cart__product-total-price dp-flex">
-                                    <p>195.000đ</p>
+                                    <p>
+                                    <?php
+                                        echo $prod->convertPrice($row['finalPrice']).'đ';
+                                    ?>
+                                    </p>
                                     <i class="fa-regular fa-trash-can"></i>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="cart__product-item dp-flex">
-                                    <a href="">
-                                        <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/1b751da0513d24200158440a2f9513b4.JPG"
-                                            alt="">
-                                    </a>
-                                    <div>
-                                        <a href="">Áo thun in hình</a>
-                                        <p>Màu sắc: <span class="cart__product-item-name">Xanh Ngọc</span> Size: <span
-                                                class="cart__product-item-size">XL</span></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="cart__product-sale-price">
-                                    <p>-455.000đ</p>
-                                    <span>( -70% )</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="item-quantity-wrap">
-                                    <span class="item-decrease-btn">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </span>
-                                    <input class="item-quantity item-quantity-s-size" type="number" name="" id=""
-                                        value="1">
-                                    <span class="item-increase-btn">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="cart__product-total-price dp-flex">
-                                    <p>195.000đ</p>
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="cart__product-item dp-flex">
-                                    <a href="">
-                                        <img src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/1b751da0513d24200158440a2f9513b4.JPG"
-                                            alt="">
-                                    </a>
-                                    <div>
-                                        <a href="">Áo thun in hình</a>
-                                        <p>Màu sắc: <span class="cart__product-item-name">Xanh Ngọc</span> Size: <span
-                                                class="cart__product-item-size">XL</span></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="cart__product-sale-price">
-                                    <p>-455.000đ</p>
-                                    <span>( -70% )</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="item-quantity-wrap">
-                                    <span class="item-decrease-btn">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </span>
-                                    <input class="item-quantity item-quantity-s-size" type="number" name="" id=""
-                                        value="1">
-                                    <span class="item-increase-btn">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="cart__product-total-price dp-flex">
-                                    <p>195.000đ</p>
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php 
+                                }
+                            }
+                        ?>
                     </tbody>
                 </table>
                 <a href="index.php" class="btn btn__primary-btn"><i class="fa-solid fa-arrow-left-long"></i>Tiếp tục mua hàng</a>
@@ -154,15 +100,23 @@
                 <div class="cart-summary__overview">
                     <div class="cart-summary__overview-item dp-flex">
                         <p>Tổng sản phẩm</p>
-                        <span class="total-product">3</span>
+                        <span class="total-product"><?=$numberOfProd?></span>
                     </div>
                     <div class="cart-summary__overview-item dp-flex">
                         <p>Tổng tiền hàng</p>
-                        <span class="total-price-product fw-500">600.000đ</span>
+                        <span class="total-price-product fw-500">
+                            <?php 
+                                echo $prod->convertPrice($totalPrice)."đ";
+                            ?>
+                        </span>
                     </div>
                     <div class="cart-summary__overview-item dp-flex">
                         <p>Thành tiền</p>
-                        <span class="order-total-price fw-500">600.000đ</span>
+                        <span class="order-total-price fw-500">
+                            <?php 
+                                echo $prod->convertPrice($finalPrice)."đ";
+                            ?>
+                        </span>
                     </div>
                 </div>
                 <div class="inner-note">
@@ -175,12 +129,24 @@
                         </div>
                     </div>
                     <div class="inner-note__item dp-flex">
-                        <div class="left-inner-note">
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                        </div>
-                        <div class="content-inner-note">
-                            <p>Miễn phí ship đơn hàng có tổng gía trị trên 2.000.000đ</p>
-                        </div>
+                        <?php 
+                        if ($finalPrice < 2000000) {
+                            echo "<div class='left-inner-note'>
+                                    <i class='fa-solid fa-circle-exclamation'></i>
+                                </div>
+                                <div class='content-inner-note'>
+                                    <p>Miễn phí ship đơn hàng có tổng gía trị trên 2.000.000đ</p>
+                                </div>";
+                        }
+                        else {
+                            echo "<div class='left-inner-note' style='color: #20bf6b;'>
+                                    <i class='fa-solid fa-circle-check'></i>
+                                </div>
+                                <div class='content-inner-note' style='color: #20bf6b;'>
+                                    <p>Đơn hàng của bạn được Miễn phí ship</p>
+                                </div>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

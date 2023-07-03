@@ -40,6 +40,13 @@ html {
     font-weight: 500 !important;
 }
 
+.error {
+    margin-top: 6px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #d63031;
+}
+
 ::selection {
     background-color: var(--black-color);
     color: var(--white-color);

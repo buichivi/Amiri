@@ -215,30 +215,46 @@
                         </div>
                     </li>
                     <li class="others__items">
+                        <?php 
+                            $numberOfProd = 0;
+                            $finalPrice = 0;
+                            $getProdCart = $ct->getProductCart();
+                            if ($getProdCart) {
+                                while($row = $getProdCart->fetch_assoc()) {
+                                    $numberOfProd += $row['quantity'];
+                                    $finalPrice += $row['finalPrice'];
+                                }
+                            }
+                        ?>
                         <div class="cart">
                             <i class="cart__icon others__icon fa-sharp fa-solid fa-bag-shopping"></i>
-                            <span class="number-cart">3</span>
+                            <span class="number-cart"><?=$numberOfProd?></span>
                             <!-- No cart item: cart-info-no-item -->
                             <!-- Khi cart không có sản phẩm nào thì thêm class cart-info-no-item vào cart-info -->
                             <div class="cart-info">
                                 <div class="cart-info__heading">
-                                    <h3>Giỏ hàng<span class="cart-info__number">3</span></h3>
+                                    <h3>Giỏ hàng<span class="cart-info__number"><?=$numberOfProd?></span></h3>
                                     <div class="cart-info__close">
                                         <i class="cart-info__close-icon fa-solid fa-xmark"></i>
                                     </div>
                                 </div>
                                 <div class="cart-list--wrap">
                                     <ul class="cart-list">
+                                        <?php 
+                                            $getProdCart = $ct->getProductCart();
+                                            if ($getProdCart) {
+                                                while($row = $getProdCart->fetch_assoc()) {
+                                        ?>
                                         <li class="cart-item">
                                             <div class="cart-item__img-wrap">
-                                                <img src="./assets/img/product-cart-1.jpg" alt=""
+                                                <img src="admin/uploads/<?=$row['productImg']?>" alt=""
                                                     class="cart-item__img">
                                             </div>
                                             <div class="cart-item__info">
-                                                <a href="" class="cart-item__heading">Đầm hai dây bản to</a>
+                                                <a href="" class="cart-item__heading"><?=$row['productName']?></a>
                                                 <div class="cart-item__desc">
-                                                    <p>Màu sắc: <span class="cart-item__color">Màu be</span></p>
-                                                    <p>Size: <span class="cart-item__size">XXL</span></p>
+                                                    <p>Màu sắc: <span class="cart-item__color"><?=$row['productColor']?></span></p>
+                                                    <p>Size: <span class="cart-item__size"><?=$row['size']?></span></p>
                                                 </div>
                                                 <div class="cart-item__price-wrap">
                                                     <div class="item-quantity-wrap">
@@ -246,76 +262,37 @@
                                                             <i class="fa-solid fa-minus"></i>
                                                         </span>
                                                         <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1" min="0">
+                                                            name="" id="" value="<?=$row['quantity']?>" min="0">
                                                         <span class="item-increase-btn">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </span>
                                                     </div>
-                                                    <span class="cart-item__price">1.299.000đ</span>
+                                                    <span class="cart-item__price">
+                                                        <?php 
+                                                            echo $prod->convertPrice($row['finalPrice']).'đ';
+                                                        ?>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="cart-item">
-                                            <div class="cart-item__img-wrap">
-                                                <img src="./assets/img/product-cart-2.jpg" alt=""
-                                                    class="cart-item__img">
-                                            </div>
-                                            <div class="cart-item__info">
-                                                <a href="" class="cart-item__heading">Áo thun in hình</a>
-                                                <div class="cart-item__desc">
-                                                    <p>Màu sắc: <span class="cart-item__color">Màu xanh đậm</span></p>
-                                                    <p>Size: <span class="cart-item__size">XXL</span></p>
-                                                </div>
-                                                <div class="cart-item__price-wrap">
-                                                    <div class="item-quantity-wrap">
-                                                        <span class="item-decrease-btn">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                        </span>
-                                                        <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1" min="0">
-                                                        <span class="item-increase-btn">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </span>
-                                                    </div>
-                                                    <span class="cart-item__price">699.000đ</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="cart-item">
-                                            <div class="cart-item__img-wrap">
-                                                <img src="./assets/img/product-cart-3.jpg" alt=""
-                                                    class="cart-item__img">
-                                            </div>
-                                            <div class="cart-item__info">
-                                                <a href="" class="cart-item__heading">Áo thun in hình</a>
-                                                <div class="cart-item__desc">
-                                                    <p>Màu sắc: <span class="cart-item__color">Màu xanh lục</span></p>
-                                                    <p>Size: <span class="cart-item__size">XXL</span></p>
-                                                </div>
-                                                <div class="cart-item__price-wrap">
-                                                    <div class="item-quantity-wrap">
-                                                        <span class="item-decrease-btn">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                        </span>
-                                                        <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="1" min="0">
-                                                        <span class="item-increase-btn">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </span>
-                                                    </div>
-                                                    <span class="cart-item__price">899.000đ</span>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <?php 
+                                            }
+                                        }
+                                        ?>
                                     </ul>
+                                    
                                     <div class="cart-item__price-mini">
-                                        <p>Tổng cộng: <span class="cart-item__total-price">2.000.000đ</span></p>
+                                        <p>Tổng cộng: <span class="cart-item__total-price">
+                                            <?php 
+                                                echo $prod->convertPrice($finalPrice).'đ';
+                                            ?>
+                                        </span></p>
                                     </div>
                                 </div>
 
                                 <div class="cart-item__button">
-                                    <a href="" class="btn btn__extra-btn">Xem giỏ hàng</a>
-                                    <a href="" class="btn">Đăng nhập</a>
+                                    <a href="cart.php" class="btn btn__extra-btn">Xem giỏ hàng</a>
+                                    <a href="login.php" class="btn">Đăng nhập</a>
                                 </div>
                             </div>
                         </div>

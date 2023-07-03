@@ -366,6 +366,7 @@
 }
 
 .cart-item__size {
+    text-transform: uppercase;
 }
 
 .cart-item__price-wrap {
@@ -1057,13 +1058,21 @@
     height: 45px;
     text-align: center;
     line-height: 45px;
-    font-size: 1.6rem;
-    font-weight: 500;
-    cursor: pointer;
 }
 
 .product__size-item:hover {
     background-color: #ececec;
+}
+
+.product__size-item > button {
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 
@@ -1317,8 +1326,12 @@
     padding-left: 0;
     list-style: none;
 }
+.product-infomation__size-list input[type='radio'] {
+    display: none;
+}
 
 .product-infomation__size-list span {
+    display: inline-block;
     width: 50px;
     padding: 8px 0;
     font-size: 1.5rem;

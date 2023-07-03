@@ -8,12 +8,17 @@
     else {
         $id = $_GET['prodId'];
         include 'inc/add-to-cart-success.php';
-        echo "  ";
-
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
-        $quantity = $_POST['quantity'];
-        $addToCart = $ct->addToCart($id, $quantity);
+        $quantity = ($_POST['quantity']) ? $_POST['quantity'] : 1;
+        $size = ($_POST['size']) ? $_POST['size'] : $_POST['add-to-cart'];
+        $addToCart = $ct->addToCart($id, $quantity, $size, "product.php?prodId=$id");
+    }
+    else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['buy-product'])) {
+        $quantity = ($_POST['quantity']) ? $_POST['quantity'] : 1;
+        $size = ($_POST['size']) ? $_POST['size'] : $_POST['add-to-cart'];
+        $addToCart = $ct->addToCart($id, $quantity, $size, "cart.php");
+        unset($_SESSION['add-to-cart-success']);
     }
     ?>
 
@@ -83,22 +88,28 @@
                     </div>
                     <p>Màu sắc: <span class="product-infomation__color">Màu lam sáng</span></p>
                     <ul class="product-infomation__size-list dp-flex">
-                        <li>
+                        <li class="size-selected">
+                            <input type="radio" name="size" id="" value="s">
                             <span>S</span>
                         </li>
                         <li>
+                            <input type="radio" name="size" id="" value="m">
                             <span>M</span>
                         </li>
                         <li>
+                            <input type="radio" name="size" id="" value="l">
                             <span>L</span>
                         </li>
                         <li>
+                            <input type="radio" name="size" id="" value="xl">
                             <span>XL</span>
                         </li>
                         <li>
+                            <input type="radio" name="size" id="" value="xxl">
                             <span>XXL</span>
                         </li>
                     </ul>
+                    <div class="error"></div>
                     <div class="product-infomation__quantity dp-flex">
                         <h3>Số lượng</h3>
                         <div class="item-quantity-wrap">
@@ -113,8 +124,8 @@
                         </div>
                     </div>
                     <div class="product-infomation__btn dp-flex">
-                        <button type='submit' name='add-to-cart' class="btn btn__extra-btn">Thêm vào giỏ</button>
-                        <button  class="btn">Mua hàng</button>
+                        <button type='submit' name='add-to-cart' class='btn btn__extra-btn' onclick="return sizeChecked();">Thêm vào giỏ</button>
+                        <button type='submit' class='btn' name='buy-product' onclick="return sizeChecked();">Mua hàng</button>
                     </div>
                 </div>
                 <div class="product-desc-wrap dp-flex">
@@ -192,26 +203,39 @@
 
 
         // Select size
-        const listSize = document.querySelectorAll('.product-infomation__size-list > li');
+        const listSize = document.querySelectorAll('.product-infomation__size-list > li > span');
         listSize.forEach(function(sizeItem) {
             sizeItem.addEventListener('click', function() {
                 if (sizeItem.classList.contains('size-selected')) {
                     sizeItem.classList.remove('size-selected');
+                    sizeItem.previousElementSibling.checked = false;
                 }
                 else {
                     if (document.querySelector('.size-selected')) {
                         document.querySelector('.size-selected').classList.remove('size-selected');
                     }
                     sizeItem.classList.add('size-selected');
+                    sizeItem.previousElementSibling.checked = true;
                 }
             });
         });
+
+        function sizeChecked() {
+            const sizeCheckedList = document.querySelectorAll('input[name="size"]');
+            for (size of sizeCheckedList) {
+                if (size.checked) {
+                    return true;
+                }
+            }
+            document.querySelector('.error').innerText = 'Bạn chưa chọn size';
+            return false;
+        }
     </script>
     <?php ?>
 
     <!-- Recommend product -->
     <div class="recomment-product container">
-        <h1>Sản phẩm tương tự</h1>
+        <h1>Sản phẩm mới</h1>
         <div class="list-product-wrap">
             <div class="move-product-right move-product-right--man">
                 <i class="fa-solid fa-arrow-right"></i>
@@ -219,6 +243,7 @@
             <div class="move-product-left move-product-left--man">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
+            <form action="" method="post">
             <ul class="list-product list-product--man">
                 <li class="product product--man">
                     <a href="" class="product__link">
@@ -250,11 +275,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -289,11 +324,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -328,11 +373,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -367,11 +422,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -406,11 +471,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -445,11 +520,21 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -484,16 +569,27 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                             <!-- Thêm class open-product__size-item để m -->
                             <ul class="product__size-list">
-                                <li class="product__size-item">S</li>
-                                <li class="product__size-item">M</li>
-                                <li class="product__size-item">L</li>
-                                <li class="product__size-item">XL</li>
-                                <li class="product__size-item">XXL</li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="s">S</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="m">M</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="l">L</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                </li>
+                                <li class="product__size-item">
+                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </li>
             </ul>
+            </form>
         </div>
     </div>
     <script src="./assets/js/slider-product.js"></script>
