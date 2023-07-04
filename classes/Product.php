@@ -120,6 +120,10 @@ class Product
                     header("Location:product.php");
                     return;
                 }
+                $prodImg = $this->db->select("SELECT productImg FROM tb_product WHERE id = $id");
+                while($row = $prodImg->fetch_assoc()) {
+                    unlink("uploads/".$row['productImg']);
+                }
                 move_uploaded_file($file_temp, $uploaded_img);
                 $query = "UPDATE `tb_product` SET `productName`='$productName',`categoryId`='$cateId',`productDesc`='$productDesc',`price`='$productPrice',`productImg`='$unique_img',`productDiscount`='$productDiscount', `productColor`='$productColor' WHERE `id` = '$id'";
             }
@@ -142,9 +146,13 @@ class Product
         }
     }
     public function deleteProductById($id) {
+        $prodImg = $this->db->select("SELECT productImg FROM tb_product WHERE id = $id");
         $query = "DELETE FROM tb_product WHERE id = $id";
         $result = $this->db->delete($query);
         if ($result) {
+            while($row = $prodImg->fetch_assoc()) {
+                unlink("uploads/".$row['productImg']);
+            }
             $_SESSION['success'] = "Xóa sản phẩm thành công";
             header("Location:product.php");
             return;

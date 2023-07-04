@@ -140,3 +140,4 @@ productQuantities.forEach(function(productQuantity) {
             numberOfProduct.value = numberOfProduct.min;
     }
 });
+

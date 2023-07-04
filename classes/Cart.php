@@ -23,13 +23,22 @@ class Cart
         $id = mysqli_real_escape_string($this->db->link, $id);
         $sessionId = session_id();
 
-        $query = "SELECT * FROM tb_product WHERE id = $id";
-        $prodDetail = $this->db->select($query)->fetch_assoc();
-
-        $query_cart = "INSERT INTO tb_cart VALUES (NULL,'$sessionId','$id','$quantity', '$size')";
-        $insert_cart = $this->db->insert($query_cart);
+        $query = "SELECT COUNT(*) AS numrow, quantity FROM tb_cart WHERE productId = '$id' AND size = '$size'";
+        $checkProdExist = $this->db->select($query)->fetch_assoc();
+        // print_r($checkProdExist);
+        $insert_cart = '';
+        if ($checkProdExist['numrow'] != 0) {
+            $curQty = $checkProdExist['quantity'];
+            $updateQty = $curQty + $quantity;
+            $query_cart = "UPDATE tb_cart SET quantity = '$updateQty' WHERE productId = '$id' AND size = '$size'";
+            $insert_cart = $this->db->update($query_cart);
+        }
+        else {
+            $query_cart = "INSERT INTO tb_cart VALUES (NULL,'$sessionId','$id','$quantity', '$size')";
+            $insert_cart = $this->db->insert($query_cart);
+        }
         if ($insert_cart) {
-            $_SESSION['add-to-cart-success'] = "Thêm vào giỏ hàng thành công!";
+            $_SESSION['notification'] = "Thêm vào giỏ hàng thành công!";
             header("Location: $url");
             return;
         }
@@ -40,13 +49,54 @@ class Cart
     }
     public function getProductCart() {
         $sessionId = session_id();
-        $query = "SELECT productId, productName, sum(quantity) as quantity, size, productImg, productColor,  price*sum(quantity) as price, productDiscount, price*sum(quantity) * (productDiscount / 100) as discountAmount, price*sum(quantity)*(1 -(productDiscount / 100)) as finalPrice
+        $query = "SELECT ct.id AS cartId, pd.id AS productId, productName, productImg, productColor, quantity, size, price*quantity AS price, productDiscount, price*quantity*(productDiscount/100) AS discountAmount, price*quantity*(1 - productDiscount/100) AS finalPrice
                     FROM tb_cart ct INNER JOIN tb_product pd on ct.productId = pd.id
-                    WHERE sessionId = '$sessionId'
-                    GROUP BY productId, size";
+                    WHERE sessionId = '$sessionId'";
         $result = $this->db->select($query);
         return $result;
     }
+    public function updateQuantityCart($cartId, $quantity) {
+        $cartId = mysqli_real_escape_string($this->db->link, $cartId);
+        $quantity = mysqli_real_escape_string($this->db->link, $quantity);
+
+        $result = '';
+        if ($quantity == 0) {
+            $query = "DELETE FROM tb_cart WHERE id = '$cartId'";
+            $result = $this->db->delete($query);
+            if ($result) {
+                $_SESSION['notification'] = 'Xóa sản phẩm khỏi giỏ hàng!';
+            }
+            else {
+                $_SESSION['notification'] = 'Xóa sản phẩm khỏi giỏ hàng không thành công!';
+            }
+        }
+        else {
+            $query = "UPDATE tb_cart SET quantity = $quantity WHERE id = '$cartId'";
+            $result = $this->db->update($query);
+            if ($result) {
+                $_SESSION['notification'] = 'Cập nhật số lượng thành công!';
+            }
+            else {
+                $_SESSION['notification'] = 'Cập nhật số lượng không thành công!';
+            }
+        }
+        header("Location: cart.php");
+    }
+    public function removeProdCart($cartId) {
+        echo 'ABC'.$cartId;
+        $cartId = mysqli_real_escape_string($this->db->link, $cartId);
+        $query = "DELETE FROM tb_cart WHERE id = '$cartId'";
+        $result = $this->db->delete($query);
+        if ($result) {
+            $_SESSION['notification'] = 'Xóa sản phẩm khỏi giỏ hàng!';
+        }
+        else {
+            $_SESSION['notification'] = 'Xóa sản phẩm khỏi giỏ hàng không thành công!';
+        }
+        header("Location: cart.php");
+    }
+    
+
 
 }
 ob_flush();

@@ -29,29 +29,30 @@
     font-size: 1.3rem;
     font-weight: 500;
     position: relative;
+    align-items: center;
 }
 
-.menu__item {
+.menu__list > li {
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
     transition: color 0.4s;
 }
 
-.menu__item:hover {
+.menu__list > li:hover {
     color: #ac2f33;
 }
 
-.menu__item:hover .list-submenu {
+.menu__list > li:hover .list-submenu {
     display: flex;
 }
 
-.menu__item + .menu__item {
+.menu__list > li + li {
     margin-left: 15px;
 }
 
 /* About us */
-.menu__item.ps-relative:hover .about-us__list {
+.menu__list > li.ps-relative:hover .about-us__list {
     display: block;
 }
 .about-us__list {
@@ -179,8 +180,9 @@
     position: absolute;
     top: -11px;
     right: -22px;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    padding: 2px 2px;
     border-radius: 50%;
     color: var(--white-color);
     background-color: var(--black-color);
@@ -1370,6 +1372,27 @@
     width: 100px;
 }
 
+.item-quantity-wrap > input[name="update-quantity"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    padding: 6px 0;
+    font-size: 1.3rem;
+    margin-top: 12px;
+    border-top-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .4s;
+}
+.item-quantity-wrap > input[name="update-quantity"]:hover {
+    background-color: var(--white-color);
+    border-color: var(--black-color);
+    color: var(--black-color);
+}
+
 .product-infomation__btn {
     width: 55%;
     justify-content: space-between;
@@ -1650,14 +1673,25 @@ td > .item-quantity-wrap {
     font-weight: 500;
     color:var(--black-color);
     align-items: center;
+    justify-content: space-between;
 }
 
-.cart__product-total-price i {
-    font-weight: 300;
-    margin-left: 50px;
+.cart__product-total-price  button {
+    width: 30px;    
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
     cursor: pointer;
 }
 
+.cart__product-total-price  button > i {
+    font-weight: 300;
+    transition: color .2s;
+}
+.cart__product-total-price  button:hover > i {
+    color:rgb(245, 61, 61);
+}
 
 .cart__list .btn.btn__primary-btn {
     width: 250px;

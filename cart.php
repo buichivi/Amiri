@@ -1,6 +1,21 @@
 <?php
     include 'inc/header.php';
 ?>
+<?php 
+    // include 'inc/notification.php';
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-quantity'])) {
+        $cartId = $_POST['cartId'];
+        $quantity = $_POST['quantity'];
+        $updateQtyCart = $ct->updateQuantityCart($cartId, $quantity);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['remove-prod-from-cart'])) {
+        $cartId = $_POST['cartId'];
+        $removeProdCart = $ct->removeProdCart($cartId);
+    }
+
+?>
 
     <!-- cart field -->
     <div class="cart-field-wrap container dp-flex">
@@ -14,7 +29,10 @@
                 </ul>
             </div>
             <!-- Nếu giỏ hàng không có sản phẩm thì thêm class no-cart -->
-            <div class="cart__list">
+            <div class="cart__list 
+            <?php 
+            if ($numberOfProd == 0) echo "no-cart";
+            ?>">
                 <h1>Giỏ hàng của bạn có <span class="cart__number-item"><?=$numberOfProd?> sản phẩm</span></h1>
                 <table class="cart-table">
                     <thead align="left">
@@ -63,14 +81,16 @@
                             <td>
                                 <form action="" method="post">
                                 <div class="item-quantity-wrap">
+                                    <input type="hidden" name="cartId" value="<?=$row['cartId']?>">
                                     <span class="item-decrease-btn">
                                         <i class="fa-solid fa-minus"></i>
                                     </span>
-                                    <input class="item-quantity item-quantity-s-size" type="number" name="" id=""
+                                    <input class="item-quantity item-quantity-s-size" type="number" name="quantity" id=""
                                         value="<?=$row['quantity']?>" min='0'>
                                     <span class="item-increase-btn">
                                         <i class="fa-solid fa-plus"></i>
                                     </span>
+                                    <input type="submit" name="update-quantity" value="Cập nhật">
                                 </div>
                                 </form>
                             </td>
@@ -81,7 +101,12 @@
                                         echo $prod->convertPrice($row['finalPrice']).'đ';
                                     ?>
                                     </p>
-                                    <i class="fa-regular fa-trash-can"></i>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="cartId" value="<?=$row['cartId']?>">
+                                        <button type="submit" name="remove-prod-from-cart" onclick="return confirm('Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng?');">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -150,7 +175,11 @@
                     </div>
                 </div>
             </div>
-            <a href="order.php" class="btn btn__extra-btn">Đặt hàng</a>
+            <?php
+                if ($numberOfProd > 0) {
+                    echo "<a href='order.php' class='btn btn__extra-btn'>Đặt hàng</a>";
+                }
+            ?>
         </div>
     </div>
 <?php

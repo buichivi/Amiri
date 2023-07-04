@@ -1,7 +1,7 @@
 <?php
     include 'inc/header.php';
 ?>
-<div>
+<div style="margin: 120px 40px; height: 900px;">
     Page not found!
 </div>
 <?php

@@ -42,6 +42,9 @@
                       $catList = $cat->getListCategory();
                       if ($catList) {
                         while($result = $catList->fetch_assoc()) {
+                          if ($result['parent_id'] == 0) {
+                            continue;
+                          }
                         ?>
                           <option value="<?=$result['id']?>"><?=$result['categoryName']?></option>
                         <?php   

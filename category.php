@@ -1,6 +1,16 @@
 <?php
     include 'inc/header.php';
 ?>
+<?php 
+    if(!isset($_GET['catid']) || $_GET['catid'] == NULL) {
+        echo '<script> window.location = "404.php"; </script>';
+    }
+    else {
+        $id = $_GET['catid'];
+        // include 'inc/notification.php';
+    }
+
+?>
 
     <!-- Body -->
     <div class="content">
@@ -532,7 +542,7 @@
         </div>
     </div>
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
     <script src="./assets/js/price-range.js"></script>
     <script src="./assets/js/filter.js"></script>
 <?php

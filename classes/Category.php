@@ -88,6 +88,20 @@ class Category
             return;
         }
     }
+    //END BACK_END
+
+
+    //START FRONT_END
+    public function getListCategory_FE() {
+        $query = "SELECT `id`, `categoryName`, `parent_id` FROM `tb_category` WHERE 1;";
+        $result = $this->db->select($query);
+        return $result;
+    } 
+    public function getCateById_FE($id) {
+        $query = "SELECT * FROM tb_category WHERE id = $id";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
 ob_flush();
 ?>

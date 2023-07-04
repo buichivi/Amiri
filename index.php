@@ -3,14 +3,13 @@
     include 'inc/slider.php';
 ?>
 <?php
-    include 'inc/add-to-cart-success.php';
+    // include 'inc/notification.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
         $id = $_POST['prodIdSelected'];
         $quantity = 1;
         $size = $_POST['add-to-cart'];
         $addToCart = $ct->addToCart($id, $quantity, $size, "index.php");
     }
-
 ?>
 
 

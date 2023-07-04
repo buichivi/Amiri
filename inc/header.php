@@ -39,155 +39,20 @@
         window.history.replaceState(null, null, window.location.href);
       }
     </script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
+    <?php include 'inc/notification.php'; ?>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="menu">
-                <ul class="menu__list">
-                    <li class="menu__item">
-                        Nam
-                        <ul class="list-submenu">
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Áo</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Áo thun</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo khoác</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo polo</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo sơ mi</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo phao</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo len</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo vest</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Quần Nam</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Quần jeans</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần short</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần dài</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần khaki</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần tây</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Dày & Dép</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Dày/Dép</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Phụ kiện</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Phụ kiện</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item">
-                        Nữ
-                        <ul class="list-submenu">
-
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Áo</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Áo sơ mi</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo thun</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo thun ngắn tay</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo peplum</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo len</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Áo khoác</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Áo khoác</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo dạ</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo tweed</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo măng tô</a></li>
-                                    <li class="db-submenu__item"><a href="">Áo vest/blazer</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Quần & jumpsuit</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Quần jeans</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần dài</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần lửng/short</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần baggy</a></li>
-                                    <li class="db-submenu__item"><a href="">Jumpsuit</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Phụ kiện</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Túi/ví</a></li>
-                                    <li class="db-submenu__item"><a href="">Dày dép & Sandals</a></li>
-                                    <li class="db-submenu__item"><a href="">Phụ kiện</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item">
-                        Trẻ em
-                        <ul class="list-submenu">
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Bé gái</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Áo bé gái</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần bé gái</a></li>
-                                    <li class="db-submenu__item"><a href="">Váy bé gái</a></li>
-                                    <li class="db-submenu__item"><a href="">Phụ kiện bé gái</a></li>
-                                </ul>
-                            </li>
-                            <li class="list-submenu__item">
-                                <h3 class="list_submenu__item-heading">
-                                    <a href="">Bé trai</a>
-                                </h3>
-                                <ul class="db-submenu">
-                                    <li class="db-submenu__item"><a href="">Áo bé trai</a></li>
-                                    <li class="db-submenu__item"><a href="">Quần bé trai</a></li>
-                                    <li class="db-submenu__item"><a href="">Phụ kiện bé trai</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item">Bộ sưu tập</li>
-                    <li class="menu__item ps-relative">
-                        Về chúng tôi
-                        <ul class="about-us__list">
-                            <li class="about-us__item">
-                                <a href="" class="about-us__item-link">Về IVY moda</a>
-                            </li>
-                            <li class="about-us__item">
-                                <a href="" class="about-us__item-link">Fashion Show</a>
-                            </li>
-                            <li class="about-us__item">
-                                <a href="" class="about-us__item-link">Hoạt động cộng đồng</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <?php include 'inc/menu.php'; ?>
             </nav>
 
             <div class="logo">
@@ -218,11 +83,13 @@
                         <?php 
                             $numberOfProd = 0;
                             $finalPrice = 0;
+                            $totalPrice = 0;
                             $getProdCart = $ct->getProductCart();
                             if ($getProdCart) {
                                 while($row = $getProdCart->fetch_assoc()) {
-                                    $numberOfProd += $row['quantity'];
-                                    $finalPrice += $row['finalPrice'];
+                                    $numberOfProd += ($row['quantity']) ? $row['quantity'] : 0;
+                                    $finalPrice += ($row['finalPrice']) ? $row['finalPrice'] : 0;
+                                    $totalPrice += ($row['price']) ? $row['price'] : 0;
                                 }
                             }
                         ?>
