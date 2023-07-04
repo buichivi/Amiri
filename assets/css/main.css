@@ -171,6 +171,48 @@
     margin-left: 22px;
 }
 
+.others__items > .login > .action {
+    --height: 164px;
+    overflow: hidden;
+    position: absolute;
+    top: 200%;
+    right: 0;
+    background-color: var(--white-color);
+    width: 200px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    animation: filterOpen ease .4s;
+    display: none;
+}
+
+.others__items > .login > .action > h3 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.others__items > .login > .action > ul {
+    padding-left: 0;
+    list-style: none;
+}
+.others__items > .login > .action > ul > li {
+    padding: 12px;
+}
+.others__items > .login > .action > ul > li:hover {
+    background-color: #dfe6e9;
+}
+
+.others__items > .login > .action > ul > li > i {
+    width: 16px;
+    font-size: 1.4rem;
+    padding-right: 24px;
+}
+.others__items > .login > .action > ul > li > a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--black-color)
+}
 /* cart */
 .cart {
     position: relative;
@@ -1938,7 +1980,7 @@ td > .item-quantity-wrap {
     margin: 0 auto;
 }
 
-.login-field input[type='text'] {
+.login-field input:not(input[type="checkbox"]) {
     width: 100%;
     font-size: 1.6rem;
     font-weight: 300;
@@ -1947,11 +1989,11 @@ td > .item-quantity-wrap {
     border-radius: 5px;
     margin-bottom: 20px;
 }
-.login-field input[type='text']:focus {
+.login-field input:not(input[type="checkbox"]):focus {
     outline: 3px solid #bfdeff;
 }
 
-.login-field input[type='text']::placeholder {
+.login-field input:not(input[type="checkbox"])::placeholder {
     color: #aeb4c7;
 }
 
@@ -2001,4 +2043,72 @@ td > .item-quantity-wrap {
     font-size: 2rem;
     font-weight: 400;
     letter-spacing: 2px;
+}
+
+
+/* Register page */
+.login-register-wrap .register-form {
+    padding: 12px 200px;
+}
+
+.login-register-wrap .register-form > h1 {
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.login-register-wrap .register-form > h4 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.login-register-wrap .register-form > table {
+    width: 100%;
+}
+.login-register-wrap .register-form > table td {
+    border-bottom: none;
+    vertical-align: middle;
+    padding: 10px 0;
+}
+
+.login-register-wrap .register-form > table td:nth-child(1),
+.login-register-wrap .register-form > table td:nth-child(3) {
+    width: 17%;
+    padding-left: 6px;
+}
+
+
+.login-register-wrap .register-form > table label {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.login-register-wrap .register-form > table input, 
+.login-register-wrap .register-form > table textarea, 
+.login-register-wrap .register-form > table select {
+    width: 100%;
+    /* height: 36px; */
+    font-size: 1.4rem;
+    padding: 14px 12px;
+    color: #57585A;
+    border-radius: 5px;
+    border: 1px solid #E7E8E9;
+    resize: none;
+}
+.login-register-wrap .register-form > table select[id='ward'] {
+    width: 100%;
+}
+
+.login-register-wrap .register-form > table input:focus, 
+.login-register-wrap .register-form > table textarea:focus, 
+.login-register-wrap .register-form > table select:focus {
+    outline: 3px solid #bfdeff;
+}
+.login-register-wrap .register-form > button[type='submit'] {
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+    font-size: 1.3rem;
 }

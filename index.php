@@ -80,22 +80,22 @@
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 <!-- Thêm class open-product__size-item để m -->
                                 <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="s">S</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="m">M</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="l">L</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </li>

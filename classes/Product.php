@@ -181,6 +181,12 @@ class Product
     public function getNewPriceAfterSale($price, $discount) {
         return $this->convertPrice($price*(100 - $discount)/100)."đ";
     }
+
+    public function getProductByCateId($catId) {
+        $query = "SELECT * FROM tb_product WHERE categoryId = '$catId' LIMIT 12";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
 ob_flush();
 ?>

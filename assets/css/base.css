@@ -264,6 +264,7 @@ html {
 /* Filter group */
 .content-product-wrap {
     margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .filter-group {

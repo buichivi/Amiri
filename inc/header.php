@@ -12,6 +12,7 @@
     $ct = new Cart(); 
     $us = new User();
     $cat = new Category();
+    $cs = new Customer();
     $prod = new Product();
 ?>
 
@@ -48,6 +49,12 @@
 
 <body>
     <?php include 'inc/notification.php'; ?>
+
+
+    <?php 
+        $login_check = Session::get("customer_login");
+    ?>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -77,6 +84,41 @@
                             <a href="login.php" class="login__link">
                                 <i class="others__icon fa-solid fa-user"></i>
                             </a>
+                            <div class="action">
+                                <h3>Tài khoản của tôi</h3>
+                                <ul>
+                                    <li>
+                                        <i class="fa-regular fa-user"></i>
+                                        <a href="">Thông tin tài khoản</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-file-invoice"></i>    
+                                        <a href="">Quản lý đơn hàng</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        <a href="">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <script>
+                                var actionUser = document.querySelector('.action');
+                                if (<?=$login_check?>) {
+                                    document.querySelector('.login__link').onclick = function(e) {
+                                        e.preventDefault();
+                                        if (actionUser.classList.contains('active')) {
+                                            actionUser.classList.add('close-filter-animation');
+                                            setTimeout(function() {
+                                                actionUser.classList.remove('active');
+                                            }, 200);
+                                        }
+                                        else {
+                                            actionUser.classList.remove('close-filter-animation');
+                                            actionUser.classList.add('active');
+                                        }
+                                    }
+                                }
+                            </script>
                         </div>
                     </li>
                     <li class="others__items">
@@ -159,7 +201,13 @@
 
                                 <div class="cart-item__button">
                                     <a href="cart.php" class="btn btn__extra-btn">Xem giỏ hàng</a>
-                                    <a href="login.php" class="btn">Đăng nhập</a>
+                                    <a
+                                    <?php 
+                                        if ($login_check) {
+                                            echo "style='display: none;'";
+                                        }
+                                    ?>
+                                     href="login.php" class="btn">Đăng nhập</a>
                                 </div>
                             </div>
                         </div>
