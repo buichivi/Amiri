@@ -164,8 +164,24 @@ class Product
         }
     }
     // END BACKEND
-    public function getProductList_New() {
-        $query = "SELECT * FROM tb_product ORDER BY id DESC LIMIT 7";
+    public function getProductList_New($catId) {
+        $query = "WITH RECURSIVE category_recursive AS (
+                    SELECT id, categoryName, parent_id, 0 AS level
+                    FROM tb_category
+                    WHERE id = '$catId'
+                    UNION ALL
+                
+                    SELECT c.id, c.categoryName, c.parent_id, cr.level + 1
+                    FROM tb_category c
+                    INNER JOIN category_recursive cr ON c.parent_id = cr.id
+                )
+                SELECT * 
+                FROM tb_product
+                WHERE categoryId in 
+                (SELECT id
+                FROM category_recursive
+                ORDER BY level, id)
+                ORDER BY id DESC LIMIT 7;";
         $result = $this->db->select($query);
         return $result;
     }
@@ -179,11 +195,29 @@ class Product
         echo 'SP'.$id;
     }
     public function getNewPriceAfterSale($price, $discount) {
+        if ($discount == 0) {
+            return $this->convertPrice($price)."đ";
+        }
         return $this->convertPrice($price*(100 - $discount)/100)."đ";
     }
 
     public function getProductByCateId($catId) {
-        $query = "SELECT * FROM tb_product WHERE categoryId = '$catId' LIMIT 12";
+        $query = "WITH RECURSIVE category_recursive AS (
+                    SELECT id, categoryName, parent_id, 0 AS level
+                    FROM tb_category
+                    WHERE id = '$catId'
+                    UNION ALL
+                
+                    SELECT c.id, c.categoryName, c.parent_id, cr.level + 1
+                    FROM tb_category c
+                    INNER JOIN category_recursive cr ON c.parent_id = cr.id
+                )
+                SELECT * 
+                FROM tb_product
+                WHERE categoryId in 
+                (SELECT id
+                FROM category_recursive
+                ORDER BY level, id) LIMIT 12;";
         $result = $this->db->select($query);
         return $result;
     }
