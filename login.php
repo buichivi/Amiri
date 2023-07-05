@@ -3,6 +3,10 @@
 ?>
 
 <?php 
+  if ($login_check) {
+    header("Location: index.php");
+  }
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $loginCus = $cs->loginCustomer($_POST);
   }

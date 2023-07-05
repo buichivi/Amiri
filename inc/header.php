@@ -48,10 +48,19 @@
 </head>
 
 <body>
-    <?php include 'inc/notification.php'; ?>
-
+    <?php 
+        include 'inc/notification.php';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-quantity'])) {
+            $cartId = $_POST['cartId'];
+            $quantity = $_POST['quantity'];
+            $updateQtyCart = $ct->updateQuantityCart($cartId, $quantity);
+        } 
+    ?>
 
     <?php 
+        if (isset($_GET['customerid'])) {
+            Session::destroy();
+        }
         $login_check = Session::get("customer_login");
     ?>
 
@@ -85,11 +94,11 @@
                                 <i class="others__icon fa-solid fa-user"></i>
                             </a>
                             <div class="action">
-                                <h3>Tài khoản của tôi</h3>
+                                <h3><a href="info.php">Tài khoản của tôi</a></h3>
                                 <ul>
                                     <li>
                                         <i class="fa-regular fa-user"></i>
-                                        <a href="">Thông tin tài khoản</a>
+                                        <a href="info.php">Thông tin tài khoản</a>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-file-invoice"></i>    
@@ -97,7 +106,7 @@
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        <a href="">Đăng xuất</a>
+                                        <a href="?customerid=<?=Session::get('customer_id')?>">Đăng xuất</a>
                                     </li>
                                 </ul>
                             </div>
@@ -147,67 +156,78 @@
                                         <i class="cart-info__close-icon fa-solid fa-xmark"></i>
                                     </div>
                                 </div>
-                                <div class="cart-list--wrap">
-                                    <ul class="cart-list">
-                                        <?php 
-                                            $getProdCart = $ct->getProductCart();
-                                            if ($getProdCart) {
-                                                while($row = $getProdCart->fetch_assoc()) {
-                                        ?>
-                                        <li class="cart-item">
-                                            <div class="cart-item__img-wrap">
-                                                <img src="admin/uploads/<?=$row['productImg']?>" alt=""
-                                                    class="cart-item__img">
-                                            </div>
-                                            <div class="cart-item__info">
-                                                <a href="" class="cart-item__heading"><?=$row['productName']?></a>
-                                                <div class="cart-item__desc">
-                                                    <p>Màu sắc: <span class="cart-item__color"><?=$row['productColor']?></span></p>
-                                                    <p>Size: <span class="cart-item__size"><?=$row['size']?></span></p>
+                                <div style="display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                height: 85%;">
+                                    <div class="cart-list--wrap">
+                                        <ul class="cart-list">
+                                            <?php 
+                                                $getProdCart = $ct->getProductCart();
+                                                if ($getProdCart) {
+                                                    while($row = $getProdCart->fetch_assoc()) {
+                                            ?>
+                                            <li class="cart-item">
+                                                <div class="cart-item__img-wrap">
+                                                    <a href="product.php?prodId=<?=$row['productId']?>" >
+                                                        <img src="admin/uploads/<?=$row['productImg']?>" alt=""
+                                                        class="cart-item__img">
+                                                    </a>
                                                 </div>
-                                                <div class="cart-item__price-wrap">
-                                                    <div class="item-quantity-wrap">
-                                                        <span class="item-decrease-btn">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                        </span>
-                                                        <input class="item-quantity item-quantity-s-size" type="number"
-                                                            name="" id="" value="<?=$row['quantity']?>" min="0">
-                                                        <span class="item-increase-btn">
-                                                            <i class="fa-solid fa-plus"></i>
+                                                <div class="cart-item__info">
+                                                    <a href="product.php?prodId=<?=$row['productId']?>" class="cart-item__heading"><?=$row['productName']?></a>
+                                                    <div class="cart-item__desc">
+                                                        <p>Màu sắc: <span class="cart-item__color"><?=$row['productColor']?></span></p>
+                                                        <p>Size: <span class="cart-item__size"><?=$row['size']?></span></p>
+                                                    </div>
+                                                    <div class="cart-item__price-wrap">
+                                                        <form action="" method="post">
+                                                            <input type="hidden" name="cartId" value="<?=$row['cartId']?>">
+                                                            <div class="item-quantity-wrap">
+                                                                <span class="item-decrease-btn">
+                                                                    <i class="fa-solid fa-minus"></i>
+                                                                </span>
+                                                                <input class="item-quantity item-quantity-s-size" type="number"
+                                                                    name="quantity" id="" value="<?=$row['quantity']?>" min="0">
+                                                                <span class="item-increase-btn">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="submit" name="update-quantity" value="Cập nhật">
+                                                        </form>
+                                                        <span class="cart-item__price">
+                                                            <?php 
+                                                                echo $prod->convertPrice($row['finalPrice']).'đ';
+                                                            ?>
                                                         </span>
                                                     </div>
-                                                    <span class="cart-item__price">
-                                                        <?php 
-                                                            echo $prod->convertPrice($row['finalPrice']).'đ';
-                                                        ?>
-                                                    </span>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <?php 
-                                            }
-                                        }
-                                        ?>
-                                    </ul>
-                                    
-                                    <div class="cart-item__price-mini">
-                                        <p>Tổng cộng: <span class="cart-item__total-price">
+                                            </li>
                                             <?php 
-                                                echo $prod->convertPrice($finalPrice).'đ';
+                                                }
+                                            }
                                             ?>
-                                        </span></p>
+                                        </ul>
+                                        
+                                        <div class="cart-item__price-mini">
+                                            <p>Tổng cộng: <span class="cart-item__total-price">
+                                                <?php 
+                                                    echo $prod->convertPrice($finalPrice).'đ';
+                                                ?>
+                                            </span></p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="cart-item__button">
-                                    <a href="cart.php" class="btn btn__extra-btn">Xem giỏ hàng</a>
-                                    <a
-                                    <?php 
-                                        if ($login_check) {
-                                            echo "style='display: none;'";
-                                        }
-                                    ?>
-                                     href="login.php" class="btn">Đăng nhập</a>
+                                    <div class="cart-item__button">
+                                        <a href="cart.php" class="btn btn__extra-btn">Xem giỏ hàng</a>
+                                        <a
+                                        <?php 
+                                            if ($login_check) {
+                                                echo "style='display: none;'";
+                                            }
+                                        ?>
+                                        href="login.php" class="btn">Đăng nhập</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

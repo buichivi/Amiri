@@ -34,27 +34,6 @@
         </td>
       </tr>
       <tr>
-        <td><label for="">Tỉnh/TP</label></td>
-        <td>
-          <select required class="form-select form-select-sm mb-3" name="city" id="city" aria-label=".form-select-sm">
-            <option value="-1" selected>Chọn tỉnh thành</option>           
-          </select>
-        </td>
-        <td><label for="">Quận/Huyện</label></td>
-        <td>
-          <select required class="form-select form-select-sm mb-3" name="district" id="district" aria-label=".form-select-sm">
-            <option value="-1" selected>Chọn quận huyện</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td><label for="">Xã/Phường</label></td>
-        <td colspan="3">
-          <select required class="form-select form-select-sm" name="ward" id="ward" aria-label=".form-select-sm">
-            <option value="-1" selected>Chọn phường xã</option>
-          </select>
-      </tr>
-      <tr>
         <td><label for="">Địa chỉ</label></td>
         <td colspan="3"><textarea name="address" id="" placeholder="Nhập địa chỉ"></textarea></td>
       </tr>
@@ -69,9 +48,7 @@
     <button type="submit" name="reg-account" class="btn btn__primary-btn">Tạo tài khoản</button>
   </form>
 </div>
-   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script src="assets/js/load-city-district-ward.js"></script>
+  
 
 <?php
     include 'inc/footer.php';

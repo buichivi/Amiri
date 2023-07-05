@@ -20,9 +20,6 @@ class Customer
         $email = mysqli_real_escape_string($this->db->link, $data['email']);
         $password = mysqli_real_escape_string($this->db->link, md5($data['password']));
         $gender = mysqli_real_escape_string($this->db->link, $data['gender']);
-        $city = mysqli_real_escape_string($this->db->link, $data['city']);
-        $district = mysqli_real_escape_string($this->db->link, $data['district']);
-        $ward = mysqli_real_escape_string($this->db->link, $data['ward']);
         $address = mysqli_real_escape_string($this->db->link, $data['address']);
 
         $checkemail = "SELECT * FROM tb_customer WHERE email = '$email' LIMIT 1";
@@ -33,7 +30,7 @@ class Customer
             return;
         }
         else {
-            $query = "INSERT INTO tb_customer VALUES (NULL,'$name','$phonenumber','$email','$password','$gender','$city','$district','$ward','$address')";
+            $query = "INSERT INTO tb_customer VALUES (NULL,'$name','$phonenumber','$email','$password','$gender','$address')";
             $result = $this->db->insert($query);
             if ($result) {
                 $_SESSION['notification'] = "Đăng ký thành công!";
@@ -67,6 +64,33 @@ class Customer
             $_SESSION['notification'] = "Tài khoản hoặc mật khẩu không chính xác!";
             header("Location: login.php");
         }
+    }
+
+    public function getCustomerById($id) {
+        $query = "SELECT * FROM tb_customer WHERE id = '$id' LIMIT 1";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function updateCustomer($data, $cusId) {
+        $name = mysqli_real_escape_string($this->db->link, $data['name']);
+        $phonenumber = mysqli_real_escape_string($this->db->link, $data['phonenumber']);
+        $gender = mysqli_real_escape_string($this->db->link, $data['gender']);
+        $address = mysqli_real_escape_string($this->db->link, $data['address']);
+
+        $query = "UPDATE tb_customer SET name = '$name', phonenumber = '$phonenumber', gender = '$gender', address = '$address' WHERE id = '$cusId'";
+        $result = $this->db->update($query);
+        if ($result) {
+            $_SESSION['notification'] = "Sửa thông tin thành công!";
+            header("Location: info.php");
+            return;
+        }
+        else {
+            $_SESSION['notification'] = "Sửa thông tin thất bại!";
+            header("Location: info.php");
+            return;
+        }
+
     }
 }
 ob_flush();

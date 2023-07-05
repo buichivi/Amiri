@@ -4,11 +4,11 @@
 <?php 
     // include 'inc/notification.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-quantity'])) {
-        $cartId = $_POST['cartId'];
-        $quantity = $_POST['quantity'];
-        $updateQtyCart = $ct->updateQuantityCart($cartId, $quantity);
-    }
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-quantity'])) {
+    //     $cartId = $_POST['cartId'];
+    //     $quantity = $_POST['quantity'];
+    //     $updateQtyCart = $ct->updateQuantityCart($cartId, $quantity);
+    // }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['remove-prod-from-cart'])) {
         $cartId = $_POST['cartId'];
