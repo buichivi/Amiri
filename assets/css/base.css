@@ -47,6 +47,13 @@ html {
     color: #d63031;
 }
 
+.pd-btn {
+    padding: 6px 12px;
+}
+
+.fs-16 {
+    font-size: 1.6rem;
+}
 ::selection {
     background-color: var(--black-color);
     color: var(--white-color);
@@ -237,6 +244,8 @@ html {
     background-color: var(--white-color);
     color: var(--black-color);
 }
+
+
 
 .btn.btn__primary-btn {
     border-top-left-radius: 30px;

@@ -24,8 +24,15 @@
                 <ul class="checkout-list dp-flex">
                     <li>Giỏ hàng</li>
                     <li>Đặt hàng</li>
-                    <li>Thanh toán</li>
-                    <li>Hoàn thành đơn</li>
+                    <li>Xác nhận</li>
+                    <li>Hoàn thành đơn
+                        <span style="position: absolute;
+                        width: 58%;
+                        height: 10px;
+                        background: white;
+                        top: 6px;
+                        right: 0px;"></span>
+                    </li>
                 </ul>
             </div>
             <!-- Nếu giỏ hàng không có sản phẩm thì thêm class no-cart -->

@@ -95,7 +95,31 @@ class Cart
         }
         header("Location: cart.php");
     }
-    
+    public function deleteCart() {
+        $sessionId = session_id();
+        $query = "DELETE FROM tb_cart WHERE sessionId = '$sessionId'";
+        $result = $this->db->delete($query);
+    }
+    public function insertOrder($cusId) {
+        $sessionId = session_id();
+        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId')";
+        $result = $this->db->insert($query);
+        if ($result) {
+            $orderId = ($this->db->select("SELECT max(id) as id FROM tb_order")->fetch_assoc())['id'];
+                $query_cart = "SELECT * FROM tb_cart WHERE sessionId = '$sessionId'";
+                $result_cart = $this->db->select($query_cart);
+                if ($result_cart) {
+                    while($row = $result_cart->fetch_assoc()) {
+                        $productId = $row['productId'];
+                        $quantity = $row['quantity'];
+                        $size = $row['size'];
+                        $query_order_details = "INSERT INTO tb_order_details VALUES (NULL ,'$orderId','$productId','$quantity','$size',CURRENT_TIMESTAMP())";
+                        $result_order_details = $this->db->insert($query_order_details);
+                    }
+                }
+        }
+        return true;
+    }
 
 
 }

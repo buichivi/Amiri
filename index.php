@@ -107,7 +107,7 @@
                     ?>
                 </ul>
                 <div class="view-all-product">
-                    <a href="category.php" class="btn btn__primary-btn view-all-btn">Xem tất cả</a>
+                    <a href="category.php?catid=1" class="btn btn__primary-btn view-all-btn">Xem tất cả</a>
                 </div>
             </div>
         </div>
@@ -203,7 +203,7 @@
                     ?>
                 </ul>
                 <div class="view-all-product">
-                    <a href="category.php" class="btn btn__primary-btn view-all-btn">Xem tất cả</a>
+                    <a href="category.php?catid=2" class="btn btn__primary-btn view-all-btn">Xem tất cả</a>
                 </div>
             </div>
         </div>

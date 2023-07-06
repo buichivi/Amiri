@@ -1639,7 +1639,7 @@
     z-index: 2;
 }
 
-.checkout-list li:last-child::after {
+/* .checkout-list li:last-child::after {
     content: '';
     position: absolute;
     top: 0;
@@ -1648,7 +1648,7 @@
     height: 15px;
     background-color: var(--white-color);
     z-index: 2;
-}
+} */
 
 
 /* Cart table */
@@ -1668,7 +1668,6 @@
 
 .cart-table {
     width: 100%;
-    /* border-spacing: 0 10px; */
 }
 
 thead th{
@@ -1969,7 +1968,9 @@ td > .item-quantity-wrap {
     border-radius: 50%;
     z-index: -1;
 }
-
+.payment-list li.active {
+    font-weight: 400;
+}
 .payment-list li span {
     margin-right: 12px;
     visibility: hidden;
