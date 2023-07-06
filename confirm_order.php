@@ -94,12 +94,12 @@
                         <tr>
                             <td>
                                 <div class="cart__product-item dp-flex">
-                                    <a href="">
+                                    <a href="product.php?prodId=<?=$row['productId']?>">
                                         <img src="admin/uploads/<?=$row['productImg']?>"
                                             alt="" style="width: 50px; height: 75px">
                                     </a>
                                     <div>
-                                        <a href="product.php?prodId=" style="font-size: 1.5rem; font-weight: 400"><?=$row['productName']?></a>
+                                        <a href="product.php?prodId=<?=$row['productId']?>" style="font-size: 1.5rem; font-weight: 400"><?=$row['productName']?></a>
                                         <p>Màu sắc: <span class="cart__product-item-name"><?=$row['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row['size']?></span></p>
                                     </div>
                                 </div>

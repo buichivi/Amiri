@@ -43,8 +43,39 @@
                     </li>
                 </ul>
             </div>
-            <div class="info">
-                
+            <div class="info" style="padding-left: 24px;">
+                <h1 style="margin-bottom: 30px">Danh sách đơn hàng</h1>
+                <table class="order-table">
+                        <thead align="center">
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Ngày tạo</th>
+                                <th>Tổng tiền</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody align="center" style="font-size: 1.4rem">
+                            <tr>
+                                <td>1</td>
+                                <td>HD0001</td>
+                                <td>Ngày 3 tháng 5</td>
+                                <td>500.000đ</td>
+                                <td>
+                                    <button class="btn" style="--height-btn: 30px">Xem</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>HD0001</td>
+                                <td>Ngày 3 tháng 5</td>
+                                <td>500.000đ</td>
+                                <td>
+                                    <button class="btn" style="--height-btn: 30px">Xem</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             </div>
         </div>
     </div>

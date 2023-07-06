@@ -3,6 +3,8 @@ ob_start();
 $filePath = realpath(dirname(__FILE__));
 require_once ($filePath.'/../lib/database.php');
 require_once ($filePath.'/../helpers/helpers.php');
+require_once ($filePath.'/../classes/Product.php');
+
 
 class Cart
 {   
@@ -101,8 +103,9 @@ class Cart
         $result = $this->db->delete($query);
     }
     public function insertOrder($cusId) {
+        $prod = new Product();
         $sessionId = session_id();
-        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId')";
+        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId',CURRENT_TIMESTAMP())";
         $result = $this->db->insert($query);
         if ($result) {
             $orderId = ($this->db->select("SELECT max(id) as id FROM tb_order")->fetch_assoc())['id'];
@@ -111,9 +114,12 @@ class Cart
                 if ($result_cart) {
                     while($row = $result_cart->fetch_assoc()) {
                         $productId = $row['productId'];
+                        $priceProd = ($prod->getProductById($productId)->fetch_assoc())['price'];
+                        $prodDiscount = ($prod->getProductById($productId)->fetch_assoc())['productDiscount'];
                         $quantity = $row['quantity'];
+                        $price = $priceProd*$quantity*(1 - $prodDiscount/100);
                         $size = $row['size'];
-                        $query_order_details = "INSERT INTO tb_order_details VALUES (NULL ,'$orderId','$productId','$quantity','$size',CURRENT_TIMESTAMP())";
+                        $query_order_details = "INSERT INTO tb_order_details VALUES (NULL ,'$orderId','$productId','$quantity','$size', '$price')";
                         $result_order_details = $this->db->insert($query_order_details);
                     }
                 }

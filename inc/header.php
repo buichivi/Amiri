@@ -102,7 +102,7 @@
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-file-invoice"></i>    
-                                        <a href="">Quản lý đơn hàng</a>
+                                        <a href="order_list.php">Quản lý đơn hàng</a>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>

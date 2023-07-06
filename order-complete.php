@@ -39,7 +39,7 @@
             </h1>
             <div class="dp-flex" style="justify-content: center;height: 50px;">
                 <a href="index.php" class="btn btn__extra-btn pd-btn fs-16" style="margin-right: 24px;">
-                    <i class="fa-solid fa-arrow-left-long"></i>
+                    <i class="fa-solid fa-arrow-left-long" style="margin-right: 6px"></i>
                     Tiếp tục mua hàng
                 </a>
                 <a href="" class="btn pd-btn fs-16">Chi tiết đơn hàng</a>

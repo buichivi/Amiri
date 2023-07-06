@@ -2221,3 +2221,13 @@ td > .item-quantity-wrap {
 .info-sidebar > ul > li.active > a{
     font-weight: 500;
 }
+
+
+/* Order detail page */
+.order-table {
+    width: 100%;
+}
+
+.order-table > thead > tr > th:first-child {
+    width: 5%;
+}
