@@ -11,6 +11,7 @@
     }
 
 ?>
+
 <div class="content">
     <div class="container">
         <div class="content__heading">
@@ -45,7 +46,7 @@
             </div>
             <div class="info" style="padding-left: 24px;">
                 <h1 style="margin-bottom: 30px">Danh sách đơn hàng</h1>
-                <table class="order-table">
+                <table class="order-list-table">
                         <thead align="center">
                             <tr>
                                 <th>STT</th>
@@ -56,24 +57,33 @@
                             </tr>
                         </thead>
                         <tbody align="center" style="font-size: 1.4rem">
+                        <?php 
+                            $cusId = Session::get('customer_id');
+                            $getOrderList = $od->getOrderByCusId($cusId);
+                            if ($getOrderList) {
+                                $i = 0;
+                                while($row = $getOrderList->fetch_assoc()) {
+                                    $i++;
+
+                        ?>
                             <tr>
-                                <td>1</td>
-                                <td>HD0001</td>
-                                <td>Ngày 3 tháng 5</td>
-                                <td>500.000đ</td>
+                                <td><?=$i?></td>
+                                <td><?=$od->convertIdOrder($row['id'])?></td>
+                                <td><?=$row['orderDate']?></td>
                                 <td>
-                                    <button class="btn" style="--height-btn: 30px">Xem</button>
+                                    <?php 
+                                        $totalPrice = ($od->getOrderTotalPrice($row['id'])->fetch_assoc())['totalPrice'];
+                                        echo $prod->convertPrice($totalPrice)."đ";
+                                    ?>
+                                </td>
+                                <td>
+                                    <a href="order_detail.php?orderId=<?=$row['id']?>" class="btn" style="--height-btn: 30px; width: 50%">Xem</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>HD0001</td>
-                                <td>Ngày 3 tháng 5</td>
-                                <td>500.000đ</td>
-                                <td>
-                                    <button class="btn" style="--height-btn: 30px">Xem</button>
-                                </td>
-                            </tr>
+                        <?php 
+                            }
+                        }
+                        ?>
                         </tbody>
                     </table>
             </div>

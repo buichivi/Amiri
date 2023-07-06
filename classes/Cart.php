@@ -126,7 +126,12 @@ class Cart
         }
         return true;
     }
-
+    public function getOrderByCusId($cusId) {
+        $query = "SELECT * FROM tb_order WHERE customerId = '$cusId'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+    
 
 }
 ob_flush();

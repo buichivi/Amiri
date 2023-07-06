@@ -42,7 +42,7 @@
                     <i class="fa-solid fa-arrow-left-long" style="margin-right: 6px"></i>
                     Tiếp tục mua hàng
                 </a>
-                <a href="" class="btn pd-btn fs-16">Chi tiết đơn hàng</a>
+                <a href="order_list.php" class="btn pd-btn fs-16">Chi tiết đơn hàng</a>
             </div>
         </div>
     </div>

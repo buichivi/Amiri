@@ -2224,10 +2224,24 @@ td > .item-quantity-wrap {
 
 
 /* Order detail page */
-.order-table {
+.order-table,
+.order-list-table {
     width: 100%;
 }
 
-.order-table > thead > tr > th:first-child {
+
+.order-list-table > thead > tr > th:first-child {
     width: 5%;
+}
+
+.order-table > tbody > tr > td,
+.order-list-table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+
+.order-table > thead > tr > th:last-child,
+.order-table > tbody > tr > td:last-child {
+    padding-right: 30px;
+    text-align: right;
 }
