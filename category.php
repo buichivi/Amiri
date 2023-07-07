@@ -144,8 +144,6 @@
                             <ul class="sort-list">
                                 <li class="sort-item"><span class="sort-item__name">Mặc định</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Mới nhất</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Được mua nhiều nhất</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Được yêu thích nhiều nhất</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Giá: Cao đến thấp</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Giá: Thấp đến cao</span></li>
                             </ul>

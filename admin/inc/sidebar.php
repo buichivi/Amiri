@@ -66,9 +66,9 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="product_gallery.php">
             <i class="bx bx-coin-stack"></i>
-            <span class="links_name">Stock</span>
+            <span class="links_name">Ảnh chi tiết sản phẩm</span>
           </a>
         </li>
         <li>

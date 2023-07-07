@@ -804,6 +804,7 @@ nav .profile-details i {
     width: 100%;
 }
 
+.product-gallery-table,
 .slider-table,
 .order-list-table {
     width: 95%;
@@ -819,7 +820,8 @@ nav .profile-details i {
 
 .slider-table > tbody > tr > td,
 .order-table > tbody > tr > td,
-.order-list-table > tbody > tr > td {
+.order-list-table > tbody > tr > td,
+.product-gallery-table > tbody > tr > td {
     vertical-align: middle;
 }
 
@@ -843,10 +845,27 @@ nav .profile-details i {
 }
 
 .slider-table,
-.slider-table > thead > tr > th {
+.slider-table > thead > tr > th,
+.product-gallery-table > thead > tr > th {
     text-align: center;
 }
 
 .add-slider-modal-btn {
     padding: 6px 8px;
+}
+
+
+
+.product-gallery-table > tbody > tr > td:nth-child(1) {
+    width: 8%;
+}
+
+
+.product-gallery-table > tbody > tr > td:nth-child(2) {
+    width: 30%;
+}
+
+
+.product-gallery-table > tbody > tr > td:last-child {
+    width: 20%;
 }

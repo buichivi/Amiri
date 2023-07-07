@@ -221,6 +221,65 @@ class Product
         $result = $this->db->select($query);
         return $result;
     }
+
+
+    public function getListProducGallery($id) {
+        $query = "SELECT * FROM tb_product_gallery WHERE productId = '$id' ORDER BY id DESC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function insertProdGallery($data, $files, $id) {
+
+        //Kiểm tra hình ảnh và lấy hình ảnh cho vào folder uploads
+        $permited = array('jpg', 'jpeg', 'png', 'gif');
+        $file_name = $_FILES['prodGallery']['name'];
+        $file_size = $_FILES['prodGallery']['size'];
+        $file_temp = $_FILES['prodGallery']['tmp_name'];
+
+        $div = explode('.', $file_name);
+        $file_ext = strtolower(end($div));
+        $unique_img = substr(md5(time()), 0, 10).'.'.$file_ext;
+        $uploaded_img = 'uploads/'.$unique_img;
+
+        if ($file_size > 2097152) {  //2MB
+            $_SESSION['error'] = "Kích thước hình ảnh chỉ nên nhỏ hơn 2MB!";
+            header("Location:product_gallery_add.php?prodId=$id"); 
+            return;
+        }
+        else if (in_array($file_ext, $permited) === false) {
+            $_SESSION['error'] = "Bạn chỉ có thể tải lên các file có đuôi: -.".implode(',  .', $permited);
+            header("Location:product_gallery_add.php?prodId=$id");
+            return;
+        }
+        move_uploaded_file($file_temp, $uploaded_img);
+        $query = "INSERT INTO tb_product_gallery VALUES (NULL, '$id', '$unique_img')";
+        $result = $this->db->insert($query);
+        if ($result) {
+            $_SESSION['success'] = 'Thêm ảnh chi tiết thành công!';
+            header("Location:product_gallery_add.php?prodId=$id");
+            return;
+        }
+        else {
+            $_SESSION['error'] = 'Thêm ảnh chi tiết không thành công!';
+            header("Location:product_gallery_add.php?prodId=$id");
+            return;
+        }
+    }
+
+    public function deleteImgDetail($imgDetailId) {
+        $curImgDetail = $this->db->select("SELECT * FROM tb_product_gallery WHERE id = '$imgDetailId'");
+        $query = "DELETE FROM tb_product_gallery WHERE id = '$imgDetailId'";
+        $result = $this->db->delete($query);
+        if ($result) {
+            while($row = $curImgDetail->fetch_assoc()) {
+                unlink("uploads/".$row['imageDetail']);
+                $prodId = $row['productId'];
+                $_SESSION['success'] = "Xóa ảnh chi tiết sản phẩm thành công!";
+                header("Location: product_gallery_add.php?prodId=$prodId");
+            }
+        }
+    }
 }
 ob_flush();
 ?>
