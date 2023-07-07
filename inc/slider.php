@@ -2,18 +2,33 @@
     <div class="slider-container">
         <div class="slider">
             <div class="aspect-ratio-169">
-                <img src="./assets/slider/slider-0.jpg" alt="">
-                <img src="./assets/slider/slider-1.jpg" alt="">
-                <img src="./assets/slider/slider-2.jpg" alt="">
-                <img src="./assets/slider/slider-3.jpg" alt="">
-                <img src="./assets/slider/slider-4.jpg" alt="">
+                <?php 
+                    $showSlider = $sl->showSliderOn();
+                    $i = 0;
+                    if ($showSlider) {
+                        while($row = $showSlider->fetch_assoc()) {
+                            $i++;
+                ?>
+                <img src="admin/uploads/<?=$row['sliderImg']?>" alt="<?=$row['sliderName']?>">
+                <?php 
+                        }
+                    }
+                ?>
+
             </div>
             <div class="dot-container">
-                <div class="dot dot--active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <?php 
+                    if ($i == 1)
+                    echo "<div class='dot dot--active'></div>";
+                    else if ($i > 1) {
+                        while($i) {
+                            $i--;
+                ?>
+                        <div class="dot"></div>
+                <?php 
+                        }
+                    }
+                ?>
             </div>
             <div class="move-right-btn">
                 <i class="move-slide-icon fa-solid fa-arrow-right"></i>

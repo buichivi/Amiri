@@ -803,19 +803,27 @@ nav .profile-details i {
 .order-table{
     width: 100%;
 }
+
+.slider-table,
 .order-list-table {
     width: 95%;
+    margin: 24px;
 }
 
 
+.slider-table > thead > tr > th:first-child,
 .order-list-table > thead > tr > th:first-child {
     width: 5%;
 }
 
+
+.slider-table > tbody > tr > td,
 .order-table > tbody > tr > td,
 .order-list-table > tbody > tr > td {
     vertical-align: middle;
 }
+
+.slider-table > tbody > tr > td:nth-child(2),
 .order-table > tbody > tr > td:nth-child(2) {
     width: 20%;
 }
@@ -827,4 +835,14 @@ nav .profile-details i {
 .order-table > tbody > tr > td:last-child {
     padding-right: 30px;
     text-align: right;
+}
+
+.slider-table > tbody > tr > td:nth-child(4),
+.slider-table > tbody > tr > td:nth-child(5) {
+    width: 12%;
+}
+
+.slider-table,
+.slider-table > thead > tr > th {
+    text-align: center;
 }

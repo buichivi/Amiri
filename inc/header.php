@@ -15,6 +15,7 @@
     $cs = new Customer();
     $prod = new Product();
     $od = new Order();
+    $sl = new Slider();
 ?>
 
 <!DOCTYPE html>
