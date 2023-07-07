@@ -800,9 +800,11 @@ nav .profile-details i {
 .dp-flex {
     display: flex;
 }
-.order-table,
-.order-list-table {
+.order-table{
     width: 100%;
+}
+.order-list-table {
+    width: 95%;
 }
 
 

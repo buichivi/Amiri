@@ -47,7 +47,9 @@ const navLinkContainer = document.querySelector('.nav-links');
   <thead>
     <th>#</th>
     <th>Mã hóa đơn</th>
+    <th>Tên khách hàng</th>
     <th>Ngày đặt</th>
+    <th>Ngày giao</th>
     <th>Thông tin</th>
     <th>Tình trạng</th>
   </thead>
@@ -65,9 +67,34 @@ const navLinkContainer = document.querySelector('.nav-links');
     <tr>
       <td><?=$i?></td>
       <td><?php echo $od->convertIdOrder($row['id']); ?></td>
+      <td>
+        <?php 
+          echo ($cs->getCustomerById($row['customerId'])->fetch_assoc())['name'];
+        ?>
+      </td>
       <td><?=$row['orderDate']?></td>
+      <td>
+        <?php 
+          if ($row['shippedDate'] == NULL)
+            echo "<span style='font-style: italic;
+            color: #beb4b4;'>Đơn chưa giao</span>";
+          else 
+            echo $row['shippedDate'];
+          
+        ?>
+      </td>
       <td><?php include './inc/order-modal-detail.php'; ?></td>
-      <td>Đang vận chuyển</td>
+      <td>
+          <?php 
+            if ($row['status'] == 0) {
+              echo "Đang vận chuyển";
+            }
+            else if ($row['status'] == 1) {
+              echo "<span style='font-style: italic;
+              color: #beb4b4;'>Đã giao hàng</span>";
+            }
+          ?>
+      </td>
     </tr>
     <?php        
         }

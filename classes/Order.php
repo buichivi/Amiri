@@ -44,6 +44,12 @@ class Order
         $result = $this->db->select($query);
         return $result;
     }
+    public function shifted($id) {
+        $id = mysqli_real_escape_string($this->db->link, $id);
+        $query = "UPDATE tb_order SET shippedDate = CURRENT_TIMESTAMP(), status = '1' WHERE id = '$id'";
+        $result = $this->db->update($query);
+        header("Location: order_list.php");
+    }   
 
 }
 ob_flush();

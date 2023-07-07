@@ -10,6 +10,10 @@
         $updateCus = $cs->updateCustomer($_POST, $cusId);
     }
 
+    if (isset($_GET['shifted'])) {
+        $id = $_GET['shifted'];
+        $shifted = $od->shifted($id);
+    }
 ?>
 
 <div class="content">
@@ -51,9 +55,11 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Mã hóa đơn</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đặt</th>
+                                <th>Ngày nhận</th>
                                 <th>Tổng tiền</th>
                                 <th>Chi tiết</th>
+                                <th>Tình trạng</th>
                             </tr>
                         </thead>
                         <tbody align="center" style="font-size: 1.4rem">
@@ -70,6 +76,7 @@
                                 <td><?=$i?></td>
                                 <td><?=$od->convertIdOrder($row['id'])?></td>
                                 <td><?=$row['orderDate']?></td>
+                                <td><?=$row['shippedDate']?></td>
                                 <td>
                                     <?php 
                                         $totalPrice = ($od->getOrderTotalPrice($row['id'])->fetch_assoc())['totalPrice'];
@@ -78,6 +85,18 @@
                                 </td>
                                 <td>
                                     <a href="order_detail.php?orderId=<?=$row['id']?>" class="btn" style="--height-btn: 30px; width: 50%">Xem</a>
+                                </td>
+                                <td>
+                                    <?php 
+                                        if ($row['status'] == 0) {
+                                            echo "<a href='order_list.php?shifted=".$row['id']."' style='text-decoration: none; color: #e40000;font-size:1.5rem;' onclick='return confirm(`Bạn chắc chắn nhận được hàng?`)'>Chưa nhận hàng</a>";
+                                        }
+                                        else 
+                                            echo "<a style='text-decoration: none;
+                                                        color: #1cc765;
+                                                        font-size: 1.5rem;
+                                                        font-style: italic;'>Đã nhận hàng</a>";   
+                                    ?>
                                 </td>
                             </tr>
                         <?php 

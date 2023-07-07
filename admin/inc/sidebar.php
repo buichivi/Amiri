@@ -60,9 +60,9 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Analytics</span>
+          <a href="slider.php">
+            <i class='bx bx-slider'></i>
+            <span class="links_name">Slider</span>
           </a>
         </li>
         <li>
