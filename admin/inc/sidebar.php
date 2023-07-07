@@ -28,6 +28,7 @@
     </script>
   </head>
   <body>
+
     <div class="sidebar">
       <div class="logo-details">
         <i class='bx bxs-cog bx-flip-horizontal' ></i>
@@ -53,9 +54,9 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="order.php">
             <i class="bx bx-list-ul"></i>
-            <span class="links_name">Order list</span>
+            <span class="links_name">Đơn hàng</span>
           </a>
         </li>
         <li>

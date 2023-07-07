@@ -105,7 +105,7 @@ class Cart
     public function insertOrder($cusId) {
         $prod = new Product();
         $sessionId = session_id();
-        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId',CURRENT_TIMESTAMP())";
+        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId',CURRENT_TIMESTAMP(), 0)";
         $result = $this->db->insert($query);
         if ($result) {
             $orderId = ($this->db->select("SELECT max(id) as id FROM tb_order")->fetch_assoc())['id'];

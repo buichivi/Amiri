@@ -15,6 +15,12 @@ class Order
         $this->db = new Database();
         $this->fm = new Format();
     }
+    public function getListOrder() {
+        $query = "SELECT * FROM tb_order";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function getOrderByCusId($cusId) {
         $query = "SELECT * FROM tb_order WHERE customerId = '$cusId'";
         $result = $this->db->select($query);

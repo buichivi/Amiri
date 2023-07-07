@@ -5,14 +5,13 @@
     if (!$login_check) {
         header("Location: login.php");
     }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-account'])) {
-        $cusId = Session::get('customer_id');
-        $updateCus = $cs->updateCustomer($_POST, $cusId);
-    }
 
     $orderId = '';
     if (isset($_GET['orderId']) && $_GET['orderId'] != NULL) {
         $orderId = $_GET['orderId'];
+    }
+    else {
+        header("Location: 404.php");
     }
 
 ?>
@@ -63,7 +62,7 @@
                         <tr>
                             <th>Tên sản phẩm</th>
                             <th>Chiết khấu</th>
-                            <th>Số lượng</th>
+                            <th align="center">Số lượng</th>
                             <th>Tổng tiền</th>
                         </tr>
                     </thead>
@@ -105,7 +104,7 @@
                                     <span>( -<?=$prodDetail['productDiscount']?>% )</span>
                                 </div>
                             </td>
-                            <td>
+                            <td align="center">
                                 <div class="item-quantity-wrap">
                                     <span style="font-size: 1.5rem;font-weight: 400;"><?=$row['quantity']?></span>                            
                                 </div>
