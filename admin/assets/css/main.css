@@ -846,3 +846,7 @@ nav .profile-details i {
 .slider-table > thead > tr > th {
     text-align: center;
 }
+
+.add-slider-modal-btn {
+    padding: 6px 8px;
+}

@@ -55,7 +55,7 @@ class Slider
         }
     }
     public function showSliderOn() {
-        $query = "SELECT * FROM tb_slider WHERE type = 0 ORDER BY id DESC";
+        $query = "SELECT * FROM tb_slider WHERE type = 1 ORDER BY id DESC";
         $result = $this->db->select($query);
         return $result;
     }
@@ -64,7 +64,24 @@ class Slider
         $result = $this->db->select($query);
         return $result;
     }
-    
+
+    public function updateSliderType($id, $type) {
+        $query = "UPDATE tb_slider SET type = '$type' WHERE id = '$id'";
+        $result = $this->db->update($query);
+        header("Location: slider.php");
+    }
+    public function deleteSlider($id) {
+        $curSlider = $this->db->select("SELECT * FROM tb_slider WHERE id = '$id'");
+        $query = "DELETE FROM tb_slider WHERE id = '$id'";
+        $result = $this->db->delete($query);
+        if ($result) {
+            while($row = $curSlider->fetch_assoc()) {
+                unlink("uploads/".$row['sliderImg']);
+            }
+            $_SESSION['success'] = "Xóa sản phẩm thành công";
+            header("Location: slider.php");
+        }
+    }
     
 
 }

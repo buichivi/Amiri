@@ -1,4 +1,14 @@
 // Requires jQuery
+function convertPriceToNumber(price) {
+    price = price.slice(0, -1);
+    const number = price.split('.');
+    var result = '';
+    for (let i = 0; i < number.length; i++) {
+        result += number[i];
+    }
+    return result;
+}
+
 
 // Initialize slider:
 $(document).ready(function () {
@@ -25,8 +35,10 @@ $(document).ready(function () {
     // Set visual min and max values and also update value hidden form inputs
     rangeSlider.noUiSlider.on("update", function (values, handle) {
         document.getElementById("slider-range-value1").innerHTML = values[0];
-        console.log(values[0], values[1]);
         document.getElementById("slider-range-value2").innerHTML = values[1];
+        document.querySelector("input[name='min-value']").value = convertPriceToNumber(values[0]);
+        document.querySelector("input[name='max-value']").value = convertPriceToNumber(values[1]);
+
         document.getElementsByName("min-value").value = moneyFormat.from(
             values[0]
         );

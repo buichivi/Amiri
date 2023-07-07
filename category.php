@@ -32,7 +32,7 @@
             <div class="content-product-wrap dp-flex">
                 <div class="filter-group">
                     <ul class="filter-list">
-                        <li class="filter-item">
+                        <!-- <li class="filter-item">
                             <div class="filter-item-name">
                                 Size
                                 <span class="icon-minus"><i class="fa-solid fa-minus"></i></span>
@@ -45,7 +45,7 @@
                                 <li class="size-item btn btn__primary-btn">XL</li>
                                 <li class="size-item btn btn__primary-btn">XXL</li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="filter-item">
                             <div class="filter-item-name">
                                 Mức giá
@@ -145,8 +145,7 @@
                                 <li class="sort-item"><span class="sort-item__name">Mặc định</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Mới nhất</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Được mua nhiều nhất</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Được yêu thích nhiều nhất</span>
-                                </li>
+                                <li class="sort-item"><span class="sort-item__name">Được yêu thích nhiều nhất</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Giá: Cao đến thấp</span></li>
                                 <li class="sort-item"><span class="sort-item__name">Giá: Thấp đến cao</span></li>
                             </ul>

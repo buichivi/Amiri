@@ -19,7 +19,7 @@
             <div class="dot-container">
                 <?php 
                     if ($i == 1)
-                    echo "<div class='dot dot--active'></div>";
+                        echo "<div class='dot dot--active'></div>";
                     else if ($i > 1) {
                         while($i) {
                             $i--;
@@ -29,6 +29,9 @@
                         }
                     }
                 ?>
+                <script>
+                    document.querySelectorAll('.dot')[0].classList.add('dot--active');
+                </script>
             </div>
             <div class="move-right-btn">
                 <i class="move-slide-icon fa-solid fa-arrow-right"></i>

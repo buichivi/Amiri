@@ -41,6 +41,20 @@ const navLinkContainer = document.querySelector('.nav-links');
   }
 ?>
 
+<?php 
+    $sl = new Slider();
+    if(isset($_GET['sliderId']) && isset($_GET['type'])) {
+        $id = $_GET['sliderId'];
+        $type = $_GET['type'];
+        $updateSliderType = $sl->updateSliderType($id, $type);
+    }
+    if(isset($_GET['del_sliderId'])) {
+        $id = $_GET['del_sliderId'];
+        $updateSliderType = $sl->deleteSlider($id);
+    }
+
+?>
+
 <?php include './inc/slider-modal-add.php'; ?>
 <table class="table table-striped table-hover slider-table">
   <thead>
@@ -68,14 +82,23 @@ const navLinkContainer = document.querySelector('.nav-links');
         <td>
             <?php 
                 if ($row['type'] == 0)
-                    echo "<a href='slider.php?sliderId=".$row['id']."'>Off</a>";
+                    echo "<a href='?sliderId=".$row['id']."&type=1' 
+                    style='text-decoration: none;
+                    color: red;
+                    font-weight: 500;'>Off</a>";
                 else
-                    echo "On"
+                    echo "<a href='?sliderId=".$row['id']."&type=0' 
+                    style='text-decoration: none;
+                    color: green;
+                    font-weight: 500;'>On</a>";
             ?>
             
         </td>
         <td>
-            <a href="">Xóa</a>
+            <a href="?del_sliderId=<?=$row['id']?>" 
+            style="font-size: 1.5rem;
+            color: red;
+            text-decoration: none;" onclick="return confirm('Bạn có chắc chắn muốn xóa slider này?')">Xóa</a>
         </td>
     </tr>
     <?php
