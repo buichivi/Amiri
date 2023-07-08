@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2023 at 06:02 PM
+-- Generation Time: Jul 08, 2023 at 07:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -125,7 +125,7 @@ CREATE TABLE `tb_customer` (
 --
 
 INSERT INTO `tb_customer` (`id`, `name`, `phonenumber`, `email`, `password`, `gender`, `address`) VALUES
-(4, 'Bùi Chí Vĩ', '0826127626', 'buichivi04062002@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Tỉnh Thái Bình'),
+(4, 'Chí Vĩ', '0826127626', 'buichivi04062002@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Tỉnh Thái Bình'),
 (5, 'Trang', '0987654321', 'admin@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 'Tình Thái Bình ');
 
 -- --------------------------------------------------------

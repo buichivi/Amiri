@@ -5,7 +5,7 @@
                 <div class="logo-footer dp-flex">
                     <div class="logo-company">
                         <a href="">
-                            <img src="./assets/img/logo.png" alt="" class="logo-company__img">
+                            <img src="./assets/img/GROUP.png" alt="" class="logo-company__img" style="height: 45px">
                         </a>
                     </div>
                     <div class="dcma-badge">
@@ -21,17 +21,17 @@
                 </div>
                 <div class="company-info">
                     <div class="registation-number">
-                        <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650</p>
+                        <p>Thăng Long University</p>
                     </div>
                     <div class="registered-address">
-                        <p>Địa chỉ đăng ký: <span>Tổ dân phố Tháp, P.Đại Mỗ, Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam</span>
+                        <p>Địa chỉ đăng ký: <span>Đường Nghiêm Xuân Yêm - Đại Kim - Hoàng Mai - Hà Nội</span>
                         </p>
                     </div>
                     <div class="phone-number">
                         <p>Số điện thoại: <span>0243 205 2222/ 090 589 8683</span></p>
                     </div>
                     <div class="company-email">
-                        <p>Email: <span>cskh@ivy.com.vn</span></p>
+                        <p>Email: <span>cskh@amiri.com.vn</span></p>
                     </div>
                     <ul class="social-list dp-flex">
                         <li class="social-item">
@@ -76,7 +76,7 @@
                 <div class="left-center-ft">
                     <p class="title-footer">Giới thiệu</p>
                     <ul>
-                        <li><a href="">Về IVY moda</a></li>
+                        <li><a href="">Về AMIRI</a></li>
                         <li><a href="">Tuyển dụng</a></li>
                         <li><a href="">Hệ thống cửa hàng</a></li>
                     </ul>
@@ -108,7 +108,7 @@
             </div>
             <div class="right-footer">
                 <div class="register-form">
-                    <p class="title-footer">Nhận thông tin các chương trình của IVY moda</p>
+                    <p class="title-footer">Nhận thông tin các chương trình của AMIRI</p>
                     <form class="input-box dp-flex">
                         <input required class="register-email" type="email" name="" id=""
                             placeholder="Nhập địa chỉ email">
@@ -135,7 +135,7 @@
         </div>
     </footer>
     <div class="copy-right">
-        <p>©IVYmoda All rights reserved</p>
+        <p>©AMIRI All rights reserved</p>
     </div>
 
 

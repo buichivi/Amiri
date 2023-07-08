@@ -864,7 +864,7 @@
     position: absolute;
     top: 116%;
     left: 50%;
-    width: 77px;
+    width: 108px;
     height: 2px;
     transform: translateX(-50%);
     background-color: var(--black-color);

@@ -55,18 +55,23 @@
                             $getCus = $cs->getCustomerById($idCus);
                             $row = $getCus->fetch_assoc();
                         ?>
-                        <h1 class="info__heading">Đổi mật khẩu</h1>
+                        <h1 class="info__heading" style="text-align: left;">Đổi mật khẩu</h1>
                         <table>
                         <tr>
                             <td><label for="">Mật khẩu hiện tại</label></td>
-                            <td><input required type="text" name="curPass" id="curPass" placeholder="Nhập mật khẩu hiện tại"></td>
+                            <td><input required type="text" name="curPass" id="curPass" placeholder="Nhập mật khẩu hiện tại" style="width:40%"></td>
                         <tr>
                             <td><label for="">Mật khẩu mới</label>
                             </td>
-                            <td><input required type="text" name="newPass" id="newPass" placeholder="Nhập mật khẩu mới"></td>
+                            <td><input required type="text" name="newPass" id="newPass" placeholder="Nhập mật khẩu mới" style="width:40%"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button type="submit" name="change-pass" class="btn btn__primary-btn" onclick="return confirm('Bạn có chắc chắn muốn đổi mật khẩu?')" style="--height-btn: 50px;width: 25%;font-size: 1.4rem;">Đổi mật khẩu</button>
+                            </td>
                         </tr>
                         </table>
-                        <button type="submit" name="change-pass" class="btn btn__primary-btn" onclick="return confirm('Bạn có chắc chắn muốn đổi mật khẩu?')">Đổi mật khẩu</button>
                     </form>
                 </div>
             </div>

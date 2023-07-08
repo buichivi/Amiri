@@ -24,13 +24,18 @@
                 </li>
             </ul>
         </div>
+        <?php 
+            $idCus = Session::get('customer_id');
+            $getCus = $cs->getCustomerById($idCus);
+            $row = $getCus->fetch_assoc();
+        ?>
         <div class="info-wrapper dp-flex">
             <div class="info-sidebar dp-flex">
                 <div class="info-sidebar__user dp-flex">
                     <div class="info-sidebar__img">
                         <img src="assets/img/user-avatar-placeholder.png" alt="">
                     </div>      
-                    <h2 class="info-sider__username">Bùi Chí Vĩ</h2>
+                    <h2 class="info-sider__username"><?=$row['name']?></h2>
                 </div>  
                 <ul>
                     <li class="active">
@@ -50,11 +55,6 @@
             <div class="info">
                 <div class="login-register-wrap dp-flex" style="margin-top: 0; width: 100%;">
                     <form action="" method="post" class="register-form" style="border: none; padding: 0; width: 100%">
-                        <?php 
-                            $idCus = Session::get('customer_id');
-                            $getCus = $cs->getCustomerById($idCus);
-                            $row = $getCus->fetch_assoc();
-                        ?>
                         <h1 class="info__heading">Tài khoản của tôi</h1>
                         <table>
                         <tr>

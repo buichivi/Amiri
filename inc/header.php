@@ -40,8 +40,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="https://pubcdn.ivymoda.com/ivy2/images/logo-icon.ico" type="image/x-icon">
-    <title>Trang chủ | IVY moda</title>
+    <link rel="shortcut icon" href="https://amiri.com/cdn/shop/files/favicon-32x32.png?crop=center&height=32&v=1677543765&width=32" type="image/x-icon">
+    <title>Trang chủ | Amiri</title>
     <script>
       if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
@@ -77,7 +77,7 @@
 
             <div class="logo">
                 <a href="index.php">
-                    <img src="./assets/img/logo.png" alt="" class="logo__img">
+                    <img src="./assets/img/group.png" alt="" class="logo__img">
                 </a>
             </div>
             <div class="right-navbar dp-flex">

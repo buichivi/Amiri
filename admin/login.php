@@ -38,7 +38,7 @@
         }
     </style>
     <div class="login-wrap dp-flex">
-        <img src="../assets/img/logo.png" alt="">
+        <img src="../assets/img/GROUP.png" alt="" style="width: 50%;">
         <span>
             <?php 
             if (isset($loginCheck))

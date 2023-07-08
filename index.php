@@ -16,7 +16,7 @@
     <div class="new-product">
         <div class="container">
             <p class="new-arrival__heading">New arrival</p>
-            <p class="product-field-name">IVY Man</p>
+            <p class="product-field-name">AMIRI Man</p>
             <div class="list-product-wrap">
                 <div class="move-product-right move-product-right--man">
                     <i class="fa-solid fa-arrow-right"></i>
@@ -121,7 +121,7 @@
             </div>
         </div>
         <div class="container">
-            <p class="product-field-name">IVY Moda</p>
+            <p class="product-field-name">AMIRI Moda</p>
             <div class="list-product-wrap">
                 <div class="move-product-right move-product-right--moda">
                     <i class="fa-solid fa-arrow-right"></i>

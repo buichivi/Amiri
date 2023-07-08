@@ -35,7 +35,7 @@
                         Về chúng tôi
                         <ul class='about-us__list'>
                             <li class='about-us__item'>
-                                <a href='' class='about-us__item-link'>Về IVY moda</a>
+                                <a href='' class='about-us__item-link'>Về AMIRI</a>
                             </li>
                             <li class='about-us__item'>
                                 <a href='' class='about-us__item-link'>Fashion Show</a>

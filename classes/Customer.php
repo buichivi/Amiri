@@ -92,6 +92,11 @@ class Customer
         }
 
     }
+
+    public function changePassWord($oldPass, $newPass) {
+        $oldPass = mysqli_real_escape_string($this->db->link, md5($oldPass));
+        
+    }
 }
 ob_flush();
 ?>
