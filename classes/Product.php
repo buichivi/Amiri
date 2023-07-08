@@ -396,6 +396,113 @@ class Product
         $result = $this->db->select($query);
         return array($result, $numberOfProd);
     }
+
+
+    public function searchProduct($keyword, $sort = NULL) {
+        $query = "WITH RECURSIVE category_recursive AS (
+                    SELECT id, categoryName, parent_id, 0 AS level
+                    FROM tb_category
+                    WHERE id in (1, 2, 3)
+                    UNION ALL
+                
+                    SELECT c.id, c.categoryName, c.parent_id, cr.level + 1
+                    FROM tb_category c
+                    INNER JOIN category_recursive cr ON c.parent_id = cr.id
+                )
+                SELECT * 
+                FROM tb_product
+                WHERE categoryId in 
+                (SELECT id
+                FROM category_recursive
+                ORDER BY level, id) AND productName like '%$keyword%'";
+        if ($sort == 'new') {
+            $query .= " ORDER BY id DESC";
+        }
+        else if ($sort == 'pricehightolow') {
+            $query .= " ORDER BY price*(1-productDiscount/100) DESC";
+        }
+        else if ($sort == 'pricelowtohigh') {
+            $query .= " ORDER BY price*(1-productDiscount/100) ASC";
+        }
+        else {
+            $query .= " ORDER BY id ASC";
+        }
+        $numberOfProd = $this->db->select($query);
+
+        $prodPerPage = 8;
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        }
+        else {
+            $page = $_GET['page'];
+        }
+        $curPage = ($page - 1)*$prodPerPage;
+        $query .= " LIMIT $curPage,$prodPerPage;";
+
+        $result = $this->db->select($query);
+        return array($result, $numberOfProd);
+    }
+
+
+    public function searchProductWithFilter($keyword, $min, $max, $sale, $sort = NULL) {
+        $query = "WITH RECURSIVE category_recursive AS (
+                    SELECT id, categoryName, parent_id, 0 AS level
+                    FROM tb_category
+                    WHERE id in (1, 2, 3)
+                    UNION ALL
+                
+                    SELECT c.id, c.categoryName, c.parent_id, cr.level + 1
+                    FROM tb_category c
+                    INNER JOIN category_recursive cr ON c.parent_id = cr.id
+                )
+                SELECT * 
+                FROM tb_product
+                WHERE categoryId in 
+                (SELECT id
+                FROM category_recursive
+                ORDER BY level, id) AND productName like '%$keyword%'";
+        if($sale[0] == NULL) {
+            $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max";
+        }
+        else if (count($sale) == 1) {
+            if (100 - (int)$sale[0] > 50)
+                $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount < $sale[0]";
+            else
+                $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount > $sale[0]";
+        }
+        else {
+            $minDiscount = $sale[0];
+            $maxDiscount = $sale[1];
+            $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount >= $minDiscount AND productDiscount < $maxDiscount";
+        }
+        if ($sort == 'new') {
+            $query .= " ORDER BY id DESC";
+        }
+        else if ($sort == 'pricehightolow') {
+            $query .= " ORDER BY price*(1-productDiscount/100) DESC";
+        }
+        else if ($sort == 'pricelowtohigh') {
+            $query .= " ORDER BY price*(1-productDiscount/100) ASC";
+        }
+        else {
+            $query .= " ORDER BY id ASC";
+        }
+
+        $numberOfProd = $this->db->select($query);
+
+        $prodPerPage = 8;
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        }
+        else {
+            $page = $_GET['page'];
+        }
+        $curPage = ($page - 1)*$prodPerPage;
+        $query .= " LIMIT $curPage,$prodPerPage;";
+
+        $result = $this->db->select($query);
+        return array($result, $numberOfProd);
+    }
 }
 ob_flush();
 ?>

@@ -82,9 +82,24 @@
             </div>
             <div class="right-navbar dp-flex">
                 <div class="search">
-                    <i class="search__icon fa-solid fa-magnifying-glass"></i>
-                    <input type="text" class="search__input" name="search-box" id="search-box"
+                        <i class="search__icon fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="search__input" name="search-box" id="search-box"
                         placeholder="Tìm kiếm sản phẩm">
+                        <script>
+                            const searchBtn = document.querySelector('.search__icon');
+                            searchBtn.onclick =function() {
+                                const inputSearch = document.querySelector('.search__input');
+                                if (inputSearch.value != '') {
+                                    window.location.href = "search.php?keyword=" + inputSearch.value;
+                                }
+                            }
+
+
+                            document.querySelector('.search__input').addEventListener('keydown', function(e) {
+                                if (e.key == 'Enter')
+                                    window.location.href = "search.php?keyword=" + this.value;
+                            });
+                        </script>
                 </div>
                 <ul class="others">
                     <li class="others__items">
@@ -107,6 +122,10 @@
                                     <li>
                                         <i class="fa-solid fa-file-invoice"></i>    
                                         <a href="order_list.php">Quản lý đơn hàng</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa-regular fa-user"></i>
+                                        <a href="change_pass_customer.php">Đổi mật khẩu</a>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-arrow-right-from-bracket"></i>

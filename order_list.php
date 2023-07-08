@@ -46,6 +46,10 @@
                         <i class="fa-solid fa-file-invoice"></i>    
                         <a href="order_list.php">Quản lý đơn hàng</a>
                     </li>
+                    <li>
+                        <i class="fa-solid fa-file-invoice"></i>    
+                        <a href="change_pass_customer.php">Đổi mật khẩu</a>
+                    </li>
                 </ul>
             </div>
             <div class="info" style="padding-left: 24px;">
