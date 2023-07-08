@@ -172,7 +172,7 @@
 }
 
 .others__items > .login > .action {
-    --height: 164px;
+    --height: 207px;
     overflow: hidden;
     position: absolute;
     top: 200%;
@@ -2195,7 +2195,7 @@ td > .item-quantity-wrap {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: 200px;
 }
 .info {
     flex: .8;
