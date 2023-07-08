@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2023 at 06:06 AM
+-- Generation Time: Jul 08, 2023 at 06:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -20,18 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ivymoda_db`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProductsByCategory` (IN `categoryId` INT)   BEGIN
-    SELECT *
-    FROM tb_category
-    WHERE parent_id = categoryId;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -150,6 +138,7 @@ CREATE TABLE `tb_order` (
   `id` int(11) NOT NULL,
   `customerId` int(11) NOT NULL,
   `orderDate` datetime NOT NULL,
+  `shippedDate` datetime DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -157,12 +146,15 @@ CREATE TABLE `tb_order` (
 -- Dumping data for table `tb_order`
 --
 
-INSERT INTO `tb_order` (`id`, `customerId`, `orderDate`, `status`) VALUES
-(1, 4, '2023-07-06 17:03:16', 0),
-(2, 4, '2023-07-06 17:08:28', 0),
-(3, 4, '2023-07-06 22:15:35', 0),
-(4, 5, '2023-07-07 10:52:26', 0),
-(5, 5, '2023-07-07 11:02:46', 0);
+INSERT INTO `tb_order` (`id`, `customerId`, `orderDate`, `shippedDate`, `status`) VALUES
+(1, 4, '2023-07-06 17:03:16', '2023-07-07 11:49:32', 1),
+(2, 4, '2023-07-06 17:08:28', '2023-07-07 11:49:55', 1),
+(3, 4, '2023-07-06 22:15:35', '2023-07-07 12:03:50', 1),
+(4, 5, '2023-07-07 10:52:26', NULL, 0),
+(5, 5, '2023-07-07 11:02:46', NULL, 0),
+(6, 4, '2023-07-08 16:48:49', '2023-07-08 22:43:15', 1),
+(7, 4, '2023-07-08 22:25:24', NULL, 0),
+(8, 4, '2023-07-08 22:47:10', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -192,7 +184,12 @@ INSERT INTO `tb_order_details` (`id`, `orderId`, `productId`, `quantity`, `size`
 (6, 3, 8, 9, 'm', '26910000'),
 (7, 4, 14, 2, 'xl', '12000000'),
 (8, 4, 13, 1, 'xl', '5000000'),
-(9, 5, 14, 1, 'l', '6000000');
+(9, 5, 14, 1, 'l', '6000000'),
+(10, 6, 15, 3, 'xxl', '600000'),
+(11, 6, 16, 1, 'xxl', '1000000'),
+(12, 7, 1, 1, 'xxl', '8000000'),
+(13, 7, 5, 1, 'l', '8000000'),
+(14, 8, 14, 10, 'xxl', '60000000');
 
 -- --------------------------------------------------------
 
@@ -230,6 +227,52 @@ INSERT INTO `tb_product` (`id`, `productName`, `categoryId`, `productDesc`, `pri
 (14, 'Áo thun', 4, '<p>ădawdacascasc&acirc;cscascascasc</p>\r\n', '10000000', 'd782ecc7a7.jpg', 1, 40, 'Màu xanh'),
 (15, 'Váy 2 dây', 23, '<p>M&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắng</p>\r\n', '400000', '3a42fefb68.jpg', 1, 50, 'Màu trắng'),
 (16, 'Đồ Nữ', 25, '<p>M&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắng</p>\r\n', '1000000', 'f90fd6558f.jpg', 1, 0, 'Màu trắng');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_product_gallery`
+--
+
+CREATE TABLE `tb_product_gallery` (
+  `id` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `imageDetail` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tb_product_gallery`
+--
+
+INSERT INTO `tb_product_gallery` (`id`, `productId`, `imageDetail`) VALUES
+(5, 1, '2beab2df77.jpg'),
+(6, 1, 'e59ebcbe19.jpg'),
+(7, 1, '3ecd04cd3b.jpg'),
+(8, 1, '3b3233f856.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_slider`
+--
+
+CREATE TABLE `tb_slider` (
+  `id` int(11) NOT NULL,
+  `sliderName` varchar(255) NOT NULL,
+  `sliderImg` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tb_slider`
+--
+
+INSERT INTO `tb_slider` (`id`, `sliderName`, `sliderImg`, `type`) VALUES
+(8, 'Slider 1', '489cf9dfe2.jpg', 1),
+(9, 'Slider 2', '6115c942c1.jpg', 1),
+(10, 'Slider 3', 'f6187d10df.jpg', 1),
+(11, 'Slider 4', 'deea8a3655.jpg', 1),
+(12, 'Slider 5', '8ae399df3e.jpg', 1);
 
 --
 -- Indexes for dumped tables
@@ -279,6 +322,18 @@ ALTER TABLE `tb_product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_product_gallery`
+--
+ALTER TABLE `tb_product_gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_slider`
+--
+ALTER TABLE `tb_slider`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -292,7 +347,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
@@ -310,19 +365,31 @@ ALTER TABLE `tb_customer`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_order_details`
 --
 ALTER TABLE `tb_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tb_product_gallery`
+--
+ALTER TABLE `tb_product_gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tb_slider`
+--
+ALTER TABLE `tb_slider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
