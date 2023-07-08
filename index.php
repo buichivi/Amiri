@@ -11,8 +11,6 @@
         $addToCart = $ct->addToCart($id, $quantity, $size, "index.php");
     }
 ?>
-
-
     <div class="new-product">
         <div class="container">
             <p class="new-arrival__heading">New arrival</p>
