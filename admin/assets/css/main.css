@@ -860,6 +860,10 @@ nav .profile-details i {
     width: 8%;
 }
 
+.product-gallery-table > tbody > tr > td:nth-child(3),
+.product-gallery-table > tbody > tr > td:nth-child(4) {
+    width: 10%;
+}
 
 .product-gallery-table > tbody > tr > td:nth-child(2) {
     width: 30%;

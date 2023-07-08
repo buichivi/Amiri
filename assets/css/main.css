@@ -951,9 +951,9 @@
     height: 345px;
     position: relative;
 }
-.product__img-wrap img:first-child {
+/* .product__img-wrap img:first-child {
     width: 10%;
-}
+} */
 
 .ticket-new {
     position: absolute;
@@ -973,16 +973,48 @@
     color: var(--white-color);
 }
 
-
-.product__img-wrap::after {
+.ticket-new::after {
     content: "";
     position: absolute;
-    top: 22px;
-    left: -16px;
-    border-width: 15px 8px;
+    top: 36px;
+    left: 0px;
+    border-top: 14px rgb(172, 47, 51);
+    border-left: 6px transparent;
+    border-bottom: 4px transparent;
+    border-right: 2px rgb(172, 47, 51);
     border-style: solid;
-    border-color: transparent rgb(172, 47, 51) transparent transparent;
 }
+
+.ticket-discount {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    z-index: 11;
+    width: 80px;
+    height: 32px;
+    background-image: url(https://pubcdn.ivymoda.com/ivy2/images/bg-seller.png);
+    background-repeat: no-repeat;
+    background-size: 140%;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 32px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--white-color);
+    border-bottom-right-radius: 30px;
+}
+.ticket-discount::after {
+    content: "";
+    position: absolute;
+    top: 31px;
+    left: 0px;
+    border-top: 14px #D73831;
+    border-left: 6px transparent;
+    border-bottom: 4px transparent;
+    border-right: 2px #D73831;
+    border-style: solid;
+}
+
 
 
 .lazy {
@@ -2244,4 +2276,43 @@ td > .item-quantity-wrap {
 .order-table > tbody > tr > td:last-child {
     padding-right: 30px;
     text-align: right;
+}
+
+/* Page list */
+.page-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+.page-list > ul{
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+}
+.page-list > ul > li > a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--black-color);
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all .3s;
+}
+.page-list > ul > li:hover > a {
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
+
+.page-list > ul > li + li {
+    margin-left: 12px;
+}
+
+.cur-page {
+    background-color: var(--black-color) !important;
+    color: var(--white-color) !important;
 }

@@ -141,3 +141,26 @@ productQuantities.forEach(function(productQuantity) {
     }
 });
 
+function sortHref(value) {
+    var curHref = window.location.href;
+    var sortNewHref;
+    if (curHref.search('&sort') > 0) {
+        var pos =curHref.search('&sort');
+        sortNewHref = curHref.substring(pos, -1) + '&sort=' + value ;
+    }
+    else
+        sortNewHref = curHref + '&sort=' + value;
+    return sortNewHref;
+}
+
+function pageHref(value) {
+    var curHref = window.location.href;
+    var sortNewHref;
+    if (curHref.search('&page') > 0) {
+        var pos =curHref.search('&page');
+        sortNewHref = curHref.substring(pos, -1) + '&page=' + value ;
+    }
+    else
+        sortNewHref = curHref + '&page=' + value;
+    return sortNewHref;
+}

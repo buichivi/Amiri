@@ -578,8 +578,8 @@ html {
 }
 
 
-.sort-item {
-    
+.sort-item > a{
+    display: block;
 }
 
 .sort-item__name {
@@ -590,9 +590,10 @@ html {
     display: inline-block;
 }
 
-.sort-item__name:hover {
+.sort-item > a:hover > span {
     color: var(--black-color);
     font-weight: 400;
+    transition: all .1s;
 }
 
 .sort-item + .sort-item {
@@ -605,6 +606,7 @@ html {
     flex-wrap: wrap;
     margin-left: -15px;
     margin-top: 15px;
+    /* min-height: 900px; */
 }
 
 .product-list .product {

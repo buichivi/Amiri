@@ -201,7 +201,7 @@ class Product
         return $this->convertPrice($price*(100 - $discount)/100)."đ";
     }
 
-    public function getProductByCateId($catId) {
+    public function getProductByCateId($catId, $sort = NULL) {
         $query = "WITH RECURSIVE category_recursive AS (
                     SELECT id, categoryName, parent_id, 0 AS level
                     FROM tb_category
@@ -217,9 +217,33 @@ class Product
                 WHERE categoryId in 
                 (SELECT id
                 FROM category_recursive
-                ORDER BY level, id) LIMIT 12;";
+                ORDER BY level, id) ";
+        if ($sort == 'new') {
+            $query .= " ORDER BY id DESC";
+        }
+        else if ($sort == 'pricehightolow') {
+            $query .= " ORDER BY price*(1-productDiscount/100) DESC";
+        }
+        else if ($sort == 'pricelowtohigh') {
+            $query .= " ORDER BY price*(1-productDiscount/100) ASC";
+        }
+        else {
+            $query .= " ORDER BY id ASC";
+        }
+        $numberOfProd = $this->db->select($query);
+
+        $prodPerPage = 8;
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        }
+        else {
+            $page = $_GET['page'];
+        }
+        $curPage = ($page - 1)*$prodPerPage;
+        $query .= " LIMIT $curPage,$prodPerPage;";
+
         $result = $this->db->select($query);
-        return $result;
+        return array($result, $numberOfProd);
     }
 
 
@@ -279,6 +303,79 @@ class Product
                 header("Location: product_gallery_add.php?prodId=$prodId");
             }
         }
+    }
+
+    public function getListProducGallery_FE($id) {
+        $query = "SELECT * FROM tb_product_gallery WHERE productId = '$id' ORDER BY id DESC LIMIT 4";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function getImgLazy($id) {
+        $query = "SELECT * FROM tb_product_gallery WHERE productId = '$id' ORDER BY id ASC LIMIT 1";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+
+    public function getProductWithFilter($catId, $min, $max, $sale, $sort = NULL) {
+        $query = "WITH RECURSIVE category_recursive AS (
+                    SELECT id, categoryName, parent_id, 0 AS level
+                    FROM tb_category
+                    WHERE id = '$catId'
+                    UNION ALL
+                
+                    SELECT c.id, c.categoryName, c.parent_id, cr.level + 1
+                    FROM tb_category c
+                    INNER JOIN category_recursive cr ON c.parent_id = cr.id
+                )
+                SELECT * 
+                FROM tb_product
+                WHERE categoryId in 
+                (SELECT id
+                FROM category_recursive
+                ORDER BY level, id)";
+        if($sale[0] == NULL) {
+            $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max";
+        }
+        else if (count($sale) == 1) {
+            if (100 - (int)$sale[0] > 50)
+                $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount < $sale[0]";
+            else
+                $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount > $sale[0]";
+        }
+        else {
+            $minDiscount = $sale[0];
+            $maxDiscount = $sale[1];
+            $query .= " AND price*(1-productDiscount/100) >= $min AND price*(1-productDiscount/100) <= $max AND productDiscount >= $minDiscount AND productDiscount < $maxDiscount";
+        }
+        if ($sort == 'new') {
+            $query .= " ORDER BY id DESC";
+        }
+        else if ($sort == 'pricehightolow') {
+            $query .= " ORDER BY price*(1-productDiscount/100) DESC";
+        }
+        else if ($sort == 'pricelowtohigh') {
+            $query .= " ORDER BY price*(1-productDiscount/100) ASC";
+        }
+        else {
+            $query .= " ORDER BY id ASC";
+        }
+
+        $numberOfProd = $this->db->select($query);
+
+        $prodPerPage = 8;
+        if (!isset($_GET['page'])) {
+            $page = 1;
+        }
+        else {
+            $page = $_GET['page'];
+        }
+        $curPage = ($page - 1)*$prodPerPage;
+        $query .= " LIMIT $curPage,$prodPerPage;";
+
+        $result = $this->db->select($query);
+        return array($result, $numberOfProd);
     }
 }
 ob_flush();

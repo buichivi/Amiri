@@ -40,9 +40,18 @@
                                 <img class="lazy"
                                     src="admin/uploads/<?=$row['productImg']?>"
                                     alt="">
+                                <?php 
+                                    $getImgLazy = $prod->getImgLazy($row['id']);
+                                    if($getImgLazy) {
+                                        while($imgLazy = $getImgLazy->fetch_assoc()) {
+                                ?>
                                 <img class="lazy hover-img-product"
-                                    src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/ef22fd275680e9334607693479e22c8e.JPG"
+                                    src="admin/uploads/<?=$imgLazy['imageDetail']?>"
                                     alt="">
+                                <?php 
+                                    }
+                                }
+                                ?>
                             </div>
                         </a>
                         <div class="product__desc dp-flex">
@@ -136,9 +145,18 @@
                                 <img class="lazy"
                                     src="admin/uploads/<?=$row['productImg']?>"
                                     alt="">
+                                <?php 
+                                    $getImgLazy = $prod->getImgLazy($row['id']);
+                                    if($getImgLazy) {
+                                        while($imgLazy = $getImgLazy->fetch_assoc()) {
+                                ?>
                                 <img class="lazy hover-img-product"
-                                    src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/ef22fd275680e9334607693479e22c8e.JPG"
+                                    src="admin/uploads/<?=$imgLazy['imageDetail']?>"
                                     alt="">
+                                <?php 
+                                    }
+                                }
+                                ?>
                             </div>
                         </a>
                         <div class="product__desc dp-flex">

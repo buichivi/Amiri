@@ -46,14 +46,19 @@
                             <img class="product-gallery__slide-item-img"
                                 src="admin/uploads/<?=$result['productImg']?>"
                                 alt="">
-                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/1366/2022/05/27/ef22fd275680e9334607693479e22c8e.JPG"
+                            <?php 
+                                $getProdGallery = $prod->getListProducGallery_FE($id);
+                                if ($getProdGallery) {
+                                    while($row = $getProdGallery->fetch_assoc()) {
+
+
+                            ?>
+                            <img src="admin/uploads/<?=$row['imageDetail']?>"
                                 alt="" class="product-gallery__slide-item-img">
-                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/1366/2022/05/27/2e26e84c03cb2b64bd117ddee3302d36.JPG"
-                                alt="" class="product-gallery__slide-item-img">
-                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/1366/2022/05/27/8f83329e3ebf044c37a9673ee315e305.JPG"
-                                alt="" class="product-gallery__slide-item-img">
-                            <img src="https://pubcdn.ivymoda.com/files/product/thumab/1366/2022/05/27/cc9887af63c797482bc8ddd778a8cb08.JPG"
-                                alt="" class="product-gallery__slide-item-img">
+                            <?php 
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                     <span class="product-gallery__slide-small-icon-up">

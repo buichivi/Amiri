@@ -75,10 +75,10 @@ const navLinkContainer = document.querySelector('.nav-links');
         <td><?=$i?></td>
         <td><?=$productDetail['productName']?></td>
         <td>
-            <img src="./uploads/<?=$productDetail['productImg']?>" alt="" style="width: 20%">
+            <img src="./uploads/<?=$productDetail['productImg']?>" alt="" style="width: 100%">
         </td>
         <td>
-            <img src="./uploads/<?=$row['imageDetail']?>" alt="" style="width: 20%">
+            <img src="./uploads/<?=$row['imageDetail']?>" alt="" style="width: 100%">
         </td>
         <td>
             <a href="?del_imgDetailId=<?=$row['id']?>" onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này?')">Xóa</a>

@@ -2,13 +2,30 @@
     include 'inc/header.php';
 ?>
 <?php 
+
+    $productList = '';
+    $prod_number = '';
     if(!isset($_GET['catid']) || $_GET['catid'] == NULL) {
         echo '<script> window.location = "404.php"; </script>';
     }
     else {
         $catId = $_GET['catid'];
-        // include 'inc/notification.php';
     }
+
+    if(isset($_GET['minPrice']) && $_GET['minPrice'] != NULL) {
+        $minPrice = $_GET['minPrice'];
+        $maxPrice = $_GET['maxPrice'];
+        $sale = $_GET['sales'];
+        $saleOption = explode('-', $sale);
+        $sort = NULL;
+        if (isset($_GET['sort']) && $_GET['sort'] != NULL) {
+            $sort = $_GET['sort'];
+        }
+        list($productList, $prod_number) = $prod->getProductWithFilter($catId, $minPrice, $maxPrice, $saleOption, $sort);
+    }
+
+
+
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
         $id = $_POST['prodIdSelected'];
@@ -18,6 +35,7 @@
     }
 ?>
 
+    <script src="./assets/js/main.js"></script>
     <!-- Body -->
     <div class="content">
         <div class="container">
@@ -30,6 +48,7 @@
                 </ul>
             </div>
             <div class="content-product-wrap dp-flex">
+            <!-- <form action="" method="post"> -->
                 <div class="filter-group">
                     <ul class="filter-list">
                         <!-- <li class="filter-item">
@@ -69,10 +88,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form>
                                                 <input type="hidden" name="min-value" value="">
                                                 <input type="hidden" name="max-value" value="">
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -86,48 +103,54 @@
                             </div>
                             <ul class="sale-list filter-item--hidden">
                                 <li class="sale-item">
-                                    <input type="radio" name="sales" id="sale_0">
+                                    <input type="radio" name="sales" id="sale_0" value="30">
                                     <span class="sale-item--checked">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <label for="sale_0">Dưới 30%</label>
                                 </li>
                                 <li class="sale-item">
-                                    <input type="radio" name="sales" id="sale_1">
+                                    <input type="radio" name="sales" id="sale_1" value="30-50">
                                     <span class="sale-item--checked">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <label for="sale_1">Từ 30% - 50%</label>
                                 </li>
                                 <li class="sale-item">
-                                    <input type="radio" name="sales" id="sale_2">
+                                    <input type="radio" name="sales" id="sale_2" value="50-70">
                                     <span class="sale-item--checked">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <label for="sale_2">Từ 50% - 70%</label>
                                 </li>
                                 <li class="sale-item">
-                                    <input type="radio" name="sales" id="sale_3">
+                                    <input type="radio" name="sales" id="sale_3" value="70">
                                     <span class="sale-item--checked">
                                         <i class="fa-solid fa-check"></i>
                                     </span>
                                     <label for="sale_3">Trên 70%</label>
                                 </li>
-                                <li class="sale-item">
-                                    <input type="radio" name="sales" id="sale_4">
-                                    <span class="sale-item--checked">
-                                        <i class="fa-solid fa-check"></i>
-                                    </span>
-                                    <label for="sale_4">Giá đặc biệt</label>
-                                </li>
                             </ul>
                         </li>
                     </ul>
                     <div class="filter-btn-group">
-                        <a href="" class="btn btn__primary-btn disable-filter-btn">Bỏ lọc</a>
+                        <a href="?catid=<?=$catId?>" class="btn btn__primary-btn disable-filter-btn">Bỏ lọc</a>
                         <a href="" class="btn btn__primary-btn filter-btn">Lọc</a>
+                        <script>
+                            const filterBtn = document.querySelector('.filter-btn');
+                            filterBtn.addEventListener('click', function(e) {
+                                // e.preventDefault();
+                                var minPrice =document.querySelector("input[name='min-value']").value;
+                                var maxPrice =document.querySelector("input[name='max-value']").value;
+                                var saleOption = '';
+                                if (document.querySelector("input[name='sales']:checked"))
+                                    saleOption = document.querySelector("input[name='sales']:checked").value;
+                                this.setAttribute("href", `?catid=<?=$catId?>&minPrice=${minPrice}&maxPrice=${maxPrice}&sales=${saleOption}`)
+                            })
+                        </script>
                     </div>
                 </div>
+                <!-- </form> -->
                 <div class="content-main">
                     <div class="content-main__heading dp-flex">
                         <h3 class="content-main__title">
@@ -142,19 +165,33 @@
                                 <i class="sort-group__icon fa-solid fa-chevron-down"></i>
                             </div>
                             <ul class="sort-list">
-                                <li class="sort-item"><span class="sort-item__name">Mặc định</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Mới nhất</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Giá: Cao đến thấp</span></li>
-                                <li class="sort-item"><span class="sort-item__name">Giá: Thấp đến cao</span></li>
+                                <li class="sort-item"><a href="#"><span class="sort-item__name">Mặc định</span></a></li>
+                                <li class="sort-item"><a href=""><span class="sort-item__name">Mới nhất</span></a></li>
+                                <li class="sort-item"><a href=""><span class="sort-item__name">Giá: Cao đến thấp</span></a></li>
+                                <li class="sort-item"><a href=""><span class="sort-item__name">Giá: Thấp đến cao</span></a></li>
                             </ul>
+                            <script>
+                                var listSortOptions = document.querySelectorAll('.sort-item > a');
+                                listSortOptions[1].setAttribute('href', sortHref('new'));
+                                listSortOptions[2].setAttribute('href', sortHref('pricehightolow'));
+                                listSortOptions[3].setAttribute('href', sortHref('pricelowtohigh'));
+                                
+                                
+                            </script>
                         </div>
                     </div>
                     <div class="product-list dp-flex">
                         <!-- ds sản phẩm demo -->
                         <?php 
-                            $productByCatId = $prod->getProductByCateId($catId);
-                            if ($productByCatId) {
-                                while($row = $productByCatId->fetch_assoc()) {
+                            if(!isset($_GET['minPrice']) || $_GET['minPrice'] == NULL) {
+                                $sort = NULL;
+                                if (isset($_GET['sort']) && $_GET['sort'] != NULL) {
+                                    $sort = $_GET['sort'];
+                                }
+                                list($productList, $prod_number) = $prod->getProductByCateId($catId, $sort);
+                            }
+                            if ($productList) {
+                                while($row = $productList->fetch_assoc()) {
                        
                         ?>
                         <form action="" method="post">
@@ -162,13 +199,28 @@
                             <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                             <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                                 <div class="product__img-wrap">
-                                    <div class="ticket-new">New</div>
+                                    <?php 
+                                        if ($row['productDiscount'] > 0)
+                                        echo "<div class='ticket-discount'>-".$row['productDiscount']."%</div>"
+                                    ?>
+                                    <!-- <div class="ticket-new">New</div> -->
+                                    
+
                                     <img class="lazy"
                                         src="admin/uploads/<?=$row['productImg']?>"
                                         alt="">
-                                    <img class="lazy hover-img-product"
-                                        src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/ef22fd275680e9334607693479e22c8e.JPG"
-                                        alt="">
+                                        <?php 
+                                            $getImgLazy = $prod->getImgLazy($row['id']);
+                                            if($getImgLazy) {
+                                                while($imgLazy = $getImgLazy->fetch_assoc()) {
+                                        ?>
+                                        <img class="lazy hover-img-product"
+                                            src="admin/uploads/<?=$imgLazy['imageDetail']?>"
+                                            alt="">
+                                        <?php 
+                                            }
+                                        }
+                                        ?>
                                 </div>
                             </a>
                             <div class="product__desc dp-flex">
@@ -198,7 +250,8 @@
                                     </span>
                                     <span class="product__price--old-price">
                                         <?php 
-                                            echo $prod->convertPrice($row['price'])."đ";
+                                            if ($row['productDiscount'] > 0) 
+                                                echo $prod->convertPrice($row['price'])."đ";
                                         ?>
                                     </span>
                                 </div>
@@ -236,6 +289,36 @@
                             margin-top: 10%;'>Không có sản phẩm nào!</p>";
                         } 
                         ?>
+                    </div>
+                    <div class="page-list">
+                        <ul>
+                            
+                            <?php 
+                                $curPage = 1;
+                                if (isset($_GET['page']) && $_GET['page'] != NULL) {
+                                    $curPage = $_GET['page'];
+                                }
+                                if ($productList) {
+                                    // echo "<li><a href='' class='cur-page'>1</a></li>";
+                                    $prod_number = mysqli_num_rows($prod_number);
+                                    $numberOfPage = ceil($prod_number/8);
+                                    // echo $numberOfPage;
+                                    for($i = 1; $i <= $numberOfPage; $i++) {
+
+                            ?>
+                                <li><a href=""><?=$i?></a></li>
+                            <?php 
+                                }
+                            }
+                            ?>
+                        </ul>
+                        <script>
+                            const pageList = document.querySelectorAll('.page-list > ul > li > a');
+                            for (let i = 0; i < pageList.length; i++) {
+                                pageList[i].setAttribute('href', pageHref(i+1));
+                            }
+                            pageList[<?=$curPage?> - 1].classList.add('cur-page');
+                        </script>
                     </div>
                 </div>
             </div>
