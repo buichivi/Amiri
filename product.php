@@ -249,351 +249,113 @@
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
             <form action="" method="post">
-            <ul class="list-product list-product--man">
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/1b751da0513d24200158440a2f9513b4.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/ef22fd275680e9334607693479e22c8e.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
+            <?php 
+                $highestParentCate = ($prod->getTheHighestParentCategory($result['categoryId'])->fetch_assoc())['id'];
+            ?>
+            <ul class="list-product 
+            <?php 
+                if ($highestParentCate == 1) 
+                    echo "list-product--man";
+                else if ($highestParentCate == 2) 
+                    echo "list-product--moda";
+            ?> ">
+                    <?php 
+                        $getListProd = $prod->getProductList_New($highestParentCate);
+                        if ($getListProd) {
+                            while($row = $getListProd->fetch_assoc()) {
+
+                    ?>
+                    <form action="" method="post">
+                    <li class="product 
+                    <?php 
+                        if ($highestParentCate == 1) 
+                            echo "product--man";
+                        else if ($highestParentCate == 2) 
+                            echo "product--moda";
+                    ?>
+                    ">
+                        <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
+                        <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
+                            <div class="product__img-wrap">
+                                <div class="ticket-new">New</div>
+                                <img class="lazy"
+                                    src="admin/uploads/<?=$row['productImg']?>"
+                                    alt="">
+                                <?php 
+                                    $getImgLazy = $prod->getImgLazy($row['id']);
+                                    if($getImgLazy) {
+                                        while($imgLazy = $getImgLazy->fetch_assoc()) {
+                                ?>
+                                <img class="lazy hover-img-product"
+                                    src="admin/uploads/<?=$imgLazy['imageDetail']?>"
+                                    alt="">
+                                <?php 
+                                    }
+                                }
+                                ?>
+                            </div>
                         </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
+                        <div class="product__desc dp-flex">
+                            <a href="product.php" class="product__link">
+                                <p class="product__name">
+                                <?php
+                                    if (strlen($row['productName']) > 34) {
+                                        echo $fm->textShorten($row['productName'], 30);
+                                    }
+                                    else 
+                                        echo $row['productName'];
+                                ?>
+                                </p>
+                            </a>
+                            <span class="product__like">
+                                <i class="product__like-icon fa-regular fa-heart"></i>
+                                <i class="product__like-icon--filled fa-solid fa-heart"></i>
+                            </span>
                         </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
+                        <div class="product__footer dp-flex">
+                            <div class="product__price">
+                                <span class="product__price--new-price">
+                                    <?php 
+                                        // echo $prod->convertPrice($row['price']*(100 - $row['productDiscount'])/100)."đ";
+                                        echo $prod->getNewPriceAfterSale($row['price'], $row['productDiscount']);
+                                    ?>
+                                </span>
+                                <span class="product__price--old-price">
+                                    <?php 
+                                        if ($row['productDiscount'] > 0) 
+                                            echo $prod->convertPrice($row['price'])."đ";
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="product__size">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <!-- Thêm class open-product__size-item để m -->
+                                <ul class="product__size-list">
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="s">S</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="m">M</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="l">L</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/0b434a14afbe18200389ee0f677c2981.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/2be83263ac6fb90dd25d5b968c13ba5b.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/224f8c4345bdc6a98cb642f2ff397ec9.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/95f2bad607ae78524f68461b19c648f5.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/4e97a231f2b355352216734bdf43c3ad.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/4fe620f8a98b86a3d8f328ab03e14442.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/f215246acdede76430c4257156b2e5b2.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/c3cbfe1eadf66e918507d5a205203ba6.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/f8d186a00a7022632f349397f5500209.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/f6d064d5055d85953dd89c9dbbbb7937.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="product product--man">
-                    <a href="" class="product__link">
-                        <div class="product__img-wrap">
-                            <div class="ticket-new">New</div>
-                            <img class="lazy"
-                                src="	https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/d79001635b2af011e4e8dc5f88651eab.JPG"
-                                alt="">
-                            <img class="lazy hover-img-product"
-                                src="https://pubcdn.ivymoda.com/files/product/thumab/400/2022/05/27/e25c4940a7d14cc88c7737ffceed32ad.JPG"
-                                alt="">
-                        </div>
-                    </a>
-                    <div class="product__desc dp-flex">
-                        <a href="" class="product__link">
-                            <p class="product__name">Áo Thun In Hình</p>
-                        </a>
-                        <span class="product__like">
-                            <i class="product__like-icon fa-regular fa-heart"></i>
-                            <i class="product__like-icon--filled fa-solid fa-heart"></i>
-                        </span>
-                    </div>
-                    <div class="product__footer dp-flex">
-                        <div class="product__price">
-                            <span class="product__price--new-price">650.000đ</span>
-                            <span class="product__price--old-price">195.000đ</span>
-                        </div>
-                        <div class="product__size">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <!-- Thêm class open-product__size-item để m -->
-                            <ul class="product__size-list">
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="s">S</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="m">M</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="l">L</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xl">XL</button>
-                                </li>
-                                <li class="product__size-item">
-                                    <button type="submit" name="add-to-cart" value="xxl">XXL</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                    </form>
+                    <?php 
+                            }
+                        }
+                    ?>
+                </ul>
             </form>
         </div>
     </div>

@@ -186,6 +186,25 @@ class Product
         return $result;
     }
 
+    public function getTheHighestParentCategory($catId) {
+        $query = "WITH RECURSIVE cte AS (
+                    SELECT id, parent_id, categoryName
+                    FROM tb_category
+                    WHERE id = '$catId'
+                    
+                    UNION ALL
+                    
+                    SELECT c.id, c.parent_id, c.categoryName
+                    FROM tb_category c
+                    INNER JOIN cte ON cte.parent_id = c.id
+                )
+                SELECT *
+                FROM cte
+                WHERE parent_id = 0;";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function convertID($id) {
         $numberOfZero = 4 - strlen($id);
         while($numberOfZero > 0) {
