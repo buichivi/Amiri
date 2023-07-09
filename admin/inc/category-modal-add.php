@@ -39,7 +39,19 @@
                       $cateList = $cate->getListCategory();
                       foreach($cateList as $row) {
                     ?>
-                      <option value="<?=$row['id']?>"><?=$row['categoryName']?></option>
+                      <option value="<?=$row['id']?>">
+                        <?php 
+                          $parentCate = $cate->getCateById($row['parent_id']);
+                          $cateName = "";
+                          if ($parentCate) {
+                            $cateName = ($parentCate->fetch_assoc())['categoryName'];
+                          }
+                          if ($cateName != '')
+                            echo $row['categoryName'].'---'.$cateName;
+                          else
+                            echo $row['categoryName'];
+                        ?>
+                      </option>
                     <?php
                       }
                     ?>

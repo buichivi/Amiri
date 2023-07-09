@@ -27,7 +27,7 @@ class Order
         return $result;
     }
     public function getOrderTotalPrice($id) {
-        $query = "SELECT sum(price) AS totalPrice FROM tb_order_details WHERE orderId = '$id'";
+        $query = "SELECT sum(price*quantity*(1 - productDiscount/100)) AS totalPrice FROM tb_order_details WHERE orderId = '$id'";
         $result = $this->db->select($query);
         return $result;
     }

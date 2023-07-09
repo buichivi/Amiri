@@ -15,6 +15,9 @@
     }
 
 ?>
+<script>
+    document.title = "Chi tiết đơn hàng | Amiri"
+</script>
 
 <div class="content">
     <div class="container">
@@ -77,20 +80,41 @@
                             if ($getOrderDetails) {
                                 while($row = $getOrderDetails->fetch_assoc()) {
                                     $numProdOfOrder += $row['quantity'];
-                                    $prodDetail = $prod->getProductById($row['productId'])->fetch_assoc();
                         ?>
                         <tr>
                             <td>
                                 <div class="cart__product-item dp-flex">
-                                    <a href="product.php?prodId=<?=$row['productId']?>">
-                                        <img src="admin/uploads/<?php 
-                                            echo $prodDetail['productImg'];
-                                        ?>"
+                                    <a
+                                        <?php 
+                                            $prodId = $row['productId'];
+                                            if ($prod->getProductById($prodId)) {
+                                                echo "href='product.php?prodId=$prodId'";
+                                            }
+                                        ?>
+                                    >
+                                        <img src="admin/uploads/<?=$row['productImg'];?>"
                                             alt="" style="width: 50px; height: 75px">
                                     </a>
                                     <div>
-                                        <a href="product.php?prodId=<?=$row['productId']?>" style="font-size: 1.5rem; font-weight: 400"><?=$prodDetail['productName']?></a>
-                                        <p>Màu sắc: <span class="cart__product-item-name"><?=$prodDetail['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row['size']?></span></p>
+                                        <a 
+                                        <?php 
+                                            if ($prod->getProductById($prodId)) {
+                                                echo "href='product.php?prodId=$prodId'";
+                                            }
+                                        ?>
+                                         style="font-size: 1.5rem; font-weight: 400">
+                                         <?php 
+                                            $prodName = $row['productName'];
+                                            if (!($prod->getProductById($prodId))) {
+                                                $prodName .= "<span style='color: red;
+                                                font-size: 1rem;
+                                                text-transform: uppercase;'
+                                                >(Sản phẩm này không còn tồn tại!)</span>";
+                                            }
+                                            echo $prodName;
+                                         ?>
+                                         </a>
+                                        <p>Màu sắc: <span class="cart__product-item-name"><?=$row['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row['size']?></span></p>
                                     </div>
                                 </div>
                             </td>
@@ -98,14 +122,14 @@
                                 <div class="cart__product-sale-price">
                                     <p>-
                                     <?php
-                                        if ($prodDetail['productDiscount'] == 0) {
+                                        if ($row['productDiscount'] == 0) {
                                             echo '0đ';
                                         }
                                         else
-                                            echo $prod->convertPrice($row['price']*(1 - $prodDetail['productDiscount']/100)).'đ';
+                                            echo $prod->convertPrice($row['price']*$row['quantity']*($row['productDiscount']/100)).'đ';
                                     ?>
                                     </p>
-                                    <span>( -<?=$prodDetail['productDiscount']?>% )</span>
+                                    <span>( -<?=$row['productDiscount']?>% )</span>
                                 </div>
                             </td>
                             <td align="center">
@@ -113,12 +137,12 @@
                                     <span style="font-size: 1.5rem;font-weight: 400;"><?=$row['quantity']?></span>                            
                                 </div>
                             </td>
-                            <td>
-                                    <p style="font-weight: 400;font-size: 1.5rem;">
-                                    <?php
-                                        echo $prod->convertPrice($row['price'])."đ";
-                                    ?>
-                                    </p>
+                        <td>
+                                <p style="font-weight: 400;font-size: 1.5rem;">
+                                <?php
+                                    echo $prod->convertPrice($row['price']*$row['quantity']*(1 - $row['productDiscount']/100))."đ";
+                                ?>
+                                </p>
                             </td>
                         </tr>
                         <?php 

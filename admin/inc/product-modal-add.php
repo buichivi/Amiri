@@ -46,7 +46,20 @@
                             continue;
                           }
                         ?>
-                          <option value="<?=$result['id']?>"><?=$result['categoryName']?></option>
+                          <option value="<?=$result['id']?>">
+                            <?php //$result['categoryName']?>
+                            <?php 
+                              $parentCate = $cat->getCateById($result['parent_id']);
+                              $cateName = "";
+                              if ($parentCate) {
+                                $cateName = ($parentCate->fetch_assoc())['categoryName'];
+                              }
+                              if ($cateName != '')
+                                echo $result['categoryName'].'---'.$cateName;
+                              else
+                                echo $result['categoryName'];
+                            ?>
+                          </option>
                         <?php   
                         }
                       }

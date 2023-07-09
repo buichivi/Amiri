@@ -7,7 +7,9 @@
     $insertCus = $cs->insertCustomer($_POST);
   }
 ?>
-
+<script>
+    document.title = "Đăng ký | Amiri"
+</script>
 <div class="login-register-wrap container dp-flex">
   <form action="" method="post" class="register-form container">
     <h1 class="register-form__heading">Đăng ký</h1>

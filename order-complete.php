@@ -8,7 +8,9 @@
     }
 
 ?>
-
+<script>
+    document.title = "Hoàn thành | Amiri"
+</script>
     <!-- cart field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">

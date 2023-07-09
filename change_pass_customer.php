@@ -5,12 +5,18 @@
     if (!$login_check) {
         header("Location: login.php");
     }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update-account'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change-pass'])) {
         $cusId = Session::get('customer_id');
-        $updateCus = $cs->updateCustomer($_POST, $cusId);
+        $oldPass = $_POST['curPass'];
+        $newPass = $_POST['newPass'];
+        $updateCus = $cs->changePassWord($cusId, $oldPass, $newPass);
     }
 
 ?>
+
+<script>
+    document.title = "Đổi mật khẩu | Amiri"
+</script>
 <div class="content">
     <div class="container">
         <div class="content__heading">
@@ -42,7 +48,7 @@
                         <a href="order_list.php">Quản lý đơn hàng</a>
                     </li>
                     <li class="active">
-                        <i class="fa-solid fa-file-invoice"></i>    
+                        <i class="fa-solid fa-rotate"></i>
                         <a href="">Đổi mật khẩu</a>
                     </li>
                 </ul>
@@ -50,20 +56,15 @@
             <div class="info">
                 <div class="login-register-wrap dp-flex" style="margin-top: 0; width: 100%;">
                     <form action="" method="post" class="register-form" style="border: none; padding: 0; width: 100%">
-                        <?php 
-                            $idCus = Session::get('customer_id');
-                            $getCus = $cs->getCustomerById($idCus);
-                            $row = $getCus->fetch_assoc();
-                        ?>
                         <h1 class="info__heading" style="text-align: left;">Đổi mật khẩu</h1>
                         <table>
                         <tr>
                             <td><label for="">Mật khẩu hiện tại</label></td>
-                            <td><input required type="text" name="curPass" id="curPass" placeholder="Nhập mật khẩu hiện tại" style="width:40%"></td>
+                            <td><input required type="password" name="curPass" id="curPass" placeholder="Nhập mật khẩu hiện tại" style="width:40%"></td>
                         <tr>
                             <td><label for="">Mật khẩu mới</label>
                             </td>
-                            <td><input required type="text" name="newPass" id="newPass" placeholder="Nhập mật khẩu mới" style="width:40%"></td>
+                            <td><input required type="password" name="newPass" id="newPass" placeholder="Nhập mật khẩu mới" style="width:40%"></td>
                         </tr>
                         <tr>
                             <td></td>

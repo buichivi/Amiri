@@ -32,7 +32,9 @@
         $addToCart = $ct->addToCart($id, $quantity, $size, "search.php?keyword=".$keyword);
     }
 ?>
-
+<script>
+    document.title = "Tìm kiếm | Amiri"
+</script>
     <script src="./assets/js/main.js"></script>
     <!-- Body -->
     <div class="content">
@@ -43,6 +45,7 @@
                         <a class="content__menu-item-name" href="index.php">Trang chủ</a>
                     </li>
                     <li class="content__menu-item">
+                        <span class='content__menu-item-separate'></span>
                         <a class="content__menu-item-name" href="search.php?keyword=">Tìm kiếm</a>
                     </li>
                 </ul>

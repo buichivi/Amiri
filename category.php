@@ -35,6 +35,9 @@
     }
 ?>
 
+    <script>
+        document.title = "Danh mục | Amiri"
+    </script>
     <script src="./assets/js/main.js"></script>
     <!-- Body -->
     <div class="content">

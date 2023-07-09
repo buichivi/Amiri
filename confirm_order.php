@@ -17,7 +17,9 @@
     }
 
 ?>
-
+<script>
+    document.title = "Xác nhận | Amiri"
+</script>
     <!-- cart field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">

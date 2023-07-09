@@ -15,7 +15,9 @@
         $shifted = $od->shifted($id);
     }
 ?>
-
+<script>
+    document.title = "Danh sách đơn hàng | Amiri"
+</script>
 <div class="content">
     <div class="container">
         <div class="content__heading">

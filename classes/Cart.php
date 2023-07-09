@@ -51,7 +51,7 @@ class Cart
     }
     public function getProductCart() {
         $sessionId = session_id();
-        $query = "SELECT ct.id AS cartId, pd.id AS productId, productName, productImg, productColor, quantity, size, price*quantity AS price, productDiscount, price*quantity*(productDiscount/100) AS discountAmount, price*quantity*(1 - productDiscount/100) AS finalPrice
+        $query = "SELECT ct.id AS cartId, pd.id AS productId, productName, productImg, productColor, quantity, size, price*quantity AS price, productDiscount, CEIL(price*quantity*(productDiscount/100)) AS discountAmount, CEIL(price*quantity*(1 - productDiscount/100)) AS finalPrice
                     FROM tb_cart ct INNER JOIN tb_product pd on ct.productId = pd.id
                     WHERE sessionId = '$sessionId'";
         $result = $this->db->select($query);
@@ -114,12 +114,15 @@ class Cart
                 if ($result_cart) {
                     while($row = $result_cart->fetch_assoc()) {
                         $productId = $row['productId'];
-                        $priceProd = ($prod->getProductById($productId)->fetch_assoc())['price'];
-                        $prodDiscount = ($prod->getProductById($productId)->fetch_assoc())['productDiscount'];
+                        $productDetail = $prod->getProductById($productId)->fetch_assoc();
+                        $productName = $productDetail['productName'];
+                        $productImg = $productDetail['productImg'];
+                        $productColor = $productDetail['productColor'];
+                        $productDiscount = $productDetail['productDiscount'];
+                        $price = $productDetail['price'];
                         $quantity = $row['quantity'];
-                        $price = $priceProd*$quantity*(1 - $prodDiscount/100);
                         $size = $row['size'];
-                        $query_order_details = "INSERT INTO tb_order_details VALUES (NULL ,'$orderId','$productId','$quantity','$size', '$price')";
+                        $query_order_details = "INSERT INTO tb_order_details VALUES (NULL ,'$orderId','$productId', '$productName', '$productImg', '$productColor', '$productDiscount', '$price', '$quantity','$size')";
                         $result_order_details = $this->db->insert($query_order_details);
                     }
                 }

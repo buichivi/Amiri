@@ -11,6 +11,10 @@
     }
 
 ?>
+
+<script>
+    document.title = 'Tài khoản | Amiri';
+</script>
 <div class="content">
     <div class="container">
         <div class="content__heading">
@@ -81,7 +85,7 @@
                                             gender.setAttribute("selected", "");
                                         }
                                     });
-                                </script>
+                                </>
                             </select>
                             </td>
                         </tr>

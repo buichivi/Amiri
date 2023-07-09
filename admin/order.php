@@ -84,7 +84,7 @@ const navLinkContainer = document.querySelector('.nav-links');
         ?>
       </td>
       <td><?php include './inc/order-modal-detail.php'; ?></td>
-      <td>
+      <td style="color: orange;font-style: italic;">
           <?php 
             if ($row['status'] == 0) {
               echo "Đang vận chuyển";

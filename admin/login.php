@@ -38,7 +38,7 @@
         }
     </style>
     <div class="login-wrap dp-flex">
-        <img src="../assets/img/GROUP.png" alt="" style="width: 50%;">
+        <img src="https://amiri.com/cdn/shop/files/logo_be4041d5-a81e-4d1e-a43d-29b0b0d52cbe.png?v=1678302533&width=400" alt="" style="width: 50%;">
         <span>
             <?php 
             if (isset($loginCheck))

@@ -16,7 +16,9 @@
     }
 
 ?>
-
+    <script>
+        document.title = "Giỏ hàng | Amiri"
+    </script>
     <!-- cart field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">

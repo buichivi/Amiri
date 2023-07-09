@@ -93,9 +93,33 @@ class Customer
 
     }
 
-    public function changePassWord($oldPass, $newPass) {
+    public function changePassWord($id, $oldPass, $newPass) {
         $oldPass = mysqli_real_escape_string($this->db->link, md5($oldPass));
-        
+        $newPass = mysqli_real_escape_string($this->db->link, md5($newPass));
+
+        $check_pass = "SELECT * FROM tb_customer WHERE id = '$id' AND password = '$oldPass'";
+        $result_check = $this->db->select($check_pass);
+        if ($result_check) {
+            $query = "UPDATE tb_customer SET password = '$newPass' WHERE id = '$id'";
+            $result = $this->db->update($query);
+            $_SESSION['notification'] = 'Thay đổi mật khẩu thành công!';
+            header("Location: change_pass_customer.php");
+        }
+        else {
+            $_SESSION['notification'] = 'Mật khẩu hiện tại không chính xác!';
+            header("Location: change_pass_customer.php");
+        }
+
+    }
+
+    public function getCustomerList() {
+        $query = "SELECT cs.id, cs.name, cs.phonenumber, sum(od.price * od.quantity * (1 - od.productDiscount/100)) AS totalPurchase
+                    FROM tb_customer cs LEFT JOIN tb_order o ON cs.id = o.customerId
+                        LEFT JOIN tb_order_details od ON od.orderId = o.id
+                    GROUP BY cs.id
+                    ORDER BY sum(od.price * od.quantity * (1 - od.productDiscount/100)) DESC";
+        $result = $this->db->select($query);
+        return $result;
     }
 }
 ob_flush();

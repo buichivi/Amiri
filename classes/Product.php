@@ -150,9 +150,9 @@ class Product
         $query = "DELETE FROM tb_product WHERE id = $id";
         $result = $this->db->delete($query);
         if ($result) {
-            while($row = $prodImg->fetch_assoc()) {
-                unlink("uploads/".$row['productImg']);
-            }
+            // while($row = $prodImg->fetch_assoc()) {
+            //     unlink("uploads/".$row['productImg']);
+            // }
             $_SESSION['success'] = "Xóa sản phẩm thành công";
             header("Location:product.php");
             return;

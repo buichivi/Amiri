@@ -21,6 +21,9 @@
         unset($_SESSION['add-to-cart-success']);
     }
     ?>
+    <script>
+        document.title = "Sản phẩm | Amiri"
+    </script>
 
     <!-- Content -->
     <div class="product-detail">

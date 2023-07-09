@@ -64,20 +64,30 @@
                             if ($getOrderDetails) {
                                 while($row2 = $getOrderDetails->fetch_assoc()) {
                                     $numProdOfOrder += $row2['quantity'];
-                                    $prodDetail = $prod->getProductById($row2['productId'])->fetch_assoc();
                         ?>
                         <tr>
                             <td>
                                 <div class="cart__product-item dp-flex">
-                                    <a href="product.php">
+                                    <a>
                                         <img src="./uploads/<?php 
-                                            echo $prodDetail['productImg'];
+                                            echo $row2['productImg'];
                                         ?>"
                                             alt="" style="width: 50px; height: 75px; margin-right: 12px;">
                                     </a>
                                     <div>
-                                        <a href="product.php" style="font-size: 1.5rem; font-weight: 400;text-decoration: none;color: #000;"><?=$prodDetail['productName']?></a>
-                                        <p>Màu sắc: <span class="cart__product-item-name"><?=$prodDetail['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row2['size']?></span></p>
+                                        <a style="font-size: 1.5rem; font-weight: 400;text-decoration: none;color: #000;">
+                                            <?php 
+                                                $prodName = $row2['productName'];
+                                                if (!($prod->getProductById($row2['productId']))) {
+                                                    $prodName .= "<span style='color: red;
+                                                    font-size: 1rem;
+                                                    text-transform: uppercase;'
+                                                    >(Sản phẩm đã bị xóa!)</span>";
+                                                }
+                                                echo $prodName;
+                                            ?>
+                                        </a>
+                                        <p>Màu sắc: <span class="cart__product-item-name"><?=$row2['productColor']?></span><br> Size: <span style="text-transform: uppercase;"><?=$row2['size']?></span></p>
                                     </div>
                                 </div>
                             </td>
@@ -85,14 +95,14 @@
                                 <div class="cart__product-sale-price">
                                     <p style="margin-bottom: 4px">
                                     <?php
-                                        if ($prodDetail['productDiscount'] == 0) {
+                                        if ($row2['productDiscount'] == 0) {
                                             echo '-0đ';
                                         }
                                         else
-                                            echo '-'.$prod->convertPrice($row2['price']*(1 - $prodDetail['productDiscount']/100)).'đ';
+                                            echo '-'.$prod->convertPrice($row2['price']*$row2['quantity']*($row2['productDiscount']/100)).'đ';
                                     ?>
                                     </p>
-                                    <span style="font-size: 12px;color: red;">(-<?=$prodDetail['productDiscount']?>%)</span>
+                                    <span style="font-size: 12px;color: red;">(-<?=$row2['productDiscount']?>%)</span>
                                 </div>
                             </td>
                             <td align="center">
@@ -103,7 +113,7 @@
                             <td>
                                     <p style="font-weight: 400;font-size: 1.5rem;">
                                     <?php
-                                        echo $prod->convertPrice($row2['price'])."đ";
+                                        echo $prod->convertPrice($row2['price']*$row2['quantity']*(1 - $row2['productDiscount']/100))."đ";
                                     ?>
                                     </p>
                             </td>

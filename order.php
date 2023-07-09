@@ -1,6 +1,9 @@
 <?php
     include 'inc/header.php';
 ?>
+<script>
+    document.title = "Đặt hàng | Amiri"
+</script>
     <!-- order field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">

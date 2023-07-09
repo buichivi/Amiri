@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Admin | IVY moda</title>
+    <title>Admin | Amiri</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -36,9 +36,9 @@
       </div>
       <ul class="nav-links">
         <li>
-          <a href="index.php" class="active">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Dashboard</span>
+          <a href="index.php">
+            <i class='bx bxs-user-account'></i>
+            <span class="links_name">Khách hàng</span>
           </a>
         </li>
         <li>
@@ -71,12 +71,7 @@
             <span class="links_name">Ảnh chi tiết sản phẩm</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-book-alt"></i>
-            <span class="links_name">Total order</span>
-          </a>
-        </li>
+        
         <li class="log_out">
           <?php 
             if (isset($_GET['action']) && $_GET['action'] == 'logout') {

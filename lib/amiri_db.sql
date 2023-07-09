@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2023 at 07:48 PM
+-- Generation Time: Jul 09, 2023 at 09:33 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ivymoda_db`
+-- Database: `amiri_db`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`id`, `adminName`, `adminEmail`, `adminUserName`, `adminPass`, `level`) VALUES
-(1, 'Chí Vĩ', 'buichivi@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0);
+(1, 'Quản trị viên', 'admin@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0);
 
 -- --------------------------------------------------------
 
@@ -147,14 +147,8 @@ CREATE TABLE `tb_order` (
 --
 
 INSERT INTO `tb_order` (`id`, `customerId`, `orderDate`, `shippedDate`, `status`) VALUES
-(1, 4, '2023-07-06 17:03:16', '2023-07-07 11:49:32', 1),
-(2, 4, '2023-07-06 17:08:28', '2023-07-07 11:49:55', 1),
-(3, 4, '2023-07-06 22:15:35', '2023-07-07 12:03:50', 1),
-(4, 5, '2023-07-07 10:52:26', NULL, 0),
-(5, 5, '2023-07-07 11:02:46', NULL, 0),
-(6, 4, '2023-07-08 16:48:49', '2023-07-08 22:43:15', 1),
-(7, 4, '2023-07-08 22:25:24', NULL, 0),
-(8, 4, '2023-07-08 22:47:10', NULL, 0);
+(12, 4, '2023-07-09 11:37:24', NULL, 0),
+(14, 4, '2023-07-09 13:47:27', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -166,30 +160,23 @@ CREATE TABLE `tb_order_details` (
   `id` int(11) NOT NULL,
   `orderId` int(11) NOT NULL,
   `productId` int(11) NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `productImg` varchar(255) NOT NULL,
+  `productColor` varchar(255) NOT NULL,
+  `productDiscount` int(11) NOT NULL,
+  `price` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `size` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL
+  `size` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tb_order_details`
 --
 
-INSERT INTO `tb_order_details` (`id`, `orderId`, `productId`, `quantity`, `size`, `price`) VALUES
-(1, 1, 13, 10, 'xxl', '50000000'),
-(2, 1, 14, 5, 'm', '30000000'),
-(3, 1, 9, 5, 'xl', '15000000'),
-(4, 2, 13, 1, 'xxl', '5000000'),
-(5, 3, 14, 11, 'xxl', '66000000'),
-(6, 3, 8, 9, 'm', '26910000'),
-(7, 4, 14, 2, 'xl', '12000000'),
-(8, 4, 13, 1, 'xl', '5000000'),
-(9, 5, 14, 1, 'l', '6000000'),
-(10, 6, 15, 3, 'xxl', '600000'),
-(11, 6, 16, 1, 'xxl', '1000000'),
-(12, 7, 1, 1, 'xxl', '8000000'),
-(13, 7, 5, 1, 'l', '8000000'),
-(14, 8, 14, 10, 'xxl', '60000000');
+INSERT INTO `tb_order_details` (`id`, `orderId`, `productId`, `productName`, `productImg`, `productColor`, `productDiscount`, `price`, `quantity`, `size`) VALUES
+(19, 12, 13, 'Áo thun in hình ', 'ac3d81f9d1.jpg', 'Màu xanh lục', 50, '10000000', 10, 'xxl'),
+(20, 12, 9, 'Đầm dạ hội cổ yếm phối ren ', '318f8d1491.jpg', 'abc', 0, '3000000', 1, 'xxl'),
+(22, 14, 18, 'Áo polo ', 'bf5a473701.jpg', 'Màu trắng', 60, '1000000', 4, 'xxl');
 
 -- --------------------------------------------------------
 
@@ -224,7 +211,6 @@ INSERT INTO `tb_product` (`id`, `productName`, `categoryId`, `productDesc`, `pri
 (8, 'AGNES DRESS - ĐẦM SENORA CỔ YẾM Đầm dạ hội cổ yếm phối ren', 4, '<p>- Đầm dạ hội cổ yếm phối ren mang đến vẻ ngo&agrave;i thanh lịch, kết hợp c&ugrave;ng thiết kế d&agrave;i qua gối l&agrave;m tăng th&ecirc;m độ sang trọng khi tham gia những buổi tiệc.</p>\r\n\r\n<p>- Chất liệu Tuysi tạo n&ecirc;n sự mềm mại v&agrave; thanh tho&aacute;t khi mặc. V&agrave;o m&ugrave;a H&egrave;, đ&acirc;y l&agrave; sự lựa chọn tối ưu bởi khả năng tạo sự m&aacute;t mẻ v&agrave; co gi&atilde;n tốt.</p>\r\n\r\n<p>- Đầm dễ d&agrave;ng kết hợp c&ugrave;ng &nbsp;đ&ocirc;i gi&agrave;y sandal v&agrave; t&uacute;i x&aacute;ch &nbsp;gi&uacute;p tổng thể outfit trở n&ecirc;n ho&agrave;n hảo v&agrave; nổi bật hơn.</p>\r\n\r\n<p>- Đầm dạ hội cổ yếm phối ren mang đến vẻ ngo&agrave;i thanh lịch, kết hợp c&ugrave;ng thiết kế d&agrave;i qua gối l&agrave;m tăng th&ecirc;m độ sang trọng khi tham gia những buổi tiệc.</p>\r\n\r\n<p>- Chất liệu Tuysi tạo n&ecirc;n sự mềm mại v&agrave; thanh tho&aacute;t khi mặc. V&agrave;o m&ugrave;a H&egrave;, đ&acirc;y l&agrave; sự lựa chọn tối ưu bởi khả năng tạo sự m&aacute;t mẻ v&agrave; co gi&atilde;n tốt.</p>\r\n\r\n<p>- Đầm dễ d&agrave;ng kết hợp c&ugrave;ng &nbsp;đ&ocirc;i gi&agrave;y sandal v&agrave; t&uacute;i x&aacute;ch &nbsp;gi&uacute;p tổng thể outfit trở n&ecirc;n ho&agrave;</p>\r\n', '2990000', '2707b3b3fe.jpg', 1, 0, 'abc'),
 (9, 'Đầm dạ hội cổ yếm phối ren ', 4, '<p>- Đầm dạ hội cổ yếm phối ren mang đến vẻ ngo&agrave;i thanh lịch, kết hợp c&ugrave;ng thiết kế d&agrave;i qua gối l&agrave;m tăng th&ecirc;m độ sang trọng khi tham gia những buổi tiệc.</p>\r\n\r\n<p>- Chất liệu Tuysi tạo n&ecirc;n sự mềm mại v&agrave; thanh tho&aacute;t khi mặc. V&agrave;o m&ugrave;a H&egrave;, đ&acirc;y l&agrave; sự lựa chọn tối ưu bởi khả năng tạo sự m&aacute;t mẻ v&agrave; co gi&atilde;n tốt.</p>\r\n\r\n<p>- Đầm dễ d&agrave;ng kết hợp c&ugrave;ng &nbsp;đ&ocirc;i gi&agrave;y sandal v&agrave; t&uacute;i x&aacute;ch &nbsp;gi&uacute;p tổng thể outfit trở n&ecirc;n ho&agrave;n hảo v&agrave; nổi bật hơn.</p>\r\n\r\n<p>- Đầm dạ hội cổ yếm phối ren mang đến vẻ ngo&agrave;i thanh lịch, kết hợp c&ugrave;ng thiết kế d&agrave;i qua gối l&agrave;m tăng th&ecirc;m độ sang trọng khi tham gia những buổi tiệc.</p>\r\n\r\n<p>- Chất liệu Tuysi tạo n&ecirc;n sự mềm mại v&agrave; thanh tho&aacute;t khi mặc. V&agrave;o m&ugrave;a H&egrave;, đ&acirc;y l&agrave; sự lựa chọn tối ưu bởi khả năng tạo sự m&aacute;t mẻ v&agrave; co gi&atilde;n tốt.</p>\r\n\r\n<p>- Đầm dễ d&agrave;ng kết hợp c&ugrave;ng &nbsp;đ&ocirc;i gi&agrave;y sandal v&agrave; t&uacute;i x&aacute;ch &nbsp;gi&uacute;p tổng thể outfit trở n&ecirc;n ho&agrave;n hảo v&agrave; nổi bật hơn.</p>\r\n', '3000000', '318f8d1491.jpg', 0, 0, 'abc'),
 (13, 'Áo thun in hình ', 4, '<p>adawdawdawdawdawdawdawd</p>\r\n', '10000000', 'ac3d81f9d1.jpg', 1, 50, 'Màu xanh lục'),
-(14, 'Áo thun', 4, '<p>ădawdacascasc&acirc;cscascascasc</p>\r\n', '10000000', 'd782ecc7a7.jpg', 1, 40, 'Màu xanh'),
 (15, 'Váy 2 dây', 23, '<p>M&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắng</p>\r\n', '400000', '3a42fefb68.jpg', 1, 50, 'Màu trắng'),
 (16, 'Đồ Nữ', 25, '<p>M&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắngM&agrave;u trắng</p>\r\n', '1000000', 'f90fd6558f.jpg', 1, 0, 'Màu trắng');
 
@@ -347,7 +333,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
@@ -365,19 +351,19 @@ ALTER TABLE `tb_customer`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_order_details`
 --
 ALTER TABLE `tb_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_product_gallery`
