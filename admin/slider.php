@@ -84,21 +84,22 @@ const navLinkContainer = document.querySelector('.nav-links');
                 if ($row['type'] == 0)
                     echo "<a href='?sliderId=".$row['id']."&type=1' 
                     style='text-decoration: none;
-                    color: red;
-                    font-weight: 500;'>Off</a>";
+                    font-weight: 500;'
+                    class='btn btn-danger'>Off</a>";
                 else
                     echo "<a href='?sliderId=".$row['id']."&type=0' 
                     style='text-decoration: none;
-                    color: green;
-                    font-weight: 500;'>On</a>";
+                    font-weight: 500;'
+                    class='btn btn-success'>On</a>";
             ?>
             
         </td>
         <td>
             <a href="?del_sliderId=<?=$row['id']?>" 
             style="font-size: 1.5rem;
-            color: red;
-            text-decoration: none;" onclick="return confirm('Bạn có chắc chắn muốn xóa slider này?')">Xóa</a>
+            text-decoration: none;"
+            class="btn btn-danger"
+             onclick="return confirm('Bạn có chắc chắn muốn xóa slider này?')">Xóa</a>
         </td>
     </tr>
     <?php

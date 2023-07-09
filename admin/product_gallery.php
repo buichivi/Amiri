@@ -64,7 +64,7 @@ const navLinkContainer = document.querySelector('.nav-links');
             <img src="./uploads/<?=$row['productImg']?>" alt="" style="width: 100%">
         </td>
         <td>
-            <a href="product_gallery_add.php?prodId=<?=$row['id']?>">Xem</a>
+            <a href="product_gallery_add.php?prodId=<?=$row['id']?>" class="btn btn-primary" style="width: 25%">Xem</a>
         </td>
     </tr>
     <?php             
