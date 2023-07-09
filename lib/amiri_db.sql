@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 12:33 PM
+-- Generation Time: Jul 09, 2023 at 05:13 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -148,7 +148,9 @@ CREATE TABLE `tb_order` (
 
 INSERT INTO `tb_order` (`id`, `customerId`, `orderDate`, `shippedDate`, `status`) VALUES
 (12, 4, '2023-07-09 11:37:24', '2023-07-09 15:19:08', 1),
-(14, 4, '2023-07-09 13:47:27', NULL, 0);
+(14, 4, '2023-07-09 13:47:27', NULL, 0),
+(15, 4, '2023-07-09 22:08:44', '2023-07-09 22:12:04', 1),
+(16, 4, '2023-07-09 22:12:56', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -176,7 +178,10 @@ CREATE TABLE `tb_order_details` (
 INSERT INTO `tb_order_details` (`id`, `orderId`, `productId`, `productName`, `productImg`, `productColor`, `productDiscount`, `price`, `quantity`, `size`) VALUES
 (19, 12, 13, 'Áo thun in hình ', 'ac3d81f9d1.jpg', 'Màu xanh lục', 50, '10000000', 10, 'xxl'),
 (20, 12, 9, 'Đầm dạ hội cổ yếm phối ren ', '318f8d1491.jpg', 'abc', 0, '3000000', 1, 'xxl'),
-(22, 14, 18, 'Áo polo ', 'bf5a473701.jpg', 'Màu trắng', 60, '1000000', 4, 'xxl');
+(22, 14, 18, 'Áo polo ', 'bf5a473701.jpg', 'Màu trắng', 60, '1000000', 4, 'xxl'),
+(23, 15, 26, 'Jessi Set - Áo Blazer Ngắn Tay Phối Quần Short', '5036d86ebf.jpg', 'Trắng', 30, '2970000', 1, 'xxl'),
+(24, 16, 22, 'Áo sơ mi trơn cơ bản', 'e4fa11c622.jpg', 'Xanh Ghi Đá', 70, '1390000', 3, 'xxl'),
+(25, 16, 23, 'Áo sơ mi cổ phối màu', '26be26aaa2.jpg', 'Đen', 70, '1090000', 4, 'xxl');
 
 -- --------------------------------------------------------
 
@@ -388,7 +393,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
@@ -406,13 +411,13 @@ ALTER TABLE `tb_customer`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_order_details`
 --
 ALTER TABLE `tb_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tb_product`

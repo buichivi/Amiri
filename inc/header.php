@@ -104,7 +104,9 @@
                 <ul class="others">
                     <li class="others__items">
                         <div class="help">
-                            <i class="others__icon fa-solid fa-headphones"></i>
+                            <a href="about_us.php" style="color: #000">
+                                <i class="others__icon fa-solid fa-headphones"></i>
+                            </a>
                         </div>
                     </li>
                     <li class="others__items">

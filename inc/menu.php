@@ -30,21 +30,8 @@
         }
         if ($level == 0) {
             $result .= "
-                    <li class=''>Bộ sưu tập</li>
-                    <li class='ps-relative'>
-                        Về chúng tôi
-                        <ul class='about-us__list'>
-                            <li class='about-us__item'>
-                                <a href='' class='about-us__item-link'>Về AMIRI</a>
-                            </li>
-                            <li class='about-us__item'>
-                                <a href='' class='about-us__item-link'>Fashion Show</a>
-                            </li>
-                            <li class='about-us__item'>
-                                <a href='' class='about-us__item-link'>Hoạt động cộng đồng</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li class=''><a href='about_us.php'>Bộ sưu tập</a></li>
+                    <li class='ps-relative'><a href='about_us.php'>Về chúng tôi</a></li>
             ";
         }
         $result .= "</ul>";
