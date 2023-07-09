@@ -1030,7 +1030,7 @@
 
 .product__img-wrap:hover .hover-img-product {
     z-index: 1;
-    animation: fadeInImg ease 0.4s;
+    animation: fadeInImg ease 0.5s;
 }
 @keyframes fadeInImg {
     0% {
@@ -2230,7 +2230,7 @@ td > .item-quantity-wrap {
 .info-sidebar > ul {
     padding-left: 0;
     list-style: none;
-    width: 70%;
+    width: 80%;
 }
 .info-sidebar > ul > li {
     font-size: 1.6rem;

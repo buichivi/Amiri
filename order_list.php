@@ -16,7 +16,7 @@
     }
 ?>
 <script>
-    document.title = "Danh sách đơn hàng | Amiri"
+    document.title = "Danh sách đơn hàng | Amiri";
 </script>
 <div class="content">
     <div class="container">
@@ -32,28 +32,10 @@
             </ul>
         </div>
         <div class="info-wrapper dp-flex">
-            <div class="info-sidebar dp-flex">
-                <div class="info-sidebar__user dp-flex">
-                    <div class="info-sidebar__img">
-                        <img src="assets/img/user-avatar-placeholder.png" alt="">
-                    </div>      
-                    <h2 class="info-sider__username">Bùi Chí Vĩ</h2>
-                </div>  
-                <ul>
-                    <li>
-                        <i class="fa-regular fa-user"></i>
-                        <a href="info.php">Thông tin tài khoản</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa-solid fa-file-invoice"></i>    
-                        <a href="order_list.php">Quản lý đơn hàng</a>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file-invoice"></i>    
-                        <a href="change_pass_customer.php">Đổi mật khẩu</a>
-                    </li>
-                </ul>
-            </div>
+            <?php include './inc/account_menu.php'; ?>
+            <script>
+                document.querySelectorAll('.info-sidebar > ul > li')[1].classList.add('active');
+            </script>
             <div class="info" style="padding-left: 24px;">
                 <h1 style="margin-bottom: 30px">Danh sách đơn hàng</h1>
                 <table class="order-list-table">

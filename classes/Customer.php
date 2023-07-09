@@ -120,7 +120,7 @@ class Customer
                     ORDER BY sum(od.price * od.quantity * (1 - od.productDiscount/100)) DESC";
         $result = $this->db->select($query);
         return $result;
-    }
+    }   
 }
 ob_flush();
 ?>

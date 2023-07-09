@@ -15,7 +15,8 @@
 ?>
 
 <script>
-    document.title = "Đổi mật khẩu | Amiri"
+    document.title = "Đổi mật khẩu | Amiri";
+    accountPageLiActive(2);
 </script>
 <div class="content">
     <div class="container">
@@ -31,28 +32,10 @@
             </ul>
         </div>
         <div class="info-wrapper dp-flex">
-            <div class="info-sidebar dp-flex">
-                <div class="info-sidebar__user dp-flex">
-                    <div class="info-sidebar__img">
-                        <img src="assets/img/user-avatar-placeholder.png" alt="">
-                    </div>      
-                    <h2 class="info-sider__username">Bùi Chí Vĩ</h2>
-                </div>  
-                <ul>
-                    <li>
-                        <i class="fa-regular fa-user"></i>
-                        <a href="info.php">Thông tin tài khoản</a>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file-invoice"></i>    
-                        <a href="order_list.php">Quản lý đơn hàng</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa-solid fa-rotate"></i>
-                        <a href="">Đổi mật khẩu</a>
-                    </li>
-                </ul>
-            </div>
+            <?php include './inc/account_menu.php'; ?>
+            <script>
+                document.querySelectorAll('.info-sidebar > ul > li')[2].classList.add('active');
+            </script>
             <div class="info">
                 <div class="login-register-wrap dp-flex" style="margin-top: 0; width: 100%;">
                     <form action="" method="post" class="register-form" style="border: none; padding: 0; width: 100%">

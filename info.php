@@ -28,34 +28,11 @@
                 </li>
             </ul>
         </div>
-        <?php 
-            $idCus = Session::get('customer_id');
-            $getCus = $cs->getCustomerById($idCus);
-            $row = $getCus->fetch_assoc();
-        ?>
         <div class="info-wrapper dp-flex">
-            <div class="info-sidebar dp-flex">
-                <div class="info-sidebar__user dp-flex">
-                    <div class="info-sidebar__img">
-                        <img src="assets/img/user-avatar-placeholder.png" alt="">
-                    </div>      
-                    <h2 class="info-sider__username"><?=$row['name']?></h2>
-                </div>  
-                <ul>
-                    <li class="active">
-                        <i class="fa-regular fa-user"></i>
-                        <a href="info.php">Thông tin tài khoản</a>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file-invoice"></i>    
-                        <a href="order_list.php">Quản lý đơn hàng</a>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file-invoice"></i>    
-                        <a href="change_pass_customer.php">Đổi mật khẩu</a>
-                    </li>
-                </ul>
-            </div>
+            <?php include './inc/account_menu.php'; ?>
+            <script>
+                document.querySelectorAll('.info-sidebar > ul > li')[0].classList.add('active');
+            </script>
             <div class="info">
                 <div class="login-register-wrap dp-flex" style="margin-top: 0; width: 100%;">
                     <form action="" method="post" class="register-form" style="border: none; padding: 0; width: 100%">
@@ -85,7 +62,7 @@
                                             gender.setAttribute("selected", "");
                                         }
                                     });
-                                </>
+                                </script>
                             </select>
                             </td>
                         </tr>

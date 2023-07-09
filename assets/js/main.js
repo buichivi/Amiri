@@ -164,3 +164,8 @@ function pageHref(value) {
         sortNewHref = curHref + '&page=' + value;
     return sortNewHref;
 }
+
+
+function accountPageLiActive(liElement) {
+    document.querySelectorAll('.info-sidebar > ul > li')[liElement].classList.add('active');
+}
