@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 05:13 PM
+-- Generation Time: Jul 12, 2023 at 05:41 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -126,7 +126,8 @@ CREATE TABLE `tb_customer` (
 
 INSERT INTO `tb_customer` (`id`, `name`, `phonenumber`, `email`, `password`, `gender`, `address`) VALUES
 (4, 'Bùi Chí Vĩ', '0826127626', 'buichivi04062002@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Tỉnh Thái Bình'),
-(5, 'Trang', '0987654321', 'admin@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 'Tình Thái Bình ');
+(5, 'Trang', '0987654321', 'admin@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 'Tình Thái Bình '),
+(6, 'Nguyễn Văn A', '0826127626', 'nguyenvana@email.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Đh Thăng Long');
 
 -- --------------------------------------------------------
 
@@ -137,20 +138,25 @@ INSERT INTO `tb_customer` (`id`, `name`, `phonenumber`, `email`, `password`, `ge
 CREATE TABLE `tb_order` (
   `id` int(11) NOT NULL,
   `customerId` int(11) NOT NULL,
+  `cusName` varchar(255) NOT NULL,
+  `cusPhoneNumber` varchar(255) NOT NULL,
+  `cusAddress` varchar(255) NOT NULL,
+  `finalPrice` varchar(255) NOT NULL,
   `orderDate` datetime NOT NULL,
   `shippedDate` datetime DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0: Mới, \r\n1: Chờ xử lý, \r\n2: Đã xác nhận,\r\n3: Đang đóng gói,\r\n4: Đang vận chuyển,\r\n5: Thành công,\r\n6: Khách hủy',
+  `display` int(11) NOT NULL DEFAULT 1 COMMENT '1: Hiển thị\r\n0: Ẩn'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tb_order`
 --
 
-INSERT INTO `tb_order` (`id`, `customerId`, `orderDate`, `shippedDate`, `status`) VALUES
-(12, 4, '2023-07-09 11:37:24', '2023-07-09 15:19:08', 1),
-(14, 4, '2023-07-09 13:47:27', NULL, 0),
-(15, 4, '2023-07-09 22:08:44', '2023-07-09 22:12:04', 1),
-(16, 4, '2023-07-09 22:12:56', NULL, 0);
+INSERT INTO `tb_order` (`id`, `customerId`, `cusName`, `cusPhoneNumber`, `cusAddress`, `finalPrice`, `orderDate`, `shippedDate`, `status`, `display`) VALUES
+(28, 6, 'Nguyễn Văn A', '01234567', 'Đh Thăng Long', '257000', '2023-07-11 09:28:50', '2023-07-12 09:58:17', 5, 0),
+(29, 6, 'ABCD', '0826127626', 'Tỉnh Thái Bình', '3309000', '2023-07-11 09:30:20', '2023-07-12 10:11:08', 5, 0),
+(30, 6, 'Bùi Chí Vĩ', '0826127626', 'Tỉnh Thái Bình', '6320000', '2023-07-11 16:16:31', '2023-07-11 22:49:31', 5, 0),
+(31, 4, 'Phan Duy Thành ', '0987654321', 'TP Hà Nội', '1430000', '2023-07-12 10:13:34', '2023-07-12 10:16:55', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -176,12 +182,13 @@ CREATE TABLE `tb_order_details` (
 --
 
 INSERT INTO `tb_order_details` (`id`, `orderId`, `productId`, `productName`, `productImg`, `productColor`, `productDiscount`, `price`, `quantity`, `size`) VALUES
-(19, 12, 13, 'Áo thun in hình ', 'ac3d81f9d1.jpg', 'Màu xanh lục', 50, '10000000', 10, 'xxl'),
-(20, 12, 9, 'Đầm dạ hội cổ yếm phối ren ', '318f8d1491.jpg', 'abc', 0, '3000000', 1, 'xxl'),
-(22, 14, 18, 'Áo polo ', 'bf5a473701.jpg', 'Màu trắng', 60, '1000000', 4, 'xxl'),
-(23, 15, 26, 'Jessi Set - Áo Blazer Ngắn Tay Phối Quần Short', '5036d86ebf.jpg', 'Trắng', 30, '2970000', 1, 'xxl'),
-(24, 16, 22, 'Áo sơ mi trơn cơ bản', 'e4fa11c622.jpg', 'Xanh Ghi Đá', 70, '1390000', 3, 'xxl'),
-(25, 16, 23, 'Áo sơ mi cổ phối màu', '26be26aaa2.jpg', 'Đen', 70, '1090000', 4, 'xxl');
+(42, 28, 21, 'Áo polo cổ tàu trụ', 'bd02b1f3ac.jpg', 'Kẻ Xanh Tím Than', 70, '690000', 1, 'xxl'),
+(43, 29, 23, 'Áo sơ mi cổ phối màu', '26be26aaa2.jpg', 'Đen', 70, '1090000', 1, 'xxl'),
+(44, 29, 27, 'Áo Vest Cách Điệu Tay Bồng', '5c3494b6fc.jpg', 'Be', 30, '1290000', 1, 'xxl'),
+(45, 29, 26, 'Jessi Set - Áo Blazer Ngắn Tay Phối Quần Short', '5036d86ebf.jpg', 'Trắng', 30, '2970000', 1, 'l'),
+(46, 30, 20, 'Áo polo thun viền cổ', 'c011890ba6.jpg', 'Xanh Oliu', 0, '790000', 8, 'l'),
+(47, 31, 21, 'Áo polo cổ tàu trụ', 'bd02b1f3ac.jpg', 'Kẻ Xanh Tím Than', 70, '690000', 5, 'xxl'),
+(48, 31, 19, 'Áo thun phối túi hộp', '7752126a7a.jpg', 'Xanh Dương', 50, '690000', 1, 'm');
 
 -- --------------------------------------------------------
 
@@ -218,7 +225,6 @@ INSERT INTO `tb_product` (`id`, `productName`, `categoryId`, `productDesc`, `pri
 (25, 'Áo Thun In Họa Tiết', 24, '<p>&Aacute;o thun in họa tiết hoa với thiết kế &aacute;o basic, đơn giản ph&ugrave; hợp với c&aacute;c c&ocirc; n&agrave;ng s&agrave;nh điệu. Thiết kế &aacute;o tay lỡ phổ biến kết hợp c&ugrave;ng gam m&agrave;u đen tạo cảm gi&aacute;c huyền b&iacute; hơn đồng thời dễ d&agrave;ng mix &amp; match theo nhiều phong c&aacute;ch kh&aacute;c nhau.&nbsp;</p>\r\n\r\n<p>Kiểu &aacute;o thun đơn giản nhưng kh&ocirc;ng hề đơn điệu gi&uacute;p n&agrave;ng c&acirc;n mọi phong c&aacute;ch thời trang từ trẻ trung đến s&agrave;nh điệu, ph&aacute; c&aacute;ch nhất.</p>\r\n', '690000', '80785a1b37.jpg', 1, 50, 'Đen'),
 (26, 'Jessi Set - Áo Blazer Ngắn Tay Phối Quần Short', 25, '<p>Set đồ&nbsp;bao gồm một chiếc &aacute;o blazer ngắn tay, &aacute;o hai d&acirc;y đi k&egrave;m v&agrave; quần short phong c&aacute;ch. Chất liệu được sử dụng l&agrave; vải linen, tạo cảm gi&aacute;c m&aacute;t mẻ v&agrave; thoải m&aacute;i khi mặc trong những ng&agrave;y h&egrave; n&oacute;ng bức.</p>\r\n\r\n<p>&Aacute;o blazer c&oacute; thiết kế cộc tay, tạo n&ecirc;n phong c&aacute;ch trẻ trung v&agrave; năng động. &Aacute;o hai d&acirc;y đi k&egrave;m với những đường may&nbsp;tinh tế, gi&uacute;p t&ocirc;n l&ecirc;n vẻ đẹp của người diện. Quần short với chiều d&agrave;i vừa phải, gi&uacute;p bạn thoải m&aacute;i di chuyển m&agrave; vẫn giữ được vẻ lịch sự c&ugrave;ng&nbsp;phong c&aacute;ch thời trang.</p>\r\n\r\n<p>Cổ &aacute;o được trang tr&iacute; bởi khuy kim loại đ&iacute;nh k&egrave;m, tạo n&ecirc;n điểm nhấn độc đ&aacute;o v&agrave; sang trọng. Với phong c&aacute;ch trẻ trung v&agrave; hiện đại, set đồ n&agrave;y sẽ l&agrave; sự lựa chọn ho&agrave;n hảo cho thời trang c&ocirc;ng sở hay&nbsp;những buổi hẹn h&ograve;, dạo phố c&ugrave;ng bạn b&egrave;.</p>\r\n', '2970000', '5036d86ebf.jpg', 1, 30, 'Trắng'),
 (27, 'Áo Vest Cách Điệu Tay Bồng', 25, '<p>Sản phẩm &aacute;o vest c&aacute;ch điệu tay bồng của Ivy Moda l&agrave; một sự kết hợp tuyệt vời giữa phong c&aacute;ch c&ocirc;ng sở v&agrave; sự sang trọng hiện đại. Với kiểu d&aacute;ng croptop tay ngắn, sản phẩm t&ocirc;n l&ecirc;n vẻ ngo&agrave;i tươi trẻ v&agrave; c&aacute; t&iacute;nh của người mặc.</p>\r\n\r\n<p>Chất liệu tuytsi cao cấp được sử dụng cho&nbsp;mang lại sự mềm mại, thoải m&aacute;i v&agrave; độ bền cao. Thiết kế c&aacute;ch điệu tay bồng tạo n&ecirc;n sự nhẹ nh&agrave;ng, bay bổng cho người mặc, gi&uacute;p bạn tự tin hơn khi diện sản phẩm n&agrave;y.</p>\r\n\r\n<p>&Aacute;o vest c&aacute;ch điệu tay bồng c&oacute; thể dễ d&agrave;ng kết hợp với nhiều trang phục kh&aacute;c nhau, từ ch&acirc;n v&aacute;y đến quần jean, gi&uacute;p bạn tạo ra nhiều phong c&aacute;ch thời trang kh&aacute;c nhau. Với sự kết hợp độc đ&aacute;o giữa phong c&aacute;ch cổ điển v&agrave; hiện đại, sản phẩm n&agrave;y sẽ l&agrave; một lựa chọn ho&agrave;n hảo cho c&aacute;c buổi gặp gỡ bạn b&egrave;, tiệc t&ugrave;ng hoặc những ng&agrave;y l&agrave;m việc tại văn ph&ograve;ng.</p>\r\n', '1290000', '5c3494b6fc.jpg', 1, 30, 'Be'),
-(28, 'Áo Thun Positive', 16, '<p>&Aacute;o thun nam cổ tr&ograve;n bo bằng chun co gi&atilde;n, tay ngắn, in chữ Positive.</p>\r\n\r\n<p>Chất liệu vải thun mềm mịn&nbsp;c&oacute; đặc t&iacute;nh thấm h&uacute;t mồ h&ocirc;i nhanh ch&oacute;ng, tạo cảm gi&aacute;c th&ocirc;ng tho&aacute;ng, dễ chịu khi mặc. Dễ giặt sạch, nhanh kh&ocirc; v&agrave; khả năng bền m&agrave;u cao trong thời gian d&agrave;i. Đường may chắc chắn v&agrave; tỉ mỉ, chống bung đứt. Form &aacute;o &ocirc;m nhẹ, tạo sự thoải m&aacute;i khi vận động.</p>\r\n', '650000', '200f2e541d.jpg', 1, 70, 'Xanh Lá Đậm'),
 (29, 'Set Đồ Thun GROWTH', 24, '<p>&Aacute;o thun d&aacute;ng su&ocirc;ng với&nbsp;độ d&agrave;i vừa phải, tay ngắn, cổ tr&ograve;n. Ph&iacute;a trước l&agrave; d&ograve;ng chữ Growth&nbsp;tr&ecirc;n nền in m&agrave;u hồng san h&ocirc;. Phần tay &aacute;o gập nếp theo phong c&aacute;ch độc đ&aacute;o v&agrave; mới lạ hiện nay.&nbsp;&Aacute;o c&oacute; độ &ocirc;m vừa phải, gọn g&agrave;ng v&agrave; chỉn chu dễ d&agrave;ng để&nbsp;phối hợp c&ugrave;ng nhiều item kh&aacute;c nhau.</p>\r\n\r\n<p>Quần đ&ugrave;i eo chun co gi&atilde;n thoải m&aacute;i.</p>\r\n\r\n<p>Một set đồ&nbsp;năng động nhưng kh&ocirc;ng k&eacute;m phần nữ t&iacute;nh d&agrave;nh cho mọi c&ocirc; n&agrave;ng.&nbsp;</p>\r\n', '1180000', '357d46b5e5.jpg', 1, 50, 'Vàng hoa cúc');
 
 -- --------------------------------------------------------
@@ -393,7 +399,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
@@ -405,19 +411,19 @@ ALTER TABLE `tb_category`
 -- AUTO_INCREMENT for table `tb_customer`
 --
 ALTER TABLE `tb_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tb_order_details`
 --
 ALTER TABLE `tb_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tb_product`
