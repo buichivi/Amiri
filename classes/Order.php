@@ -50,6 +50,16 @@ class Order
         $result = $this->db->update($query);
         header("Location: order_list.php");
     }   
+    public function updateStatusOrder($id, $status) {
+        $id = mysqli_real_escape_string($this->db->link, $id);
+        $status = mysqli_real_escape_string($this->db->link, $status);
+        $query = '';
+        if ($status == 5)
+            $query = "UPDATE tb_order SET shippedDate = CURRENT_TIMESTAMP(), status = '$status' WHERE id = '$id'";
+        else
+            $query = "UPDATE tb_order SET status = '$status' WHERE id = '$id'";
+        $result = $this->db->update($query);
+    }
 
 }
 ob_flush();

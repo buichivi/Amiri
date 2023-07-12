@@ -110,7 +110,7 @@
                 <div class="register-form">
                     <p class="title-footer">Nhận thông tin các chương trình của AMIRI</p>
                     <form class="input-box dp-flex">
-                        <input required class="register-email" type="email" name="" id=""
+                        <input required class="register-email" type="email" name="extra-email" id="extra-email"
                             placeholder="Nhập địa chỉ email">
                         <button type="submit" href="#" class="btn btn__primary-btn">Đăng ký</button>
                     </form>

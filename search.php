@@ -9,7 +9,6 @@
     if (isset($_GET['keyword']) && $_GET['keyword'] != NULL) {
         $keyword = $_GET['keyword'];
     }
-
     if(isset($_GET['minPrice']) && $_GET['minPrice'] != NULL) {
         $minPrice = $_GET['minPrice'];
         $maxPrice = $_GET['maxPrice'];
@@ -33,7 +32,7 @@
     }
 ?>
 <script>
-    document.title = "Tìm kiếm | Amiri"
+    document.title = "Tìm kiếm | Amiri";
 </script>
     <script src="./assets/js/main.js"></script>
     <!-- Body -->
@@ -158,9 +157,12 @@
                     <div class="content-main__heading dp-flex">
                         <h3 class="content-main__title">
                             <?php
-                                echo "Tìm kiếm theo từ khóa '".$keyword."'";
+                                echo "Tìm kiếm theo từ khóa '<span>$keyword</span>'";
                             ?>
                         </h3>
+                        <script>
+                            document.querySelector('#search-box').value = document.querySelector('.content-main__title > span').innerHTML
+                        </script>
                         <div class="sort-group">
                             <div class="sort-group__heading dp-flex">
                                 <h3 class="sort-group__title">Sắp xếp theo</h3>

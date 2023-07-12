@@ -102,10 +102,20 @@ class Cart
         $query = "DELETE FROM tb_cart WHERE sessionId = '$sessionId'";
         $result = $this->db->delete($query);
     }
-    public function insertOrder($cusId) {
+    public function insertOrder($cusId, $cusName, $cusPhoneNumber, $cusAddress, $finalPrice) {
         $prod = new Product();
         $sessionId = session_id();
-        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId',CURRENT_TIMESTAMP(), NULL, 0)";
+        $cusId = mysqli_real_escape_string($this->db->link, $cusId);
+        $cusName = mysqli_real_escape_string($this->db->link, $cusName);
+        $cusPhoneNumber = mysqli_real_escape_string($this->db->link, $cusPhoneNumber);
+        $cusAddress = mysqli_real_escape_string($this->db->link, $cusAddress);
+
+        // echo 'CusName = '.$cusName;
+        // echo 'CusPhoneNumber = '.$cusPhoneNumber;
+        // echo 'CusAddress = '.$cusAddress;
+
+
+        $query = "INSERT INTO tb_order VALUES (NULL,'$cusId', '$cusName', '$cusPhoneNumber', '$cusAddress', '$finalPrice',CURRENT_TIMESTAMP(), NULL, 0, 1)";
         $result = $this->db->insert($query);
         if ($result) {
             $orderId = ($this->db->select("SELECT max(id) as id FROM tb_order")->fetch_assoc())['id'];

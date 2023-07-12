@@ -136,26 +136,38 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <h2>Tổng sản phẩm: </h2>
+                                <h2 style="margin: 6px 0;">Tổng sản phẩm: </h2>
+                                <h2 style="margin: 6px 0;">Tổng tiền hàng: </h2>
+                                <h2 style="margin: 6px 0;">Phí vận chuyển: </h2>
+                                <h2 style="margin: 6px 0;">Tổng tiền: </h2>
+
                             </td>
                             <td align="right">
-                                <h2><?=$numProdOfOrder?></h2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h2>Tổng tiền: </h2>
-                            </td>
-                            <td align="right">
-                                <h2>
+                                <h2 style="margin: 6px 0;"><?=$numProdOfOrder?></h2>
+                                <h2 style="margin: 6px 0;">
                                     <?php 
-                                      echo $prod->convertPrice(($od->getOrderTotalPrice($orderId)->fetch_assoc())['totalPrice'])."đ";
+                                      $totalPrice = ($od->getOrderTotalPrice($orderId)->fetch_assoc())['totalPrice'];
+                                      echo $prod->convertPrice($totalPrice).'đ';
+
+                                    ?>
+                                </h2>
+                                <h2 style="margin: 6px 0;">
+                                    <?php 
+                                        if ($totalPrice < 2000000)
+                                            echo '50.000đ';
+                                        else echo '0đ';
+                                    ?>
+                                </h2>
+                                <h2 style="margin: 6px 0;">
+                                    <?php 
+                                        if ($totalPrice < 2000000)
+                                            $totalPrice += 50000;
+                                        echo $prod->convertPrice($totalPrice).'đ';
                                     ?>
                                 </h2>
                             </td>
                         </tr>
+                        
                     </tbody>
                 </table>
             </div>

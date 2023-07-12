@@ -113,11 +113,10 @@ class Customer
     }
 
     public function getCustomerList() {
-        $query = "SELECT cs.id, cs.name, cs.phonenumber, sum(od.price * od.quantity * (1 - od.productDiscount/100)) AS totalPurchase
-                    FROM tb_customer cs LEFT JOIN tb_order o ON cs.id = o.customerId
-                        LEFT JOIN tb_order_details od ON od.orderId = o.id
-                    GROUP BY cs.id
-                    ORDER BY sum(od.price * od.quantity * (1 - od.productDiscount/100)) DESC";
+        $query = "SELECT c.id, c.name, c.phonenumber, SUM(o.finalPrice) AS totalPurchase
+                    FROM tb_customer c LEFT JOIN tb_order o ON c.id = o.customerId AND o.status = 5
+                    GROUP BY c.id, c.name 
+                    ORDER BY SUM(o.finalPrice) DESC";
         $result = $this->db->select($query);
         return $result;
     }   

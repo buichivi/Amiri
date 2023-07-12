@@ -8,22 +8,26 @@
     if (!$login_check) {
         header("Location: cart.php");
     }
-    if(isset($_GET['orderId']) || $_GET['orderId'] == 'order') {
+    if(isset($_GET['orderId']) && $_GET['orderId'] == 'order') {
         $cusId = Session::get('customer_id');
-        $insertOrder = $ct->insertOrder($cusId);
+        $cusName = $_GET['cusName'];
+        $cusPhoneNumber = $_GET['cusPhoneNumber'];
+        $cusAddress = $_GET['cusAddress'];
+        if ($finalPrice < 2000000)
+            $finalPrice += 50000;
+        $insertOrder = $ct->insertOrder($cusId, $cusName, $cusPhoneNumber, $cusAddress, $finalPrice);
         $delCart = $ct->deleteCart();
         header("Location: order-complete.php");
-        
     }
-
 ?>
 <script>
-    document.title = "Xác nhận | Amiri"
+    document.title = "Xác nhận | Amiri";
 </script>
     <!-- cart field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">
             <div class="checkout-process dp-flex">
+                
                 <ul class="checkout-list dp-flex">
                     <li>Giỏ hàng</li>
                     <li class="active-process">Đặt hàng</li>
@@ -56,20 +60,11 @@
                 ?>
                 <div class="delivery-address">
                     <h1 class="cart-field-left__title">Địa chỉ giao hàng</h1>
-                    <?php 
-                        if($login_check) {
-                            $cusId = Session::get('customer_id');
-                            $getCus = $cs->getCustomerById($cusId);
-                            $row = $getCus->fetch_assoc();
-                            ?>
                     <div class="delivery-address__input">
-                        <input readonly class="consignee-name" type="text" value="<?=$row['name']?>" name="name" id="" placeholder="Họ tên">
-                        <input readonly class="consignee-phone" type="text" value="<?=$row['phonenumber']?>" name="phonenumber" id="" placeholder="Số điện thoại">
-                        <input readonly class="consignee-address" type="text" value="<?=$row['address']?>" name="address" id="" placeholder="Địa chỉ">
+                        <input readonly class="consignee-name" type="text" value="<?=$_GET['cusName']?>" name="name" id="" placeholder="Họ tên">
+                        <input readonly class="consignee-phone" type="text" value="<?=$_GET['cusPhoneNumber']?>" name="phonenumber" id="" placeholder="Số điện thoại">
+                        <input readonly class="consignee-address" type="text" value="<?=$_GET['cusAddress']?>" name="address" id="" placeholder="Địa chỉ">
                     </div>
-                    <?php 
-                        }
-                    ?>
                 </div>
                 <h1 style="margin-top: 0;
                 margin-bottom: 30px;
@@ -218,7 +213,14 @@
             </div>
             <?php
                 if ($numberOfProd > 0) {
-                    echo "<a href='?orderId=order' class='btn btn__extra-btn'>Hoàn Thành</a>";
+                    echo "<a href='' class='btn btn__extra-btn complete-order-btn'>Hoàn Thành</a>";
+            ?>
+                <script>
+                    document.querySelector('.complete-order-btn').onclick = function() {
+                        this.setAttribute('href', window.location.href + '&orderId=order');
+                    }
+                </script>
+            <?php
                 }
             ?>
         </div>

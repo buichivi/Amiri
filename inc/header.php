@@ -63,7 +63,8 @@
 
     <?php 
         if (isset($_GET['customerid'])) {
-            Session::destroy();
+            Session::set('customer_login', false);
+            header("location: login.php");
         }
         $login_check = Session::get("customer_login");
     ?>

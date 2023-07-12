@@ -4,6 +4,20 @@
 <script>
     document.title = "Đặt hàng | Amiri"
 </script>
+<?php 
+    if ($numberOfProd <= 0){
+        header("location: cart.php");
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm-order'])) {
+        $cusName = $_POST['name'];
+        $cusPhoneNumber = $_POST['phonenumber'];
+        $cusAddress = $_POST['address'];
+        header("location: confirm_order.php?cusName=$cusName&cusPhoneNumber=$cusPhoneNumber&cusAddress=$cusAddress");
+    }
+
+?>
+
+
     <!-- order field -->
     <div class="cart-field-wrap container dp-flex">
         <div class="cart-field-left">
@@ -46,9 +60,21 @@
                         $row = $getCus->fetch_assoc();
                 ?>
                 <div class="delivery-address__input">
-                    <input readonly class="consignee-name" type="text" value="<?=$row['name']?>" name="name" id="" placeholder="Họ tên">
-                    <input readonly class="consignee-phone" type="text" value="<?=$row['phonenumber']?>" name="phonenumber" id="" placeholder="Số điện thoại">
-                    <input readonly class="consignee-address" type="text" value="<?=$row['address']?>" name="address" id="" placeholder="Địa chỉ">
+                    <form action="" id="cus-info" method="post">
+                        <div class="dp-flex">
+                            <div class="form-group" style="width: 50%">
+                                <input class="consignee-name" type="text" value="<?=$row['name']?>" name="name" id="name" placeholder="Họ tên" style="width: 95%">
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group" style="width: 50%">
+                                <input class="consignee-phone" type="text" value="<?=$row['phonenumber']?>" name="phonenumber" id="phonenumber" placeholder="Số điện thoại" style="width: 100%; float: none">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="consignee-address" type="text" value="<?=$row['address']?>" name="address" id="address" placeholder="Địa chỉ">
+                            <span class="form-message"></span>
+                        </div>
                 </div>
                 <?php 
                     }
@@ -161,9 +187,33 @@
             </div>
             <?php 
                 if ($login_check) {
-                    echo "<a style='width: 100%' href='confirm_order.php' class='btn btn__extra-btn confirm-order'>Xác nhận</a>";
+                    echo "<button type='submit' name='confirm-order' style='width: 100%' class='btn btn__extra-btn'>Xác nhận</button>";
+            ?>
+                <script>
+                    // document.querySelector('.confirm-order').onclick = function() {
+                    //     const cusName = document.getElementById('name').value;
+                    //     const cusPhoneNumber =document.getElementById('phonenumber').value;
+                    //     const cusAddress =document.getElementById('address').value;
+                    //     this.setAttribute('href', 'confirm_order.php?cusName=' + cusName + '&cusPhoneNumber=' + cusPhoneNumber + '&cusAddress=' + cusAddress)
+                    // }
+                </script>
+                <script src="./assets/js/validator.js"></script>
+                <script>
+                    Validator({
+                        form: '#cus-info',
+                        errorSelector: '.form-message',
+                        rules: [
+                            Validator.isRequired('#name'),
+                            Validator.isRequired('#phonenumber'),
+                            Validator.isPhoneNumber('#phonenumber'),
+                            Validator.isRequired('#address')
+                        ]
+                    });
+                </script>
+            <?php 
                 }
             ?>
+            </form>
         </div>
     </div>
 <?php

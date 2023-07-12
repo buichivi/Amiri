@@ -75,7 +75,8 @@
         <li class="log_out">
           <?php 
             if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-                Session::destroy();
+                Session::set('login', false);
+                header("Location: login.php");
             }
           ?> 
           <a href="?action=logout">

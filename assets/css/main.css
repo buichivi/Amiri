@@ -2142,7 +2142,7 @@ td > .item-quantity-wrap {
 
 .login-register-wrap .register-form > table td:nth-child(1),
 .login-register-wrap .register-form > table td:nth-child(3) {
-    width: 17%;
+    width: 20%;
     padding-left: 6px;
 }
 
@@ -2315,4 +2315,22 @@ td > .item-quantity-wrap {
 .cur-page {
     background-color: var(--black-color) !important;
     color: var(--white-color) !important;
+}
+
+/* form */
+.form-message {
+    display: block;
+    margin-top: 6px;
+    margin-left: 4px;
+    font-size: 1.4rem;
+}
+
+.invalid > .form-message {
+    color: red;
+}
+
+.invalid > input, 
+.invalid > textarea,  
+.invalid > select {
+    border-color: red !important;
 }

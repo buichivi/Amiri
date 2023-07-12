@@ -43,6 +43,25 @@ const navLinkContainer = document.querySelector('.nav-links');
     unset($_SESSION['error']);
   }
 ?>
+
+
+<?php 
+  $cs = new Customer();
+  $od = new Order();
+  $prod = new Product();
+  if (isset($_GET['orderId']) && $_GET['orderId'] != NULL) {
+    $orderId = $_GET['orderId'];
+    if (isset($_GET['status']) && $_GET['status'] != NULL) {
+      $status = $_GET['status'];
+      $updateStatusOrder = $od->updateStatusOrder($orderId, $status);
+      header("location: order.php");
+    }
+  }
+?>
+
+
+
+
 <table class="table table-striped table-hover order-list-table">
   <thead>
     <th>#</th>
@@ -55,9 +74,6 @@ const navLinkContainer = document.querySelector('.nav-links');
   </thead>
   <tbody>
     <?php 
-      $cs = new Customer();
-      $od = new Order();
-      $prod = new Product();
       $listOrder = $od->getListOrder();
       if ($listOrder) {
         $i = 0;
@@ -84,15 +100,34 @@ const navLinkContainer = document.querySelector('.nav-links');
         ?>
       </td>
       <td><?php include './inc/order-modal-detail.php'; ?></td>
-      <td style="color: orange;font-style: italic;">
+      <td style="color: orange;">
           <?php 
-            if ($row['status'] == 0) {
-              echo "Đang vận chuyển";
-            }
-            else if ($row['status'] == 1) {
-              echo "<span style='font-style: italic;
-              color: #beb4b4;'>Đã giao hàng</span>";
-            }
+            $msg = "Bạn có chắc chắn muốn đổi trạng thái đơn hàng?";
+            switch($row['status']) {
+              case 0:
+                echo "<a href='?orderId=".$row['id']."&status=1' class='btn btn-primary' onclick='return confirm(`$msg`)'>Mới</a>";
+                break;
+              case 1:
+                echo "<a href='?orderId=".$row['id']."&status=2' class='btn btn-warning' onclick='return confirm(`$msg`)'>Chờ xử lý</a>";
+                break;
+              case 2:
+                echo "<a href='?orderId=".$row['id']."&status=3' class='btn btn-info' onclick='return confirm(`$msg`)'>Đã xác nhận</a>";
+                break;
+              case 3:
+                echo "<a href='?orderId=".$row['id']."&status=4' class='btn btn-warning' onclick='return confirm(`$msg`)'>Đang đóng gói</a>";
+                break;
+              case 4:
+                echo "<a class='btn btn-warning'>Đang vận chuyển</a>";
+                break;
+              case 5:
+                echo "<a class='btn btn-success'>Thành công</a>";
+                break;
+              case 6:
+                echo "<a class='btn btn-danger'>Khách hủy</a>";
+                break;
+              default:
+                break;
+            };
           ?>
       </td>
     </tr>

@@ -13,37 +13,18 @@
     <div class="modal-body">
         <h4 class="modal-title">Thông tin khách hàng</h4>
         <table class="customer-detail">
-            <?php 
-                $getUserDetail = $cs->getCustomerById($row['customerId'])->fetch_assoc();
-            ?>
             <tr>
                 <td><span>Họ tên</span></td>
-                <td><input readonly type="text" name="" id="" value="<?=$getUserDetail['name']?>"></td>
+                <td><input readonly type="text" name="" id="" value="<?=$row['cusName']?>"></td>
             </tr>
             <tr>
                 <td><span>Số điện thoại</span></td>
-                <td><input readonly type="text" name="" id="" value="<?=$getUserDetail['phonenumber']?>"></td>
-            </tr>
-            <tr>
-                <td><span>Email</span></td>
-                <td><input readonly type="email" name="" id="" value="<?=$getUserDetail['email']?>"></td>
-            </tr>
-            <tr>
-                <td><span>Giới tính</span></td>
-                <td><input readonly type="text" name="" id="" value="<?php 
-                    if($getUserDetail['gender'] == 0)
-                        echo 'Nam';
-                    else if ($getUserDetail['gender'] == 1)
-                        echo 'Nữ';
-                    else
-                        echo 'Khác';
-
-                ?>"></td>
+                <td><input readonly type="text" name="" id="" value="<?=$row['cusPhoneNumber']?>"></td>
             </tr>
             <tr>
                 <td><span>Địa chỉ</span></td>
                 <td>
-                    <textarea readonly name="" id=""><?=$getUserDetail['address']?></textarea>
+                    <textarea readonly name="" id=""><?=$row['cusAddress']?></textarea>
                 </td>
             </tr>
         </table>
@@ -126,22 +107,29 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <h5>Tổng sản phẩm: </h5>
+                                <h5>Tổng tiền: </h5>
+                                <h5>Tổng tiền hàng: </h5>
+                                <h5>Phí vận chuyển: </h5>
+                                <h5>Tổng thanh toán: </h5>
                             </td>
                             <td align="right">
                                 <h5><?=$numProdOfOrder?></h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Tổng tiền: </h5>
-                            </td>
-                            <td align="right">
                                 <h5>
                                     <?php 
-                                      echo $prod->convertPrice(($od->getOrderTotalPrice($row['id'])->fetch_assoc())['totalPrice'])."đ";
+                                      $finalPrice = $od->getOrderTotalPrice($row['id'])->fetch_assoc()['totalPrice'];
+                                      echo $prod->convertPrice($finalPrice).'đ';
+                                    ?>
+                                </h5>
+                                <h5>
+                                    <?php 
+                                      if ($finalPrice < 2000000)
+                                        echo '50.000đ';
+                                      else echo '0đ';
+                                    ?>
+                                </h5>
+                                <h5>
+                                    <?php 
+                                      echo $prod->convertPrice($row['finalPrice']).'đ';
                                     ?>
                                 </h5>
                             </td>
