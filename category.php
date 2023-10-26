@@ -183,7 +183,8 @@
                             </script>
                         </div>
                     </div>
-                    <div class="product-list dp-flex">
+                    <div class="product-list grid">
+                        <div class="row">
                         <!-- ds sản phẩm demo -->
                         <?php 
                             if(!isset($_GET['minPrice']) || $_GET['minPrice'] == NULL) {
@@ -197,8 +198,8 @@
                                 while($row = $productList->fetch_assoc()) {
                        
                         ?>
-                        <form action="" method="post">
-                        <li class="product product--man">
+                        <form action="" method="post" class="col l-3">
+                        <li class="product">
                             <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                             <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                                 <div class="product__img-wrap">
@@ -292,6 +293,7 @@
                             margin-top: 10%;'>Không có sản phẩm nào!</p>";
                         } 
                         ?>
+                        </div>
                     </div>
                     <div class="page-list">
                         <ul>
@@ -328,7 +330,6 @@
         </div>
     </div>
     
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
     <script src="./assets/js/price-range.js"></script>
     <script src="./assets/js/filter.js"></script>
 <?php

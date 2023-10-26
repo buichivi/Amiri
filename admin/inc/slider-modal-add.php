@@ -9,7 +9,7 @@
 
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg add-slider-modal-btn" data-toggle="modal" data-target="#slider" style="margin-left: 24px;">Thêm sản phẩm <i class='bx bx-plus-circle'></i></button>
+<button type="button" class="btn btn-info btn-lg add-slider-modal-btn" data-toggle="modal" data-target="#slider" style="margin-left: 24px;">Thêm slider<i class='bx bx-plus-circle'></i></button>
 
 <!-- Modal -->
 <div id="slider" class="modal bd-example-modal-lg fade" role="dialog">

@@ -184,8 +184,9 @@
                             </script>
                         </div>
                     </div>
-                    <div class="product-list dp-flex">
+                    <div class="product-list grid">
                         <!-- ds sản phẩm demo -->
+                        <div class="row">
                         <?php 
                             if(!isset($_GET['minPrice']) || $_GET['minPrice'] == NULL) {
                                 $sort = NULL;
@@ -198,8 +199,8 @@
                                 while($row = $productList->fetch_assoc()) {
                        
                         ?>
-                        <form action="" method="post">
-                        <li class="product product--man">
+                        <form action="" method="post" class="col l-3">
+                        <li class="product">
                             <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                             <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                                 <div class="product__img-wrap">
@@ -293,6 +294,7 @@
                             margin-top: 10%;'>Không có sản phẩm nào!</p>";
                         } 
                         ?>
+                        </div>
                     </div>
                     <div class="page-list">
                         <ul>

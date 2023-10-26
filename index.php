@@ -16,21 +16,14 @@
             <p class="new-arrival__heading">New arrival</p>
             <p class="product-field-name">AMIRI Man</p>
             <div class="list-product-wrap">
-                <div class="move-product-right move-product-right--man">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
-                <div class="move-product-left move-product-left--man">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-                <ul class="list-product list-product--man">
+                <ul class="list-product owl-carousel">
                     <?php 
                         $getListProd = $prod->getProductList_New(1);
                         if ($getListProd) {
                             while($row = $getListProd->fetch_assoc()) {
-
                     ?>
                     <form action="" method="post">
-                    <li class="product product--man">
+                        <li class="product">
                         <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                         <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                             <div class="product__img-wrap">
@@ -121,13 +114,7 @@
         <div class="container">
             <p class="product-field-name">AMIRI Moda</p>
             <div class="list-product-wrap">
-                <div class="move-product-right move-product-right--moda">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
-                <div class="move-product-left move-product-left--moda">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-                <ul class="list-product list-product--moda">
+                <ul class="list-product owl-carousel">
                     <?php 
                         $getListProd = $prod->getProductList_New(2);
                         if ($getListProd) {
@@ -135,7 +122,7 @@
 
                     ?>
                     <form action="" method="post">
-                    <li class="product product--moda">
+                        <li class="product">
                         <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                         <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                             <div class="product__img-wrap">

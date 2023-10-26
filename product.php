@@ -245,23 +245,10 @@
     <div class="recomment-product container">
         <h1>Sản phẩm mới</h1>
         <div class="list-product-wrap">
-            <div class="move-product-right move-product-right--man">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-            <div class="move-product-left move-product-left--man">
-                <i class="fa-solid fa-arrow-left"></i>
-            </div>
-            <form action="" method="post">
             <?php 
                 $highestParentCate = ($prod->getTheHighestParentCategory($result['categoryId'])->fetch_assoc())['id'];
             ?>
-            <ul class="list-product 
-            <?php 
-                if ($highestParentCate == 1) 
-                    echo "list-product--man";
-                else if ($highestParentCate == 2) 
-                    echo "list-product--moda";
-            ?> ">
+            <ul class="list-product owl-carousel">
                     <?php 
                         $getListProd = $prod->getProductList_New($highestParentCate);
                         if ($getListProd) {
@@ -269,14 +256,7 @@
 
                     ?>
                     <form action="" method="post">
-                    <li class="product 
-                    <?php 
-                        if ($highestParentCate == 1) 
-                            echo "product--man";
-                        else if ($highestParentCate == 2) 
-                            echo "product--moda";
-                    ?>
-                    ">
+                    <li class="product">
                         <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
                         <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                             <div class="product__img-wrap">
@@ -359,7 +339,6 @@
                         }
                     ?>
                 </ul>
-            </form>
         </div>
     </div>
     <script src="./assets/js/slider-product.js"></script>

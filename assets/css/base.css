@@ -602,17 +602,15 @@ html {
 
 /* Product list */
 .product-list {
-    width: 106%;
+    width: 100%;
     flex-wrap: wrap;
-    margin-left: -15px;
-    margin-top: 15px;
+    margin-top: 30px;
     /* min-height: 900px; */
 }
 
 .product-list .product {
     position: relative !important;
-    padding: 0 15px;
     box-sizing: content-box;
-    width: 224px;
     margin-bottom: 30px;
+    height: 450px;
 }
