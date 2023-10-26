@@ -41,7 +41,7 @@ CREATE TABLE `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`id`, `adminName`, `adminEmail`, `adminUserName`, `adminPass`, `level`) VALUES
-(1, 'Quản trị viên', 'admin@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0);
+(1, 'Chủ cửa hàng', 'admin@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0);
 
 -- --------------------------------------------------------
 

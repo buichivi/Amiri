@@ -5,9 +5,6 @@
     require_once ($filePath.'/../lib/database.php');
     require_once ($filePath.'/../helpers/helpers.php');
 
-?>
-
-<?php
 class Adminlogin
 {   
     private $db; //database

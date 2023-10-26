@@ -929,6 +929,9 @@
     height: 450px;
 
 }
+.list-product.owl-carousel .owl-stage-outer {
+    overflow: unset;
+}
 
 .list-product form {
     width: 100%;
