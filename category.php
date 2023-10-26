@@ -25,8 +25,6 @@
     }
 
 
-
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
         $id = $_POST['prodIdSelected'];
         $quantity = 1;
@@ -76,12 +74,12 @@
                             </div>
                             <div class="range-price filter-item--hidden">
                                 <div class="container-price-range">
-                                    <div class="row">
+                                    <div class="row_slider">
                                         <div class="col-sm-12">
                                             <div id="slider-range"></div>
                                         </div>
                                     </div>
-                                    <div class="row slider-labels">
+                                    <div class="row_slider slider-labels">
                                         <div class="col-xs-6 caption">
                                             <span id="slider-range-value1"></span>
                                         </div>
@@ -89,10 +87,10 @@
                                             <span id="slider-range-value2"></span>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row_slider">
                                         <div class="col-sm-12">
-                                                <input type="hidden" name="min-value" value="">
-                                                <input type="hidden" name="max-value" value="">
+                                            <input type="hidden" name="min-value" value="">
+                                            <input type="hidden" name="max-value" value="">
                                         </div>
                                     </div>
                                 </div>

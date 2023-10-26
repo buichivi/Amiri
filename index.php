@@ -210,6 +210,105 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <p class="product-field-name">AMIRI Kid</p>
+            <div class="list-product-wrap">
+                <ul class="list-product owl-carousel">
+                    <?php 
+                        $getListProd = $prod->getProductList_New(3);
+                        if ($getListProd) {
+                            while($row = $getListProd->fetch_assoc()) {
+
+                    ?>
+                    <form action="" method="post">
+                        <li class="product">
+                        <input type="hidden" name="prodIdSelected" value="<?=$row['id']?>">
+                        <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
+                            <div class="product__img-wrap">
+                                <div class="ticket-new">New</div>
+                                <img class="lazy"
+                                    src="admin/uploads/<?=$row['productImg']?>"
+                                    alt="">
+                                <?php 
+                                    $getImgLazy = $prod->getImgLazy($row['id']);
+                                    if($getImgLazy) {
+                                        while($imgLazy = $getImgLazy->fetch_assoc()) {
+                                ?>
+                                <img class="lazy hover-img-product"
+                                    src="admin/uploads/<?=$imgLazy['imageDetail']?>"
+                                    alt="">
+                                <?php 
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </a>
+                        <div class="product__desc dp-flex">
+                            <a href="product.php" class="product__link">
+                                <p class="product__name">
+                                <?php
+                                    if (strlen($row['productName']) > 34) {
+                                        echo $fm->textShorten($row['productName'], 30);
+                                    }
+                                    else 
+                                        echo $row['productName'];
+                                ?>
+                                </p>
+                            </a>
+                            <span class="product__like">
+                                <i class="product__like-icon fa-regular fa-heart"></i>
+                                <i class="product__like-icon--filled fa-solid fa-heart"></i>
+                            </span>
+                        </div>
+                        <div class="product__footer dp-flex">
+                            <div class="product__price">
+                                <span class="product__price--new-price">
+                                    <?php 
+                                        // echo $prod->convertPrice($row['price']*(100 - $row['productDiscount'])/100)."đ";
+                                        echo $prod->getNewPriceAfterSale($row['price'], $row['productDiscount']);
+                                    ?>
+                                </span>
+                                <span class="product__price--old-price">
+                                    <?php 
+                                        if ($row['productDiscount'] > 0) 
+                                            echo $prod->convertPrice($row['price'])."đ";
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="product__size">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <!-- Thêm class open-product__size-item để m -->
+                                <ul class="product__size-list">
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="s">S</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="m">M</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="l">L</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xl">XL</button>
+                                    </li>
+                                    <li class="product__size-item">
+                                        <button type="submit" name="add-to-cart" value="xxl">XXL</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    </form>
+                    <?php 
+                            }
+                        }
+                    ?>
+                </ul>
+                <div class="view-all-product">
+                    <a href="category.php?catid=3" class="btn btn__primary-btn view-all-btn">Xem tất cả</a>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="./assets/js/slider-product.js"></script>
 <?php

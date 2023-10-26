@@ -345,7 +345,7 @@
 
     <!-- Advertise -->
     <div class="advertise container">
-        <img class="advertise-img" src="./assets/slider/slider-0.jpg" alt="">
+        <img class="advertise-img" src="./assets/slider/slider-5.jpg" alt="">
     </div>
     
 <?php
