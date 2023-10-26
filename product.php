@@ -5,19 +5,18 @@
     if(!isset($_GET['prodId']) || $_GET['prodId'] == NULL) {
         echo '<script> window.location = "404.php"; </script>';
     }
-    else {
-        $id = $_GET['prodId'];
-        // include 'inc/notification.php';
-    }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-to-cart'])) {
+        $idProduct = $_GET['prodId'];
+        $id = ($_POST['prodIdSelected'] == 0) ? $idProduct : $_POST['prodIdSelected'];
         $quantity = ($_POST['quantity']) ? $_POST['quantity'] : 1;
         $size = ($_POST['size']) ? $_POST['size'] : $_POST['add-to-cart'];
-        $addToCart = $ct->addToCart($id, $quantity, $size, "product.php?prodId=$id");
+        $addToCart = $ct->addToCart($id, $quantity, $size, "product.php?prodId=$idProduct");
     }
     else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['buy-product'])) {
+        $idProduct = $_GET['prodId'];
         $quantity = ($_POST['quantity']) ? $_POST['quantity'] : 1;
         $size = ($_POST['size']) ? $_POST['size'] : $_POST['add-to-cart'];
-        $addToCart = $ct->addToCart($id, $quantity, $size, "cart.php");
+        $addToCart = $ct->addToCart($idProduct, $quantity, $size, "cart.php");
         unset($_SESSION['add-to-cart-success']);
     }
     ?>
@@ -30,7 +29,8 @@
         <form action="" method="post" name="add-to-cart-form">
         <div class="container dp-flex">
             <?php 
-                $prodDetail = $prod->getProductById($id);
+                $idProduct = $_GET['prodId'];
+                $prodDetail = $prod->getProductById($idProduct);
                 $result = $prodDetail->fetch_assoc();
             ?>
             <div class="product-gallery__slide dp-flex">
@@ -50,7 +50,7 @@
                                 src="admin/uploads/<?=$result['productImg']?>"
                                 alt="">
                             <?php 
-                                $getProdGallery = $prod->getListProducGallery_FE($id);
+                                $getProdGallery = $prod->getListProducGallery_FE($idProduct);
                                 if ($getProdGallery) {
                                     while($row = $getProdGallery->fetch_assoc()) {
 
