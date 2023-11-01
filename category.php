@@ -226,7 +226,7 @@
                                 </div>
                             </a>
                             <div class="product__desc dp-flex">
-                                <a href="product.php" class="product__link">
+                                <a href="product.php?prodId=<?=$row['id']?>" class="product__link">
                                     <p class="product__name">
                                     <?php
                                         if (strlen($row['productName']) > 34) {

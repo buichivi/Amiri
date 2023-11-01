@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2023 at 05:41 AM
+-- Generation Time: Nov 01, 2023 at 05:58 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -57,6 +57,19 @@ CREATE TABLE `tb_cart` (
   `size` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `tb_cart`
+--
+
+INSERT INTO `tb_cart` (`id`, `sessionId`, `productId`, `quantity`, `size`) VALUES
+(232, 'vcn6a16vfge6uk8lku9v6inu5v', 23, 1, 'xxl'),
+(233, 'vcn6a16vfge6uk8lku9v6inu5v', 19, 1, 'xxl'),
+(235, 'vcn6a16vfge6uk8lku9v6inu5v', 22, 1, 'xxl'),
+(236, 'vcn6a16vfge6uk8lku9v6inu5v', 21, 1, 'l'),
+(239, 'vcn6a16vfge6uk8lku9v6inu5v', 20, 2, 's'),
+(242, 'vcn6a16vfge6uk8lku9v6inu5v', 20, 1, 'xxl'),
+(243, 'vcn6a16vfge6uk8lku9v6inu5v', 1, 1, 'm');
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +115,9 @@ INSERT INTO `tb_category` (`id`, `categoryName`, `parent_id`) VALUES
 (26, 'Quần Jeans', 8),
 (27, 'Quần dài', 8),
 (28, 'Jumpsuit', 8),
-(29, 'Túi/Ví', 9);
+(29, 'Túi/Ví', 9),
+(33, 'Váy bé gái', 11),
+(34, 'Phụ kiện bé trai', 10);
 
 -- --------------------------------------------------------
 
@@ -126,7 +141,7 @@ CREATE TABLE `tb_customer` (
 
 INSERT INTO `tb_customer` (`id`, `name`, `phonenumber`, `email`, `password`, `gender`, `address`) VALUES
 (4, 'Bùi Chí Vĩ', '0826127626', 'buichivi04062002@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Tỉnh Thái Bình'),
-(5, 'Trang', '0987654321', 'admin@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 'Tình Thái Bình '),
+(5, 'Linh', '0987654321', 'admin@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 'Tình Thái Bình '),
 (6, 'Nguyễn Văn A', '0826127626', 'nguyenvana@email.com', '827ccb0eea8a706c4c34a16891f84e7b', '0', 'Đh Thăng Long');
 
 -- --------------------------------------------------------
@@ -225,7 +240,13 @@ INSERT INTO `tb_product` (`id`, `productName`, `categoryId`, `productDesc`, `pri
 (25, 'Áo Thun In Họa Tiết', 24, '<p>&Aacute;o thun in họa tiết hoa với thiết kế &aacute;o basic, đơn giản ph&ugrave; hợp với c&aacute;c c&ocirc; n&agrave;ng s&agrave;nh điệu. Thiết kế &aacute;o tay lỡ phổ biến kết hợp c&ugrave;ng gam m&agrave;u đen tạo cảm gi&aacute;c huyền b&iacute; hơn đồng thời dễ d&agrave;ng mix &amp; match theo nhiều phong c&aacute;ch kh&aacute;c nhau.&nbsp;</p>\r\n\r\n<p>Kiểu &aacute;o thun đơn giản nhưng kh&ocirc;ng hề đơn điệu gi&uacute;p n&agrave;ng c&acirc;n mọi phong c&aacute;ch thời trang từ trẻ trung đến s&agrave;nh điệu, ph&aacute; c&aacute;ch nhất.</p>\r\n', '690000', '80785a1b37.jpg', 1, 50, 'Đen'),
 (26, 'Jessi Set - Áo Blazer Ngắn Tay Phối Quần Short', 25, '<p>Set đồ&nbsp;bao gồm một chiếc &aacute;o blazer ngắn tay, &aacute;o hai d&acirc;y đi k&egrave;m v&agrave; quần short phong c&aacute;ch. Chất liệu được sử dụng l&agrave; vải linen, tạo cảm gi&aacute;c m&aacute;t mẻ v&agrave; thoải m&aacute;i khi mặc trong những ng&agrave;y h&egrave; n&oacute;ng bức.</p>\r\n\r\n<p>&Aacute;o blazer c&oacute; thiết kế cộc tay, tạo n&ecirc;n phong c&aacute;ch trẻ trung v&agrave; năng động. &Aacute;o hai d&acirc;y đi k&egrave;m với những đường may&nbsp;tinh tế, gi&uacute;p t&ocirc;n l&ecirc;n vẻ đẹp của người diện. Quần short với chiều d&agrave;i vừa phải, gi&uacute;p bạn thoải m&aacute;i di chuyển m&agrave; vẫn giữ được vẻ lịch sự c&ugrave;ng&nbsp;phong c&aacute;ch thời trang.</p>\r\n\r\n<p>Cổ &aacute;o được trang tr&iacute; bởi khuy kim loại đ&iacute;nh k&egrave;m, tạo n&ecirc;n điểm nhấn độc đ&aacute;o v&agrave; sang trọng. Với phong c&aacute;ch trẻ trung v&agrave; hiện đại, set đồ n&agrave;y sẽ l&agrave; sự lựa chọn ho&agrave;n hảo cho thời trang c&ocirc;ng sở hay&nbsp;những buổi hẹn h&ograve;, dạo phố c&ugrave;ng bạn b&egrave;.</p>\r\n', '2970000', '5036d86ebf.jpg', 1, 30, 'Trắng'),
 (27, 'Áo Vest Cách Điệu Tay Bồng', 25, '<p>Sản phẩm &aacute;o vest c&aacute;ch điệu tay bồng của Ivy Moda l&agrave; một sự kết hợp tuyệt vời giữa phong c&aacute;ch c&ocirc;ng sở v&agrave; sự sang trọng hiện đại. Với kiểu d&aacute;ng croptop tay ngắn, sản phẩm t&ocirc;n l&ecirc;n vẻ ngo&agrave;i tươi trẻ v&agrave; c&aacute; t&iacute;nh của người mặc.</p>\r\n\r\n<p>Chất liệu tuytsi cao cấp được sử dụng cho&nbsp;mang lại sự mềm mại, thoải m&aacute;i v&agrave; độ bền cao. Thiết kế c&aacute;ch điệu tay bồng tạo n&ecirc;n sự nhẹ nh&agrave;ng, bay bổng cho người mặc, gi&uacute;p bạn tự tin hơn khi diện sản phẩm n&agrave;y.</p>\r\n\r\n<p>&Aacute;o vest c&aacute;ch điệu tay bồng c&oacute; thể dễ d&agrave;ng kết hợp với nhiều trang phục kh&aacute;c nhau, từ ch&acirc;n v&aacute;y đến quần jean, gi&uacute;p bạn tạo ra nhiều phong c&aacute;ch thời trang kh&aacute;c nhau. Với sự kết hợp độc đ&aacute;o giữa phong c&aacute;ch cổ điển v&agrave; hiện đại, sản phẩm n&agrave;y sẽ l&agrave; một lựa chọn ho&agrave;n hảo cho c&aacute;c buổi gặp gỡ bạn b&egrave;, tiệc t&ugrave;ng hoặc những ng&agrave;y l&agrave;m việc tại văn ph&ograve;ng.</p>\r\n', '1290000', '5c3494b6fc.jpg', 1, 30, 'Be'),
-(29, 'Set Đồ Thun GROWTH', 24, '<p>&Aacute;o thun d&aacute;ng su&ocirc;ng với&nbsp;độ d&agrave;i vừa phải, tay ngắn, cổ tr&ograve;n. Ph&iacute;a trước l&agrave; d&ograve;ng chữ Growth&nbsp;tr&ecirc;n nền in m&agrave;u hồng san h&ocirc;. Phần tay &aacute;o gập nếp theo phong c&aacute;ch độc đ&aacute;o v&agrave; mới lạ hiện nay.&nbsp;&Aacute;o c&oacute; độ &ocirc;m vừa phải, gọn g&agrave;ng v&agrave; chỉn chu dễ d&agrave;ng để&nbsp;phối hợp c&ugrave;ng nhiều item kh&aacute;c nhau.</p>\r\n\r\n<p>Quần đ&ugrave;i eo chun co gi&atilde;n thoải m&aacute;i.</p>\r\n\r\n<p>Một set đồ&nbsp;năng động nhưng kh&ocirc;ng k&eacute;m phần nữ t&iacute;nh d&agrave;nh cho mọi c&ocirc; n&agrave;ng.&nbsp;</p>\r\n', '1180000', '357d46b5e5.jpg', 1, 50, 'Vàng hoa cúc');
+(29, 'Set Đồ Thun GROWTH', 24, '<p>&Aacute;o thun d&aacute;ng su&ocirc;ng với&nbsp;độ d&agrave;i vừa phải, tay ngắn, cổ tr&ograve;n. Ph&iacute;a trước l&agrave; d&ograve;ng chữ Growth&nbsp;tr&ecirc;n nền in m&agrave;u hồng san h&ocirc;. Phần tay &aacute;o gập nếp theo phong c&aacute;ch độc đ&aacute;o v&agrave; mới lạ hiện nay.&nbsp;&Aacute;o c&oacute; độ &ocirc;m vừa phải, gọn g&agrave;ng v&agrave; chỉn chu dễ d&agrave;ng để&nbsp;phối hợp c&ugrave;ng nhiều item kh&aacute;c nhau.</p>\r\n\r\n<p>Quần đ&ugrave;i eo chun co gi&atilde;n thoải m&aacute;i.</p>\r\n\r\n<p>Một set đồ&nbsp;năng động nhưng kh&ocirc;ng k&eacute;m phần nữ t&iacute;nh d&agrave;nh cho mọi c&ocirc; n&agrave;ng.&nbsp;</p>\r\n', '1180000', '357d46b5e5.jpg', 1, 50, 'Vàng hoa cúc'),
+(30, 'Đầm Thun Phối Áo Kiểu', 33, '<p>Đơn giản nhưng vẫn to&aacute;t l&ecirc;n h&igrave;nh ảnh b&eacute; g&aacute;i nhẹ nh&agrave;ng, đ&aacute;ng y&ecirc;u khi diện l&ecirc;n thiết kế đầm phối n&agrave;y. Đầm cổ tr&ograve;n, c&oacute; khuy c&agrave;i ph&iacute;a sau. Thiết kế tay d&agrave;i&nbsp; kết hợp trong d&aacute;ng v&aacute;y b&aacute;n nguyệt x&ograve;e nhẹ, gi&uacute;p ch&uacute;ng ta cảm nhận được sự dịu&nbsp;d&agrave;ng, thanh&nbsp;tho&aacute;t.&nbsp;</p>\r\n\r\n<p>V&aacute;y phối c&ugrave;ng &aacute;o hai d&acirc;y hoa nh&iacute;, tạo điểm nhấn kh&aacute;c biệt, tăng sự thu h&uacute;t cho mẫu thiết kế.&nbsp;</p>\r\n', '649000', '17e49954dc.jpg', 1, 0, 'Màu trắng'),
+(31, 'Áo Thun Xoắn Eo', 14, '<p>&Aacute;o thun xoắn eo l&agrave; một lựa chọn thời trang, xu hướng, hiện đại cho b&eacute; y&ecirc;u. &Aacute;o thun c&oacute; thiết kế xoắn ốc ở phần eo để tạo điểm nhấn, gi&uacute;p &aacute;o trở n&ecirc;n nữ t&iacute;nh, dễ thương hơn.&nbsp;</p>\r\n\r\n<p>Mẹ lựa chọn mix &aacute;o cho con với quần jogger, quần shorts hoặc quần jean để tạo n&ecirc;n c&aacute;c outfits đẹp mắt, ph&ugrave; hợp nhiều dịp kh&aacute;c nhau.</p>\r\n', '399000', '006ffb5c59.jpg', 1, 0, 'Màu trắng'),
+(32, 'Quần Thun Túi Phối Viền', 15, '<p>Quần d&agrave;i d&aacute;ng, bo gấu, cạp chun co gi&atilde;n. Quần thiết kế 2 t&uacute;i sườn nổi, c&oacute; viền t&uacute;i kh&aacute;c m&agrave;u, tạo hiệu ứng bắt s&aacute;ng.&nbsp;</p>\r\n\r\n<p>Đặc biệt, quần sử dụng chất liệu thun mềm mịn, giữ nhiệt tốt, an to&agrave;n cho da v&agrave; ph&ugrave; hợp khi trẻ&nbsp;tham gia nhiều hoạt động.&nbsp;</p>\r\n', '400000', '79adbe8678.jpg', 1, 0, 'Màu hồng'),
+(33, 'Áo Thun Bé Trai Ngắn Tay', 12, '<p>&Aacute;o thun được l&agrave;m từ chất liệu thấm h&uacute;t, kh&ocirc;ng g&acirc;y k&iacute;ch ứng cho da b&eacute;, gi&uacute;p b&eacute; lu&ocirc;n cảm thấy thoải m&aacute;i v&agrave; kh&ocirc; r&aacute;o suốt cả ng&agrave;y.</p>\r\n\r\n<p>Ba mẹ c&oacute; thể dễ d&agrave;ng kết hợp &aacute;o&nbsp;với c&aacute;c loại quần, quần short hoặc jeans để tạo ra nhiều phong c&aacute;ch kh&aacute;c nhau cho b&eacute;. Ngo&agrave;i ra, sản phẩm c&ograve;n c&oacute; nhiều m&agrave;u sắc v&agrave; họa tiết đa dạng để bạn lựa chọn ph&ugrave; hợp với sở th&iacute;ch v&agrave; phong c&aacute;ch của b&eacute; trai.</p>\r\n', '349000', '52baab1efb.jpg', 1, 0, 'Màu xanh lam'),
+(34, 'Quần Dài Khaki In Hình', 13, '<p>Quần d&agrave;i khaki b&eacute; trai. Cạp chun co gi&atilde;n c&oacute; d&acirc;y k&eacute;o r&uacute;t. Gấu quần bo chun co gi&atilde;n. 2 t&uacute;i c&oacute; nắp b&ecirc;n ống quần. Mix c&ugrave;ng &aacute;o polo, &aacute;o sơ mi cho b&eacute;!</p>\r\n\r\n<p>M&agrave;u sắc: Họa tiết Xanh R&ecirc;u - Họa tiết Ghi Kh&oacute;i</p>\r\n', '420000', 'aded5d23f6.jfif', 1, 0, 'Màu xanh rêu'),
+(35, 'Mũ Lưỡi Trai Life Is Good', 34, '<p>Mũ lưỡi trai cho b&eacute; trai, th&ecirc;u chữ kh&aacute;c m&agrave;u ph&iacute;a trước.&nbsp;C&oacute; kh&oacute;a c&agrave;i điều chỉnh được.</p>\r\n\r\n<p>Đỉnh lưỡi trai d&agrave;i 6cm</p>\r\n\r\n<p>M&agrave;u sắc: V&agrave;ng hoa c&uacute;c - Gold</p>\r\n\r\n<div class=\"ddict_btn\" style=\"top: 103px; left: 194.875px;\"><img src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/logo/48.png\" /></div>\r\n\r\n<div class=\"ddict_div\" style=\"top: 109.594px; max-width: 150px; left: 60.1016px;\"><img class=\"ddict_audio\" src=\"chrome-extension://bpggmmljdiliancllaapiggllnkbjocb/img/audio.png\" />\r\n<p class=\"ddict_sentence\">V&agrave;ng hoa c&uacute;c</p>\r\n</div>\r\n', '290000', '7b056e3d0b.jpg', 1, 0, 'Vàng hoa cúc');
 
 -- --------------------------------------------------------
 
@@ -298,7 +319,30 @@ INSERT INTO `tb_product_gallery` (`id`, `productId`, `imageDetail`) VALUES
 (56, 29, '141e957752.jpg'),
 (57, 29, '1ade4c07dd.jpg'),
 (58, 29, '1a580faacc.jpg'),
-(59, 29, '02718232dd.jpg');
+(59, 29, '02718232dd.jpg'),
+(60, 30, '4b04ecf7cd.jpg'),
+(61, 30, '1db19408b1.jpg'),
+(62, 30, '9cdff30df9.jpg'),
+(63, 30, '4af2f84502.jpg'),
+(64, 31, '6827c37795.jpg'),
+(65, 31, '7734523425.jpg'),
+(66, 31, '6233c5d6c5.jpg'),
+(67, 31, 'fd72973c93.jpg'),
+(68, 32, 'fcdcb4e3ea.jpg'),
+(69, 32, '67a9729390.jpg'),
+(70, 32, '87ce52ac4f.jpg'),
+(71, 32, '1a1d460fa8.jpg'),
+(72, 33, '19919d87f6.jpg'),
+(73, 33, 'eec9aad4d5.jpg'),
+(74, 33, 'db41204a8a.jpg'),
+(75, 33, 'e14762af72.jpg'),
+(76, 34, '5974323881.jpg'),
+(77, 34, 'ea30929339.jpg'),
+(78, 34, '6818370974.jpg'),
+(79, 34, '27ca797b6d.jpg'),
+(80, 35, 'f4327312d2.jpg'),
+(81, 35, 'd56a322f38.jpg'),
+(82, 35, 'b127c32748.jpg');
 
 -- --------------------------------------------------------
 
@@ -323,8 +367,9 @@ INSERT INTO `tb_slider` (`id`, `sliderName`, `sliderImg`, `type`) VALUES
 (10, 'Slider 3', 'f6187d10df.jpg', 1),
 (11, 'Slider 4', 'deea8a3655.jpg', 0),
 (12, 'Slider 5', '8ae399df3e.jpg', 1),
-(13, 'Slider 6', '0d0f7659d3.jpg', 1),
-(14, 'Slider 7', '8455301e51.jpg', 1);
+(13, 'Slider 6', '0d0f7659d3.jpg', 0),
+(14, 'Slider 7', '8455301e51.jpg', 1),
+(15, 'Slider 8', '3bb423de72.jpg', 1);
 
 --
 -- Indexes for dumped tables
@@ -399,13 +444,13 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_cart`
 --
 ALTER TABLE `tb_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `tb_category`
 --
 ALTER TABLE `tb_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_customer`
@@ -429,19 +474,19 @@ ALTER TABLE `tb_order_details`
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tb_product_gallery`
 --
 ALTER TABLE `tb_product_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `tb_slider`
 --
 ALTER TABLE `tb_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
